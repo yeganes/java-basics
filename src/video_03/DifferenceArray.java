@@ -4,8 +4,6 @@ import java.util.Scanner;
 public class DifferenceArray {
     public static void main(String[] args){
 
-
-
         Scanner input = new Scanner(System.in);
 
         int [] array1 = new int[3];
@@ -28,7 +26,7 @@ public class DifferenceArray {
         for(int i = 0 ; i <3 ; i++ ){
             if (array1[i] == array2[i]) {
                 int j = i + 1;
-                System.out.println("the element number " + j +"  are the same");
+                System.out.println("the elements number " + j +"  are the same");
             }else{
                 i++;
                 }
