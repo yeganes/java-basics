@@ -6,7 +6,7 @@ public class Member {
 
     private String name;
     private int age;
-    private char sex;
+    private char gender;
     private long membershipId;
     private boolean exist;
 
@@ -28,12 +28,12 @@ public class Member {
         return age;
     }
 
-    public void setSex(char s) {
-        sex = s;
+    public void setGender(char s) {
+        gender = s;
     }
 
-    public char getSex(char s) {
-        return sex;
+    public char getGender(char s) {
+        return gender;
     }
 
     public void setMembershipId(long m) {
@@ -55,16 +55,17 @@ public class Member {
     public static void Age() {
         Scanner input = new Scanner(System.in);
 
-        System.out.println(" please enter your age  : ");
+        System.out.println("please enter your age  : ");
 
         int ageInput = input.nextInt();
     }
-    public static void Sex() {
+    public static void Gender() {
         Scanner input = new Scanner(System.in);
 
-        System.out.println(" Female enter : F , Male enter : M ");
+        System.out.println("Female enter : F , Male enter : M ");
 
-        char ageInput = (char)input.nextInt();
+        char GenderInput = input.next().toUpperCase().charAt(0);
+        //برای گرفتن کاراکتر از این استفاده میکنیم که اولین کاراکتر را به ما برمیگردونه
 
     }
 

@@ -5,6 +5,6 @@ public class Main {
         Member member = new Member();
         member.Name();
         member.Age();
-        member.Sex();
+        member.Gender();
     }
 }
