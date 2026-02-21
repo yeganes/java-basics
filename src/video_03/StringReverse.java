@@ -20,9 +20,9 @@ public class StringReverse {
 
     }
     static void reverse3(String string){
-        int first = string.charAt(0);
-        int second = string.charAt(1);
-        int last = string.charAt(2);
+        char first = string.charAt(0);
+        char second = string.charAt(1);
+        char last = string.charAt(2);
         if (first == last){
             System.out.println(string);
         }
@@ -31,11 +31,11 @@ public class StringReverse {
         }
     }
     static void reverse5(String string){
-        int first = string.charAt(0);
-        int second = string.charAt(1);
-        int third = string.charAt(2);
-        int fourth = string.charAt(3);
-        int last = string.charAt(4);
+        char first = string.charAt(0);
+        char second = string.charAt(1);
+        char third = string.charAt(2);
+        char fourth = string.charAt(3);
+        char last = string.charAt(4);
         if (first == last && second == fourth) {
             System.out.println(string);
         }
