@@ -1,75 +1,92 @@
 package Library;
-
 import java.util.Scanner;
-
 public class Member {
+    static Scanner input = new Scanner(System.in);
 
     private String name;
     private int age;
     private char gender;
-    private long membershipId;
-    private boolean exist;
-
-    //یک کلاس برای اعضا ایجاد کردیم که دارای یک سری ویژگی(فیلده)
-    // با استفاده از متود الان میایم این ویژگی هارو ست میکنیم
-    public void setName(String n) {
-        name = n;
+    private long phone;
+    private long idMembership;
+    //یه ویژگی تعریف کردیم برای این کاربر که اسمش هست
+    public void setName(String name){
+        this.name = name;
+        // در ستر یک مقدار پارامتر ورودی به ان میدهیم تا انرا تغییر دهیم
     }
-
-    public String getName(String n) {
+    public String getName(){
         return name;
+        // در گتر هیچ پارامتری نداریم برای ورودی ولی این متود تایپ فیلد برمیگردونه به ما پس وید نیست
+    }
+    public void setAge(int age){
+        this.age = age;
+    }
+    public int getAge(){
+        if(age > 100 || age < 5 ){
+            return 404;}
+        return age;}
+
+    public void setGender(char gender){
+        this.gender = gender;
+    }
+    public char getGender() {
+        if (gender == 'M' || gender == 'm' || gender == 'f' || gender == 'F') {
+            return gender;
+        }
+        return 'u';
+    }
+    public void setPhone(long phone){
+        this.phone = phone;
+    }
+    public long getPhone(){
+        return phone;
+    }
+    public void setIdMembership(long idMembership){
+        this.idMembership = idMembership;
+    }
+    public long getIdMembership(){
+        return idMembership;
     }
 
-    public void setAge(int a) {
-        age = a;
+    public Member(String name , int age , char gender , long phone , long idMembership){
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.phone = phone;
+        this.idMembership = idMembership;
     }
+    //اماده سازی اولیه اشیا
+    public static void main(String[] args){
+        System.out.println("Welcome to the library ");
+        System.out.println("Would you please enter your name please : ");
+        String getUserName = input.nextLine();
+        System.out.println("Now please enter your age please : ");
+        int getUserAge = input.nextInt();
+        System.out.println("Please choose your gender M(male) , F(female) : ");
+        char getUserGender = input.next().toUpperCase().charAt(0);
+        System.out.println("Please enter your phone number :+98 ");
+        long getUserphone = input.nextLong();
+        long setUserMembershipId = 404_000_000_000_000L + getUserphone;
 
-    public int getAge(int a) {
-        return age;
-    }
 
-    public void setGender(char s) {
-        gender = s;
-    }
 
-    public char getGender(char s) {
-        return gender;
-    }
 
-    public void setMembershipId(long m) {
-        membershipId = m;
-    }
 
-    public long getMembershipId(long m) {
-        return membershipId;
-    }
+        Member person = new Member(getUserName , getUserAge , getUserGender , getUserphone , setUserMembershipId);
+        System.out.println("your name is : " + person.getName());
+        System.out.println("your are  : " + person.getAge() + " years old");
+        System.out.println(person.getGender());
+        System.out.println("your phone number is : " + person.getPhone());
+        System.out.println("your ID is : "+person.getIdMembership());
 
-    public static void Name() {
-        Scanner input = new Scanner(System.in);
 
-        System.out.println("Welcome , please enter your name and surname  : ");
 
-        String nameInput = input.nextLine();
-    }
 
-    public static void Age() {
-        Scanner input = new Scanner(System.in);
-
-        System.out.println("please enter your age  : ");
-
-        int ageInput = input.nextInt();
-    }
-    public static void Gender() {
-        Scanner input = new Scanner(System.in);
-
-        System.out.println("Female enter : F , Male enter : M ");
-
-        char GenderInput = input.next().toUpperCase().charAt(0);
-        //برای گرفتن کاراکتر از این استفاده میکنیم که اولین کاراکتر را به ما برمیگردونه
 
     }
+    }
 
-}
+
+
 
 
 
