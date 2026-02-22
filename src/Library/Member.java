@@ -15,7 +15,7 @@ public class Member {
     }
     public String getName(){
         return name;
-        // در گتر هیچ پارامتری نداریم برای ورودی ولی این متود تایپ فیلد برمیگردونه به ما پس وید نیست
+        // در گتر هیچ پارامتری نداریم برای ورودی ولی این متود تایپ فیلد برمیگردونه به ما پس وید هم نمیتونه باشه
     }
     public void setAge(int age){
         this.age = age;
@@ -56,16 +56,19 @@ public class Member {
     }
     //اماده سازی اولیه اشیا
     public static void main(String[] args){
-        System.out.println("Welcome to the library ");
-        System.out.println("Would you please enter your name please : ");
-        String getUserName = input.nextLine();
-        System.out.println("Now please enter your age please : ");
-        int getUserAge = input.nextInt();
-        System.out.println("Please choose your gender M(male) , F(female) : ");
-        char getUserGender = input.next().toUpperCase().charAt(0);
-        System.out.println("Please enter your phone number :+98 ");
-        long getUserphone = input.nextLong();
-        long setUserMembershipId = 404_000_000_000_000L + getUserphone;
+        for (int i = 0 ; i < 2 ; i ++) {
+            System.out.println("Welcome to the library ");
+            System.out.println("Would you please enter your name please : ");
+            String getUserName = input.nextLine();
+            System.out.println("Now please enter your age please : ");
+            int getUserAge = input.nextInt();
+            input.nextLine();
+            System.out.println("Please choose your gender M(male) , F(female) : ");
+            char getUserGender = input.next().toUpperCase().charAt(0);
+            System.out.println("Please enter your phone number :+98 ");
+            long getUserphone = input.nextLong();
+            input.nextLine();
+            long setUserMembershipId = 404_000_000_000_000L + getUserphone;
 
 
 
@@ -76,11 +79,7 @@ public class Member {
         System.out.println("your are  : " + person.getAge() + " years old");
         System.out.println(person.getGender());
         System.out.println("your phone number is : " + person.getPhone());
-        System.out.println("your ID is : "+person.getIdMembership());
-
-
-
-
+        System.out.println("your ID is : "+person.getIdMembership());}
 
     }
     }
