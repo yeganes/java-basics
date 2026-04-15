@@ -16,7 +16,7 @@ public class Menu {
     public static void ask(){
         Operations c = new CreateOperation();
         Scanner input = new Scanner(System.in);
-        System.out.println("please choose a number: \n 1 : Create \n2 : Read \n 3 : Update\n 4 : Delete");
+        System.out.println("please choose a number: \n 1 : Create \n 2 : Read \n 3 : Update\n 4 : Delete");
          int chosenNumber = input.nextInt();
          switch (chosenNumber) {
              case 1:

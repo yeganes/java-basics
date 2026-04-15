@@ -1,7 +1,7 @@
 package Main.Library;
 
 
-public class Members {
+public class Member {
     // یک کلاس داریم که کارش نگه داشتن اطلاعات ممبر هاست
     // این کلاس ی سری فیلد یا همون پراپرتی داره که خصوصیات این مثل اسم سن و ...
     //این پراپرتی ها باید خصوصی تعریف بشه که از لحاظ امنیتی کد در حالت استیبلی قرار بگیره
@@ -44,7 +44,7 @@ public class Members {
     }
 
     // یک سازنده هم نام کلاسمان میسازیم
-    public Members(String name , int age , long phoneNumber , String gender ,long memberId){
+    public Member(String name , int age , long phoneNumber , String gender ,long memberId){
         this.name = name ;
         this.age = age;
         this.phoneNumber = phoneNumber;

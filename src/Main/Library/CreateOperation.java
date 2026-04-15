@@ -11,26 +11,22 @@ public class CreateOperation extends Operations {
         int j = inputInfo.nextInt();
         String bufferClearer = inputInfo.nextLine();
         for (int i = 1 ; i<= j ; i ++) {
-            System.out.println("Hello please enter your name: ");
+            System.out.println(" please enter your name: ");
             String inputName = inputInfo.nextLine();
-            System.out.println("enter your age: ");
+            System.out.println(" age: ");
             int inputAge = inputInfo.nextInt();
-            System.out.println("enter your phone number: ");
+            System.out.println(" phone number: ");
             long inputPhoneNumber = inputInfo.nextLong();
             String bufferClearer1 = inputInfo.nextLine();
             System.out.println("enter your gender: ");
-            String inputGender = inputInfo.nextLine();
+            String inputGender = inputInfo.next();
             long idMember = i;
-            Members person = new Members(inputName, inputAge, inputPhoneNumber, inputGender ,idMember);
-            String[] arrayPerson1 = new String[5];
-            arrayPerson1[0] = person.getName();
-            arrayPerson1[1] = String.valueOf(person.getAge());
-            arrayPerson1[2] = String.valueOf(person.getPhoneNumber());
-            arrayPerson1[3] = person.getGender();
-            arrayPerson1[4] = String.valueOf(person.getMemberId());
+            Member person = new Member(inputName, inputAge, inputPhoneNumber, inputGender ,idMember);
+            Member[] arrayPerson = new Member[i];
+            for (int k = 0 ; k <= i ; k++){
+                arrayPerson[k] = person;
+            }
             System.out.println(person.getName() + "  " + person.getAge() + " " + person.getPhoneNumber() + " " + person.getGender() + " " + idMember);
-            System.out.println(Arrays.toString(arrayPerson1));
-
 
         }
     }
