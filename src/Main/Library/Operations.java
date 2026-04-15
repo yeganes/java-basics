@@ -3,7 +3,7 @@ package Main.Library;
 import java.util.Scanner;
 
 public abstract class Operations {
-    private Scanner scanner;
+    protected Scanner inputInfo;
 
     public void execute(){}
 
