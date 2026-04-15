@@ -1,71 +1,56 @@
 package Main.Library;
-public class Member {
 
+
+public class Members {
+    // یک کلاس داریم که کارش نگه داشتن اطلاعات ممبر هاست
+    // این کلاس ی سری فیلد یا همون پراپرتی داره که خصوصیات این مثل اسم سن و ...
+    //این پراپرتی ها باید خصوصی تعریف بشه که از لحاظ امنیتی کد در حالت استیبلی قرار بگیره
     private String name;
-    private int age;
-    private char gender;
-    private long phone;
-    private long idMembership;
+    private int age ;
+    private long phoneNumber;
+    final private String gender;
+    private long memberId;
 
-    //یه ویژگی تعریف کردیم برای این کاربر که اسمش هست
-    public void setName(String name) {
+
+
+    //از متود ستر استفاده میکنیم که بتوانیم متغیرمان را تغییر دهیم و انرا تعیین کنیم و یک اشاره گر برای ان بسازیم
+    public void setName(String name){
         this.name = name;
-        // در ستر یک مقدار پارامتر ورودی به ان میدهیم تا انرا تغییر دهیم
     }
-
-    public String getName() {
+    // از متود گتر تعریف استفاده میکنیم که بتوانیم مقدار این ویژگی را دریافت کنیم
+    public String getName(){
         return name;
-        // در گتر هیچ پارامتری نداریم برای ورودی ولی این متود تایپ فیلد برمیگردونه به ما پس وید هم نمیتونه باشه
     }
-
-    public void setAge(int age) {
+    public void setAge(int age){
         this.age = age;
     }
-
-    public int getAge() {
+    public int getAge(){
         return age;
     }
-
-    public void setGender(char gender) {
-        this.gender = gender;
+    public void setPhoneNumber(long phoneNumber){
+        this.phoneNumber = phoneNumber;
+    }
+    public long getPhoneNumber(){
+        return phoneNumber;
+    }
+    public String getGender(){
+        return gender;
+    }
+    public void setMemberId(long memberId){
+        this.memberId = memberId;
+    }
+    public long getMemberId(){
+        return memberId;
     }
 
-    public char getGender() {
-        if (gender == 'M' || gender == 'm' || gender == 'f' || gender == 'F') {
-            return gender;
-        }
-        return 'u';
-    }
-
-    public void setPhone(long phone) {
-        this.phone = phone;
-    }
-
-    public long getPhone() {
-        return phone;
-    }
-
-    public void setIdMembership(long idMembership) {
-        this.idMembership = idMembership;
-    }
-
-    public long getIdMembership() {
-        return idMembership;
-    }
-
-    public Member(String name, int age, char gender, long phone, long idMembership) {
-        this.name = name;
+    // یک سازنده هم نام کلاسمان میسازیم
+    public Members(String name , int age , long phoneNumber , String gender ,long memberId){
+        this.name = name ;
         this.age = age;
+        this.phoneNumber = phoneNumber;
         this.gender = gender;
-        this.phone = phone;
-        this.idMembership = idMembership;
+        this.memberId = memberId;
     }
+    // یک شی به اسم پرسن از کلاس ممبر تعریف میکنیم و انرا اینیشیالایزد میکنیم و چون یک سازنده داشتیم الان اون از بدو تولدش دارای یک شی معتبر است پس میتوانیم با توجه به یک
+    //پارامتری بودن سازندهمون به ان یک پارامتر برای استفاده بدهیم.
 }
-    //اماده سازی اولیه اشیا
-
-
-
-
-
-
-
