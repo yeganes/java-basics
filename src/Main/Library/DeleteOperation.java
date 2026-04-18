@@ -1,4 +1,8 @@
 package Main.Library;
 
-public class DeleteOperation extends Operations{
+public class DeleteOperation extends Operation{
+    @Override
+    public void execute() {
+
+    }
 }

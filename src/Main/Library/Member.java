@@ -8,8 +8,8 @@ public class Member {
     private String name;
     private int age ;
     private long phoneNumber;
-    final private String gender;
-    private long memberId;
+    private String gender;
+    private int memberId;
 
 
 
@@ -36,15 +36,12 @@ public class Member {
     public String getGender(){
         return gender;
     }
-    public void setMemberId(long memberId){
-        this.memberId = memberId;
-    }
-    public long getMemberId(){
+    public int getMemberId(){
         return memberId;
     }
 
     // یک سازنده هم نام کلاسمان میسازیم
-    public Member(String name , int age , long phoneNumber , String gender ,long memberId){
+    public Member(String name , int age , long phoneNumber , String gender ,int memberId){
         this.name = name ;
         this.age = age;
         this.phoneNumber = phoneNumber;

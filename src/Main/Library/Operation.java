@@ -2,10 +2,10 @@ package Main.Library;
 
 import java.util.Scanner;
 
-public abstract class Operations {
+public abstract class Operation {
     protected Scanner inputInfo;
 
-    public void execute(){}
+    public abstract void  execute();
 
 }
 
