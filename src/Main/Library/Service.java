@@ -40,12 +40,36 @@ public class Service {
         int enteredId = inputInfo.nextInt();
 
         Member m = listPerson.get(enteredId-1);
-
+        System.out.println("here is your information : ");
             System.out.println(m.getName()  + " " + m.getAge() + " " + m.getGender() + " " + m.getPhoneNumber());
 
 
     }
-        public void update(){}
+        public void update(){
+        Member person = new Member(idMember);
+        System.out.println("enter the id number : ");
+        int enteredId = Integer.parseInt(inputInfo.nextLine());
+        Member m = listPerson.get(enteredId-1);
+        System.out.println("here is your information : ");
+        System.out.println(m.getName()  + " " + m.getAge() + " " + m.getPhoneNumber());
+        System.out.println("which one does need changing ? \n 1. Name \n 2. age \n 3. phone number ");
+        int inputChanged = Integer.parseInt(inputInfo.nextLine());
+            switch (inputChanged) {
+                case 1 :
+                    System.out.println("you selected number 1 , enter the alternative one : ");
+                    String alternativeName  = inputInfo.nextLine();
+                    System.out.println(m.setName(alternativeName));
+                case 2 :
+                    System.out.println("you selected number 2 , enter the alternative one : ");
+                    int alternativeAge  = Integer.parseInt(inputInfo.nextLine());
+                    System.out.println(m.setAge(alternativeAge));
+                case 3 :
+                    System.out.println("you selected number 3 , enter the alternative one : ");
+                    int alternativePhonenumber  = Integer.parseInt(inputInfo.nextLine());
+                    System.out.println(m.setAge(alternativePhonenumber));
+            }
+
+        }
         public void delete(){}
 }
 

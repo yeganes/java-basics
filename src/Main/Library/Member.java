@@ -14,15 +14,17 @@ public class Member {
 
 
     //از متود ستر استفاده میکنیم که بتوانیم متغیرمان را تغییر دهیم و انرا تعیین کنیم و یک اشاره گر برای ان بسازیم
-    public void setName(String name){
+    public String setName(String name){
         this.name = name;
+        return name;
     }
     // از متود گتر تعریف استفاده میکنیم که بتوانیم مقدار این ویژگی را دریافت کنیم
     public String getName(){
         return name;
     }
-    public void setAge(int age){
+    public int setAge(int age){
         this.age = age;
+        return age;
     }
     public int getAge(){
         return age;
