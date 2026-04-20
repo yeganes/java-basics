@@ -38,7 +38,6 @@ public class Service {
         Member person = new Member(idMember);
         System.out.println("enter the id number : ");
         int enteredId = inputInfo.nextInt();
-
         Member m = listPerson.get(enteredId-1);
         System.out.println("here is your information : ");
             System.out.println(m.getName()  + " " + m.getAge() + " " + m.getGender() + " " + m.getPhoneNumber());
@@ -46,7 +45,6 @@ public class Service {
 
     }
         public void update(){
-        Member person = new Member(idMember);
         System.out.println("enter the id number : ");
         int enteredId = Integer.parseInt(inputInfo.nextLine());
         Member m = listPerson.get(enteredId-1);
@@ -70,7 +68,23 @@ public class Service {
             }
 
         }
-        public void delete(){}
-}
+        public void delete(){
+            System.out.println("enter the id number : ");
+            int enteredId = Integer.parseInt(inputInfo.nextLine());
+            Member m = listPerson.get(enteredId-1);
+            System.out.println("here is your information : ");
+            System.out.println(m.getName()  + " " + m.getAge() + " " + m.getPhoneNumber());
+            System.out.println("Do you wanna delete the account : \n 1.Yes \n 2. No ");
+            int answer = Integer.parseInt(inputInfo.nextLine());
+            if (answer == 1 ){
+                Member d = listPerson.remove(enteredId-1);
+                System.out.println("the member is no longer available ");
+            } else if (answer == 2 ) {
+                System.out.println("Ok , the member is still available ");
+            }
+        }
+
+        }
+
 
 
