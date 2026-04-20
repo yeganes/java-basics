@@ -30,7 +30,6 @@ public class Service {
             Member person = new Member(inputName, inputAge, inputPhoneNumber, inputGender ,idMember);
             listPerson.add(person);
             idMember++;
-            System.out.println(listPerson);
             System.out.println("Added! ID: " + idMember);
                 }
                     }
