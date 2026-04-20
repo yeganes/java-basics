@@ -13,10 +13,7 @@ public class Menu {
         this.number = number;
     }
     public static void ask() {
-        Operation c = new CreateOperation();
-        Operation r = new ReadOperation();
-        Operation u = new UpdateOperation();
-        Operation d = new DeleteOperation();
+        Service service = new Service();
 
         Scanner input = new Scanner(System.in);
         int chosenNumber;
@@ -26,31 +23,29 @@ public class Menu {
             switch (chosenNumber) {
                 case 1:
                     System.out.println("you selected number 1 , let's create the members");
-                    c.execute();
+                    service.create();
                     break;
                 case 2:
                     System.out.println("you selected number 2 , let's read the members");
-                    r.execute();
+                    service.read();
                     break;
                 case 3:
                     System.out.println("you selected number 3 , let's update the members");
-                    u.execute();
+                    service.update();
                     break;
                 case 4:
                     System.out.println("you selected number 4 , let's delete the members");
-                    d.execute();
+                    service.delete();
                     break;
                 case 5:
                     System.out.println("you selected number 5 , Bye");
                     break;
             }
         } while (chosenNumber == 1 ||chosenNumber == 2 || chosenNumber == 3 || chosenNumber == 4);
-        //اگر همون اول بخواد خارج شه از برنامه نمیتونه
     }
 
     public static void main(String[] args){
         ask();
-
     }
 }
 

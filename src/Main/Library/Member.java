@@ -48,6 +48,10 @@ public class Member {
         this.gender = gender;
         this.memberId = memberId;
     }
+    public Member(int memberId){
+        this.memberId = memberId;
+
+    }
     // یک شی به اسم پرسن از کلاس ممبر تعریف میکنیم و انرا اینیشیالایزد میکنیم و چون یک سازنده داشتیم الان اون از بدو تولدش دارای یک شی معتبر است پس میتوانیم با توجه به یک
     //پارامتری بودن سازندهمون به ان یک پارامتر برای استفاده بدهیم.
 }
