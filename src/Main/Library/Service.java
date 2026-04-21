@@ -82,7 +82,7 @@ public class Service {
             int answer = Integer.parseInt(inputInfo.nextLine());
             if (answer == 1 ){
                 listPerson.remove(enteredId);
-                System.out.println("the member is no longer available ");
+                System.out.println("the member with " + enteredId+1 + "is no longer available ");
             } else if (answer == 2 ) {
                 System.out.println("Ok , the member is still available ");
             }
