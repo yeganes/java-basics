@@ -29,8 +29,9 @@ public class Member {
     public int getAge(){
         return age;
     }
-    public void setPhoneNumber(long phoneNumber){
+    public long setPhoneNumber(long phoneNumber){
         this.phoneNumber = phoneNumber;
+        return phoneNumber;
     }
     public long getPhoneNumber(){
         return phoneNumber;

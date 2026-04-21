@@ -22,19 +22,19 @@ public class Menu {
             chosenNumber = input.nextInt();
             switch (chosenNumber) {
                 case 1:
-                    System.out.println("you selected number 1 , let's create the members");
+                    System.out.println("you selected number 1 , let's create the member");
                     service.create();
                     break;
                 case 2:
-                    System.out.println("you selected number 2 , let's read the members");
+                    System.out.println("you selected number 2 , let's read the member");
                     service.read();
                     break;
                 case 3:
-                    System.out.println("you selected number 3 , let's update the members");
+                    System.out.println("you selected number 3 , let's update the member");
                     service.update();
                     break;
                 case 4:
-                    System.out.println("you selected number 4 , let's delete the members");
+                    System.out.println("you selected number 4 , let's delete the member");
                     service.delete();
                     break;
                 case 5:
@@ -48,5 +48,3 @@ public class Menu {
         ask();
     }
 }
-
-
