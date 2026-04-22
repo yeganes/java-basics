@@ -42,9 +42,6 @@ public class MemberService {
         return result;
     }
     public void read(){
-        if (listPerson.isEmpty()) {
-            System.out.println("list is empty");
-        }
         System.out.println("enter the id number : ");
         int enteredId = Integer.parseInt(inputInfo.nextLine());
         Member m = findMemberById(enteredId);

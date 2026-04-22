@@ -1,5 +1,6 @@
 package Main.Library;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class LibrarianService {
@@ -22,24 +23,29 @@ public class LibrarianService {
             Book book = new Book(inputTitle , inputAuthor , inputPage);
             listBook.add(book);
             System.out.println(book.getTitle() + " written by " + book.getAuthor() + " with " + book.getPage() + " pages ");
-            System.out.println("enter the book's name : ");
-            String booksname = inputInfo.nextLine();
-            boolean inputAvailable = book.getTitle().equalsIgnoreCase(booksname);
-            if (inputAvailable )  {
-                book = new Book(inputAvailable);
-                System.out.println(book.getTitle() + " written by " + book.getAuthor() + " with " + book.getPage() + " pages " + book.getAvailable());
-
-
-            }
-
-
         }
 
-
-
     }
-
+    public Book findBookByTitle(String title){
+        Book result =  null;
+        for (Book b : listBook){
+            if (Objects.equals(title, b.getTitle())){
+                result = b ;
+                break;
+            }
+        }
+        return result;
+    }
     public void search(){
+        System.out.println("enter the book you are searching for : ");
+        String givenTitle = inputInfo.nextLine();
+        Book b =  findBookByTitle(givenTitle);
+        if (b == null){
+            System.out.println("NOT FOUND");
+        } else {
+            System.out.println("this book is : " + b.getTitle() + " written by " + b.getAuthor() + " with " + b.getPage() + " pages ");
+        }
+
 
     }
     public void update(){}
