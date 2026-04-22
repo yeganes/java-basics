@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class Service {
+public class MemberService {
 
     static Scanner inputInfo = new Scanner(System.in);
     public static ArrayList<Member> listPerson = new ArrayList<>();

@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class MemberMenu {
     static Scanner input = new Scanner(System.in);
     public static void ask() {
-        Service service = new Service();
+        MemberService memberService = new MemberService();
 
         int chosenNumber;
         do {
@@ -14,19 +14,19 @@ public class MemberMenu {
             switch (chosenNumber) {
                 case 1:
                     System.out.println("you selected number 1 , let's create the member");
-                    service.create();
+                    memberService.create();
                     break;
                 case 2:
                     System.out.println("you selected number 2 , let's read the member");
-                    service.read();
+                    memberService.read();
                     break;
                 case 3:
                     System.out.println("you selected number 3 , let's update the member");
-                    service.update();
+                    memberService.update();
                     break;
                 case 4:
                     System.out.println("you selected number 4 , let's delete the member");
-                    service.delete();
+                    memberService.delete();
                     break;
                 case 5:
                     System.out.println("you selected number 5 , Bye");
