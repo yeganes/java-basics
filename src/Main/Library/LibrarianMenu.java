@@ -2,10 +2,10 @@ package Main.Library;
 import java.util.Scanner;
 public class LibrarianMenu {
 
-    public static void ask(){
+    public static void ask() {
         LibrarianService librarianService = new LibrarianService();
         Scanner input = new Scanner(System.in);
-        int chosenNumber ;
+        int chosenNumber;
         do {
             System.out.println("please choose a number: \n 1 : Add book \n 2 : Search \n 3 : Update the price \n 4 : Delete \n 5 : EXIT");
             chosenNumber = input.nextInt();
@@ -29,11 +29,7 @@ public class LibrarianMenu {
                 case 5:
                     System.out.println("you selected number 5 , Bye");
                     break;
-                }
-                    }while (chosenNumber == 1 ||chosenNumber == 2 || chosenNumber == 3 || chosenNumber == 4);
-                        }
-    public static void main(String[] args){
-        ask();
+            }
+        } while (chosenNumber == 1 || chosenNumber == 2 || chosenNumber == 3 || chosenNumber == 4);
     }
-
 }

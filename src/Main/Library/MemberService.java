@@ -60,7 +60,7 @@ public class MemberService {
         if (m == null){
             System.out.println("NOT FOUND");
         } else {
-            System.out.println(m.getName());
+            System.out.println(m.getName() + " " + m.getAge() + " " +m.getGender()+ " " + m.getPhoneNumber());
         }
     }
         public void update(){
@@ -71,25 +71,36 @@ public class MemberService {
                 System.out.println("NOT FOUND");
             } else {
                 System.out.println("here is your information : ");
-                System.out.println(m.getName()  + " " + m.getAge() + " " + m.getPhoneNumber());
-                System.out.println("which one does need changing ? \n 1. Name \n 2. age \n 3. phone number ");
-                int inputChanged = Integer.parseInt(inputInfo.nextLine());
-                switch (inputChanged) {
-                    case 1 :
-                        System.out.println("you selected number 1 , enter the alternative name : ");
-                        String alternativeName  = inputInfo.nextLine();
-                        System.out.println(m.setName(alternativeName));
-                        break;
-                    case 2 :
-                        System.out.println("you selected number 2 , enter the alternative age : ");
-                        int alternativeAge  = Integer.parseInt(inputInfo.nextLine());
-                        System.out.println(m.setAge(alternativeAge));
-                        break;
-                    case 3 :
-                        System.out.println("you selected number 3 , enter the alternative phone number : ");
-                        long alternativePhoneNumber  = Long.parseLong(inputInfo.nextLine());
-                        System.out.println(m.setPhoneNumber(alternativePhoneNumber));
-                        break;
+                System.out.println(m.getName());
+                System.out.println(":");
+                String alternativeName = inputInfo.nextLine();
+                boolean spaceEnter = alternativeName.isEmpty();
+                if (spaceEnter){
+                    // intentionally left blank
+                }
+                else{
+                    System.out.println(m.setName(alternativeName));
+                }
+                System.out.println(m.getPhoneNumber());
+                System.out.println(": ");
+                String alternativePhoneNumber  = inputInfo.nextLine();
+                boolean spaceEnter1 = alternativePhoneNumber.isEmpty();
+
+                if (spaceEnter1){
+                    // intentionally left blank
+                }
+                else{
+                    System.out.println(m.setPhoneNumber(Long.parseLong(alternativePhoneNumber)));
+                }
+                System.out.println(m.getAge());
+                System.out.println(": ");
+                String alternativeAge  = inputInfo.nextLine();
+                boolean spaceEnter2 = alternativeAge.isEmpty();
+                if (spaceEnter2){
+                    // intentionally left blank
+                }
+                else{
+                    System.out.println(m.setAge(Integer.parseInt(alternativeAge)));
                 }
             }
         }
