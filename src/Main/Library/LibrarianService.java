@@ -29,7 +29,7 @@ public class LibrarianService {
     public Book findBookByTitle(String title){
         Book result =  null;
         for (Book b : listBook){
-            if (Objects.equals(title, b.getTitle())){
+            if (title.equalsIgnoreCase(b.getTitle())){
                 result = b ;
                 break;
             }
@@ -48,8 +48,23 @@ public class LibrarianService {
 
 
     }
-    public void update(){}
-    public void delete(){}
+    public void update(){
+
+    }
+    public void delete(){
+        System.out.println("enter the book you are searching for : ");
+        String givenTitle = inputInfo.nextLine();
+        Book b =  findBookByTitle(givenTitle);
+        if (b == null){
+            System.out.println("NOT FOUND");
+        }
+             else {
+                 int i = listBook.indexOf(b);
+                 listBook.remove(i);
+             }
+        }
+
+
 
 
 }

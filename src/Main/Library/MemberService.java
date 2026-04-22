@@ -1,5 +1,6 @@
 package Main.Library;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 
@@ -41,6 +42,17 @@ public class MemberService {
         }
         return result;
     }
+    public Member findMemberById(String member){
+        Member result = null;
+        for (Member m : listPerson){
+            if (member.equalsIgnoreCase(m.getName())){
+                 result = m;
+                 break ;
+            }
+        }
+        return result;
+    }
+
     public void read(){
         System.out.println("enter the id number : ");
         int enteredId = Integer.parseInt(inputInfo.nextLine());
@@ -95,7 +107,7 @@ public class MemberService {
                 int i = listPerson.indexOf(m);
                 if (answer == 1 ){
                 listPerson.remove(i);
-                System.out.println("the member with " + enteredId+1 + "is no longer available ");
+                System.out.println("this member with is no longer available ");
             } else if (answer == 2 ) {
                 System.out.println("Ok , the member is still available ");
             }
