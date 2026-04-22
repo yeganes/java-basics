@@ -2,6 +2,7 @@ package Main.Library;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Service {
 
     static Scanner inputInfo = new Scanner(System.in);
