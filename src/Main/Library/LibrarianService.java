@@ -25,7 +25,7 @@ public class LibrarianService {
             System.out.println("enter the book's name : ");
             String booksname = inputInfo.nextLine();
             boolean inputAvailable = book.getTitle().equalsIgnoreCase(booksname);
-            if ( inputAvailable == true ) {
+            if (inputAvailable )  {
                 book = new Book(inputAvailable);
                 System.out.println(book.getTitle() + " written by " + book.getAuthor() + " with " + book.getPage() + " pages " + book.getAvailable());
 
