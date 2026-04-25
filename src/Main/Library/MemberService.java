@@ -9,11 +9,18 @@ public class MemberService {
     static Scanner inputInfo = new Scanner(System.in);
     public static ArrayList<Member> listPerson = new ArrayList<>();
     static int idMember ;
-    public void create(){
-        System.out.println("How many people are going to sign-up: ");
-        int j = Integer.parseInt(inputInfo.nextLine());
+    public void create() {
 
-        for (int i = 0 ; i< j ; i ++) {
+        System.out.println("How many people are going to sign-up: ");
+        int j = 0;
+        if (inputInfo.hasNextInt()) {
+            j = Integer.parseInt(inputInfo.nextLine());
+        }
+        else {
+            System.out.println("Invalid input!");
+            inputInfo.next();
+        }
+        for (int i = 0; i < j; i++) {
 
             System.out.println(" please enter your name: ");
             String inputName = inputInfo.nextLine();
@@ -27,11 +34,11 @@ public class MemberService {
             System.out.println("enter your gender: ");
             String inputGender = inputInfo.nextLine();
             idMember++;
-            Member person = new Member(inputName, inputAge, inputPhoneNumber, inputGender ,idMember);
+            Member person = new Member(inputName, inputAge, inputPhoneNumber, inputGender, idMember);
             listPerson.add(person);
             System.out.println("Added! ID: " + idMember);
-                }
-                    }
+        }
+    }
     public Member findMemberById(int id){
         Member result =  null;
         for (Member m : listPerson){

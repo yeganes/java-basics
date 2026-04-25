@@ -5,14 +5,15 @@ import java.util.Scanner;
 public class MemberMenu {
     static Scanner input = new Scanner(System.in);
 
-    public static void ask() {
+    public static void ask(){
         MemberService memberService = new MemberService();
         int chosenNumber = 0;
         do {
             System.out.println("please choose a number: \n 1 : Create \n 2 : Read \n 3 : Update\n 4 : Delete \n 5 : EXIT");
             if (input.hasNextInt()){
                 //the output of hasnextint is always a boolean
-                chosenNumber = input.nextInt();}
+                chosenNumber = input.nextInt();
+            }
                 else{
                 System.out.println("Invalid input!");
                 input.next();

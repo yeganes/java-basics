@@ -5,10 +5,17 @@ public class LibrarianMenu {
     public static void ask() {
         LibrarianService librarianService = new LibrarianService();
         Scanner input = new Scanner(System.in);
-        int chosenNumber;
+        int chosenNumber = 0;
         do {
             System.out.println("please choose a number: \n 1 : Add book \n 2 : Search \n 3 : Update the price \n 4 : Delete \n 5 : EXIT");
-            chosenNumber = input.nextInt();
+            if (input.hasNextInt()){
+                //the output of hasnextint is always a boolean
+                chosenNumber = input.nextInt();
+            }
+            else{
+                System.out.println("Invalid input!");
+                input.next();}
+                //input.next == clears the buffer
             switch (chosenNumber) {
                 case 1:
                     System.out.println("you selected number 1 , let's add the book");
@@ -30,6 +37,6 @@ public class LibrarianMenu {
                     System.out.println("you selected number 5 , Bye");
                     break;
             }
-        } while (chosenNumber == 1 || chosenNumber == 2 || chosenNumber == 3 || chosenNumber == 4);
+        } while (chosenNumber != 5);
     }
 }

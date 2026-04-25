@@ -7,9 +7,9 @@ public class Menu {
 
         int clarification = 0;
         do {
-            System.out.println("1.member \n2.librarian");
+            System.out.println("Hello please choose a number : \n 1.member \n 2.librarian\n 3.Exit");
             if (input.hasNextInt()){
-                clarification = Integer.parseInt(input.nextLine());
+                clarification = input.nextInt();
             }
             else{
                 System.out.println("invalid input ! please enter a number");
@@ -17,10 +17,15 @@ public class Menu {
             }
             switch (clarification) {
                 case 1 :
-                MemberMenu.ask();
+                    MemberMenu.ask();
+                    break;
                 case 2  :
-                LibrarianMenu.ask();
+                    LibrarianMenu.ask();
+                    break;
+                case 3 :
+                    System.out.println("you selected number 3 , Bye");
+                    break;
             }
-        } while (true);
+        } while (clarification != 3);
     }
 }
