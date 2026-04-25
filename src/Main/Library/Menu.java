@@ -5,15 +5,22 @@ public class Menu {
     static Scanner input = new Scanner(System.in);
     public static void main(String[] args) {
 
-        int clarification;
+        int clarification = 0;
         do {
             System.out.println("1.member \n2.librarian");
-            clarification = Integer.parseInt(input.nextLine());
-            if (clarification == 1) {
+            if (input.hasNextInt()){
+                clarification = Integer.parseInt(input.nextLine());
+            }
+            else{
+                System.out.println("invalid input ! please enter a number");
+                input.next();
+            }
+            switch (clarification) {
+                case 1 :
                 MemberMenu.ask();
-            } else if (clarification == 2) {
+                case 2  :
                 LibrarianMenu.ask();
             }
-        } while (clarification == 1 || clarification == 2 );
+        } while (true);
     }
 }
