@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class MemberMenu {
     static Scanner input = new Scanner(System.in);
 
-    public static void ask(){
+    public static void ask()  {
         MemberService memberService = new MemberService();
         int chosenNumber = 0;
         do {

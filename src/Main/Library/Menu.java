@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Menu {
     static Scanner input = new Scanner(System.in);
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
 
         int clarification = 0;
         do {

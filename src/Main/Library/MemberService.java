@@ -9,16 +9,18 @@ public class MemberService {
     static Scanner inputInfo = new Scanner(System.in);
     public static ArrayList<Member> listPerson = new ArrayList<>();
     static int idMember ;
-    public void create() {
+    public void create()  {
 
-        System.out.println("How many people are going to sign-up: ");
         int j = 0;
-        if (inputInfo.hasNextInt()) {
-            j = Integer.parseInt(inputInfo.nextLine());
-        }
-        else {
-            System.out.println("Invalid input!");
-            inputInfo.next();
+        while(true) {
+            System.out.println("How many people are going to sign-up: ");
+            String input = inputInfo.nextLine();
+            try {
+                j = Integer.parseInt(input);
+                break;
+            } catch (Exception e) {
+                System.out.println("Invalid input!");
+            }
         }
         for (int i = 0; i < j; i++) {
 
@@ -39,41 +41,37 @@ public class MemberService {
             System.out.println("Added! ID: " + idMember);
         }
     }
-    public Member findMemberById(int id){
-        Member result =  null;
-        for (Member m : listPerson){
-            if (id ==  m.getMemberId()){
-                result = m ;
-                break;
-            }
-        }
-        return result;
-    }
-    public Member findMemberById(String member){
-        Member result = null;
-        for (Member m : listPerson){
-            if (member.equalsIgnoreCase(m.getName())){
-                 result = m;
-                 break ;
-            }
-        }
-        return result;
-    }
+
 
     public void read(){
-        System.out.println("enter the id number : ");
-        int enteredId = Integer.parseInt(inputInfo.nextLine());
-        Member m = findMemberById(enteredId);
-        if (m == null){
-            System.out.println("NOT FOUND");
-        } else {
-            System.out.println(m.getName() + " " + m.getAge() + " " +m.getGender()+ " " + m.getPhoneNumber());
+        System.out.println(" 1. search by name \n 2. search by id");
+        int searchBy = Integer.parseInt(inputInfo.nextLine());
+        switch(searchBy){
+            case 1 :
+                System.out.println("enter your name : ");
+                String enteredName = inputInfo.nextLine();
+                Member n = Search.findMemberByName(enteredName);
+                if (n == null){
+                    System.out.println("NOT FOUND");
+                }else{
+                System.out.println(n.getName() + " " + n.getAge() + " " +n.getGender()+ " " + n.getPhoneNumber());
+                }
+                break;
+            case 2 :
+                System.out.println("enter the id number : ");
+                int enteredId = Integer.parseInt(inputInfo.nextLine());
+                Member m = Search.findMemberById(enteredId);
+                if (m == null){
+                    System.out.println("NOT FOUND");
+                } else {
+                    System.out.println(m.getName() + " " + m.getAge() + " " +m.getGender()+ " " + m.getPhoneNumber());
+                    }
         }
     }
         public void update(){
         System.out.println("enter the id number : ");
         int enteredId = Integer.parseInt(inputInfo.nextLine());
-            Member m = findMemberById(enteredId);
+            Member m = Search.findMemberById(enteredId);
             if (m == null){
                 System.out.println("NOT FOUND");
             } else {
@@ -114,7 +112,7 @@ public class MemberService {
         public void delete(){
             System.out.println("enter the id number : ");
             int enteredId = Integer.parseInt(inputInfo.nextLine());
-            Member m = findMemberById(enteredId);
+            Member m = Search.findMemberById(enteredId);
             if (m == null){
                 System.out.println("NOT FOUND");
             } else {
