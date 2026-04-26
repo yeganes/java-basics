@@ -10,11 +10,13 @@ public class LibrarianMenu {
             System.out.println("please choose a number: \n 1 : Add book \n 2 : Search \n 3 : Update the price \n 4 : Delete \n 5 : EXIT");
             if (input.hasNextInt()){
                 //the output of hasnextint is always a boolean
-                chosenNumber = input.nextInt();
+                chosenNumber = Integer.parseInt(input.nextLine());
             }
             else{
                 System.out.println("Invalid input!");
-                input.next();}
+                input.nextLine();
+                continue;
+            }
                 //input.next == clears the buffer
             switch (chosenNumber) {
                 case 1:

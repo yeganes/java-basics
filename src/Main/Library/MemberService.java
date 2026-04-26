@@ -5,10 +5,30 @@ import java.util.Scanner;
 
 
 public class MemberService {
+    public   Member findMemberById(int id){
+        Member result =  null;
+        for (Member m : listPerson){
+            if (id ==  m.getMemberId()){
+                result = m ;
+                break;
+            }
+        }
+        return result;
+    }
+    public  Member findMemberByName(String member){
+        Member result = null;
+        for (Member m : listPerson){
+            if (member.equalsIgnoreCase(m.getName())){
+                result = m;
+                break ;
+            }
+        }
+        return result;
+    }
 
     static Scanner inputInfo = new Scanner(System.in);
     public static ArrayList<Member> listPerson = new ArrayList<>();
-    static int idMember ;
+    static Integer idMember = 0 ;
     public void create()  {
 
         int j = 0;
@@ -28,7 +48,13 @@ public class MemberService {
             String inputName = inputInfo.nextLine();
 
             System.out.println(" age: ");
-            int inputAge = Integer.parseInt(inputInfo.nextLine());
+            int inputAge ;
+            try {
+                 inputAge = Integer.parseInt(inputInfo.nextLine());
+            }catch(NumberFormatException e){
+                System.out.println("Invalid input! please enter a number");
+                return;
+            }
 
             System.out.println(" phone number: ");
             long inputPhoneNumber = Long.parseLong(inputInfo.nextLine());
@@ -38,7 +64,7 @@ public class MemberService {
             idMember++;
             Member person = new Member(inputName, inputAge, inputPhoneNumber, inputGender, idMember);
             listPerson.add(person);
-            System.out.println("Added! ID: " + idMember);
+            System.out.println("Added! ID: " + person.getMemberId());
         }
     }
 
@@ -50,7 +76,7 @@ public class MemberService {
             case 1 :
                 System.out.println("enter your name : ");
                 String enteredName = inputInfo.nextLine();
-                Member n = Search.findMemberByName(enteredName);
+                Member n = findMemberByName(enteredName);
                 if (n == null){
                     System.out.println("NOT FOUND");
                 }else{
@@ -58,9 +84,17 @@ public class MemberService {
                 }
                 break;
             case 2 :
-                System.out.println("enter the id number : ");
-                int enteredId = Integer.parseInt(inputInfo.nextLine());
-                Member m = Search.findMemberById(enteredId);
+                Integer enteredId ;
+                while(true){
+                try {
+                    System.out.println("enter the id number : ");
+                    enteredId = Integer.parseInt(inputInfo.nextLine());
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Invalid input!");
+                }
+                }
+                Member m = findMemberById(enteredId);
                 if (m == null){
                     System.out.println("NOT FOUND");
                 } else {
@@ -71,7 +105,7 @@ public class MemberService {
         public void update(){
         System.out.println("enter the id number : ");
         int enteredId = Integer.parseInt(inputInfo.nextLine());
-            Member m = Search.findMemberById(enteredId);
+            Member m = findMemberById(enteredId);
             if (m == null){
                 System.out.println("NOT FOUND");
             } else {
@@ -112,7 +146,7 @@ public class MemberService {
         public void delete(){
             System.out.println("enter the id number : ");
             int enteredId = Integer.parseInt(inputInfo.nextLine());
-            Member m = Search.findMemberById(enteredId);
+            Member m = findMemberById(enteredId);
             if (m == null){
                 System.out.println("NOT FOUND");
             } else {

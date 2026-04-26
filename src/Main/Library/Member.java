@@ -9,7 +9,7 @@ public class Member {
     private int age ;
     private long phoneNumber;
     private String gender;
-    private int memberId;
+    private final Integer memberId;
 
 
 
@@ -39,19 +39,19 @@ public class Member {
     public String getGender(){
         return gender;
     }
-    public int getMemberId(){
+    public Integer getMemberId(){
         return memberId;
     }
 
     // یک سازنده هم نام کلاسمان میسازیم
-    public Member(String name , int age , long phoneNumber , String gender ,int memberId){
+    public Member(String name , int age , long phoneNumber , String gender ,Integer memberId){
         this.name = name ;
         this.age = age;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
         this.memberId = memberId;
     }
-    public Member(int memberId){
+    public Member(Integer memberId){
         this.memberId = memberId;
 
     }

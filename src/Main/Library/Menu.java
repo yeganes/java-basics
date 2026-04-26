@@ -9,11 +9,13 @@ public class Menu {
         do {
             System.out.println("Hello please choose a number : \n 1.member \n 2.librarian\n 3.Exit");
             if (input.hasNextInt()){
-                clarification = input.nextInt();
+                clarification = Integer.parseInt(input.nextLine());
             }
             else{
                 System.out.println("invalid input ! please enter a number");
-                input.next();
+               input.nextLine();
+               continue;
+
             }
             switch (clarification) {
                 case 1 :

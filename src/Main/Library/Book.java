@@ -5,6 +5,12 @@ public class Book {
     private String author;
     private Integer page;
     private boolean available;
+    final private  Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -32,17 +38,11 @@ public class Book {
         this.available = available;
     }
 
-    public Book(String title , String author , Integer page ){
+    public Book(String title , String author , Integer page , Integer id){
         this.title = title;
         this.author = author;
         this.page = page;
-
-    }
-    public Book(boolean available){
-        this.available = available;
-    }
-    public Book (String title){
-        this.title = title;
+        this.id = id;
 
     }
 

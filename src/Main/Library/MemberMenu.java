@@ -12,11 +12,12 @@ public class MemberMenu {
             System.out.println("please choose a number: \n 1 : Create \n 2 : Read \n 3 : Update\n 4 : Delete \n 5 : EXIT");
             if (input.hasNextInt()){
                 //the output of hasnextint is always a boolean
-                chosenNumber = input.nextInt();
+                chosenNumber = Integer.parseInt(input.nextLine());
             }
                 else{
                 System.out.println("Invalid input!");
-                input.next();
+                input.nextLine();
+                continue;
                 //input.next == clears the buffer
             }
             switch (chosenNumber) {

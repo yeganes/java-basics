@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class LibrarianService {
     Scanner inputInfo = new Scanner(System.in);
     public static ArrayList<Book> listBook = new ArrayList<>();
+    static Integer id;
 
     public void add(){
         System.out.println("How many books are you going to add? ");
@@ -19,10 +20,10 @@ public class LibrarianService {
 
             System.out.println("How many pages does it have? ");
             Integer inputPage = Integer.valueOf(inputInfo.nextLine());
-
-            Book book = new Book(inputTitle , inputAuthor , inputPage);
+            id++;
+            Book book = new Book(inputTitle , inputAuthor , inputPage , id);
             listBook.add(book);
-            System.out.println(book.getTitle() + " written by " + book.getAuthor() + " with " + book.getPage() + " pages ");
+            System.out.println(book.getTitle() + " written by " + book.getAuthor() + " with " + book.getPage() + " pages " + "the book's id is : " + book.getId());
         }
 
     }
