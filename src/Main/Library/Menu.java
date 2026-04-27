@@ -1,6 +1,11 @@
 package Main.Library;
 import java.util.Scanner;
 
+/**
+ * سرویس منو اصلی ورودی
+ *
+ */
+
 public class Menu {
     static Scanner input = new Scanner(System.in);
     public static void main(String[] args)  {

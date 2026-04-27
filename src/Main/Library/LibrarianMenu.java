@@ -7,7 +7,7 @@ public class LibrarianMenu {
         Scanner input = new Scanner(System.in);
         int chosenNumber = 0;
         do {
-            System.out.println("please choose a number: \n 1 : Add book \n 2 : Search \n 3 : Update the price \n 4 : Delete \n 5 : EXIT");
+            System.out.println("please choose a number: \n 1 : Add book \n 2 : Search \n 3 : Update the status\n 4 : Delete \n 5 : EXIT");
             if (input.hasNextInt()){
                 //the output of hasnextint is always a boolean
                 chosenNumber = Integer.parseInt(input.nextLine());
@@ -28,7 +28,7 @@ public class LibrarianMenu {
                     librarianService.search();
                     break;
                 case 3:
-                    System.out.println("you selected number 3 , let's update the book's price");
+                    System.out.println("you selected number 3 , let's update the book's status");
                     librarianService.update();
                     break;
                 case 4:

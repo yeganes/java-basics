@@ -3,9 +3,20 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * سرویس کراد ممبر ها
+ */
+
 
 public class MemberService {
-    public   Member findMemberById(int id){
+
+
+    /**
+     * سرچ کردن با ورودی ایدی
+      * @param id ایدی وارد شده
+     * @return اطلاعات کاربر
+     */
+    public Member findMemberById(int id){
         Member result =  null;
         for (Member m : listPerson){
             if (id ==  m.getMemberId()){
@@ -15,6 +26,12 @@ public class MemberService {
         }
         return result;
     }
+
+    /**
+     * سرچ کردن با ورودی اسم
+     * @param member اسم کاربر
+     * @return اطلاعات کاربر
+     */
     public  Member findMemberByName(String member){
         Member result = null;
         for (Member m : listPerson){
@@ -25,14 +42,16 @@ public class MemberService {
         }
         return result;
     }
-
+    Member person = null;
     static Scanner inputInfo = new Scanner(System.in);
     public static ArrayList<Member> listPerson = new ArrayList<>();
     static Integer idMember = 0 ;
-    public void create()  {
+    public static Integer borrowLimit = 2;
+    public static Integer borrowedBooks = 0;
+    public ArrayList<Member> create() {
 
         int j = 0;
-        while(true) {
+        while (true) {
             System.out.println("How many people are going to sign-up: ");
             String input = inputInfo.nextLine();
             try {
@@ -48,28 +67,39 @@ public class MemberService {
             String inputName = inputInfo.nextLine();
 
             System.out.println(" age: ");
-            int inputAge ;
+            int inputAge;
             try {
-                 inputAge = Integer.parseInt(inputInfo.nextLine());
-            }catch(NumberFormatException e){
+                inputAge = Integer.parseInt(inputInfo.nextLine());
+            } catch (NumberFormatException e) {
                 System.out.println("Invalid input! please enter a number");
-                return;
+                return null;
             }
 
             System.out.println(" phone number: ");
             long inputPhoneNumber = Long.parseLong(inputInfo.nextLine());
 
-            System.out.println("enter your gender: ");
-            String inputGender = inputInfo.nextLine();
+            Member.Gender gender = null;
+            while (gender == null) {
+                System.out.println("Enter gender (male/female): ");
+                String inputGender = inputInfo.nextLine().trim().toUpperCase();
+                try {
+                    gender = Member.Gender.valueOf(inputGender);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Invalid gender, try again!");
+                }
+            }
             idMember++;
-            Member person = new Member(inputName, inputAge, inputPhoneNumber, inputGender, idMember);
+            person = new Member(inputName, inputAge, inputPhoneNumber, gender, idMember ,borrowLimit ,borrowedBooks);
+
             listPerson.add(person);
-            System.out.println("Added! ID: " + person.getMemberId());
+
+            System.out.println("Added! ID: " + person.getMemberId() );
         }
+        return listPerson;
     }
 
 
-    public void read(){
+    public Member read(){
         System.out.println(" 1. search by name \n 2. search by id");
         int searchBy = Integer.parseInt(inputInfo.nextLine());
         switch(searchBy){
@@ -80,7 +110,7 @@ public class MemberService {
                 if (n == null){
                     System.out.println("NOT FOUND");
                 }else{
-                System.out.println(n.getName() + " " + n.getAge() + " " +n.getGender()+ " " + n.getPhoneNumber());
+                System.out.println(n.getName() + " " + n.getAge() + " " +n.getGender()+ " " + n.getPhoneNumber() + "\n"+ "you can borrow  " + n.getBorrowLimit() + " books" );
                 }
                 break;
             case 2 :
@@ -98,11 +128,12 @@ public class MemberService {
                 if (m == null){
                     System.out.println("NOT FOUND");
                 } else {
-                    System.out.println(m.getName() + " " + m.getAge() + " " +m.getGender()+ " " + m.getPhoneNumber());
+                    System.out.println(m.getName() + " " + m.getAge() + " " +m.getGender()+ " " + m.getPhoneNumber()+ "\n"+ "you can borrow  " + m.getBorrowLimit() + " books" );
                     }
         }
+        return person;
     }
-        public void update(){
+        public Member update(){
         System.out.println("enter the id number : ");
         int enteredId = Integer.parseInt(inputInfo.nextLine());
             Member m = findMemberById(enteredId);
@@ -142,8 +173,9 @@ public class MemberService {
                     System.out.println(m.setAge(Integer.parseInt(alternativeAge)));
                 }
             }
+            return person;
         }
-        public void delete(){
+        public Member delete(){
             System.out.println("enter the id number : ");
             int enteredId = Integer.parseInt(inputInfo.nextLine());
             Member m = findMemberById(enteredId);
@@ -157,14 +189,16 @@ public class MemberService {
                 int i = listPerson.indexOf(m);
                 if (answer == 1 ){
                 listPerson.remove(i);
-                System.out.println("this member with is no longer available ");
+                System.out.println("this member is no longer available ");
             } else if (answer == 2 ) {
                 System.out.println("Ok , the member is still available ");
             }
         }
+            return person;
     }
 
-        }
+
+}
 
 
 

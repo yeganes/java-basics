@@ -1,8 +1,8 @@
 package Main.Library;
 
 public class Book {
-    private String title;
-    private String author;
+    private final String title;
+    private final String author;
     private Integer page;
     private boolean available;
     final private  Integer id;
@@ -14,14 +14,8 @@ public class Book {
     public String getTitle() {
         return title;
     }
-    public void setTitle(String title) {
-        this.title = title;
-    }
     public String getAuthor() {
         return author;
-    }
-    public void setAuthor(String author) {
-        this.author = author;
     }
     public Integer getPage() {
         return page;
@@ -38,11 +32,12 @@ public class Book {
         this.available = available;
     }
 
-    public Book(String title , String author , Integer page , Integer id){
+    public Book(String title , String author , Integer page , Integer id , boolean available) {
         this.title = title;
         this.author = author;
         this.page = page;
         this.id = id;
+        this.available = available;
 
     }
 
