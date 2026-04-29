@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 
 public class BookService {
-    public ArrayList<Book> listBook = new ArrayList<>();
-    static Integer id = 0;
+    public static ArrayList<Book> listBook = new ArrayList<>();    static Integer id = 0;
     static boolean isAvailable = true;
 
 
@@ -17,17 +16,13 @@ public class BookService {
         return book;
     }
 
-    public Book findBookByTitle(String title) throws NullPointerException{
-        Book result = null;
+    public Book findBookByTitle(String title) {
         for (Book b : listBook) {
             if (title.equalsIgnoreCase(b.getTitle())) {
-                result = b;
-                break;
-            }else{
-                throw new NullPointerException();
+                return b;
+            }
         }
-        }
-        return result;
+        return null;
     }
 
     public Book search(String givenTitle) {
