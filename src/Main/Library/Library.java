@@ -6,7 +6,8 @@ import Main.Library.Model.Member;
 public interface Library {
 
 
-public void borrow(Member member , Book book);
+
+public void borrow(String member , String book);
 
 
     }

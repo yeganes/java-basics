@@ -50,7 +50,6 @@ public class MemberService {
     public static Integer borrowLimit = 2;
     public static Integer borrowedBooks = 0;
     public ArrayList<Member> create() {
-
         int j = 0;
         while (true) {
             System.out.println("How many people are going to sign-up: ");

@@ -26,7 +26,6 @@ public class BookService {
             }else{
                 throw new NullPointerException();
         }
-
         }
         return result;
     }
