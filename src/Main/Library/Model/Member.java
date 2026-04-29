@@ -1,4 +1,4 @@
-package Main.Library;
+package Main.Library.Model;
 
 
 public class Member {

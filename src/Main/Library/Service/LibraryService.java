@@ -1,6 +1,10 @@
-package Main.Library;
+package Main.Library.Service;
 
-public class LibraryService implements Library  {
+import Main.Library.Library;
+import Main.Library.Model.Book;
+import Main.Library.Model.Member;
+
+public class LibraryService implements Library {
 
     @Override
     public void borrow(Member member, Book book) {

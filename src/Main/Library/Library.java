@@ -1,6 +1,7 @@
 package Main.Library;
 
-import java.util.ArrayList;
+import Main.Library.Model.Book;
+import Main.Library.Model.Member;
 
 public interface Library {
 

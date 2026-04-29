@@ -1,6 +1,7 @@
-package Main.Library;
+package Main.Library.Service;
+import Main.Library.Model.Member;
+
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 /**

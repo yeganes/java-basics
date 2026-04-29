@@ -1,11 +1,13 @@
-package Main.Library;
+package Main.Library.UI;
+
+import Main.Library.Service.MemberService;
 
 import java.util.Scanner;
 
 public class MemberMenu {
     static Scanner input = new Scanner(System.in);
 
-    public static void ask()  {
+    public  void ask()  {
         MemberService memberService = new MemberService();
         int chosenNumber = 0;
         do {
@@ -14,7 +16,7 @@ public class MemberMenu {
                 //the output of hasnextint is always a boolean
                 chosenNumber = Integer.parseInt(input.nextLine());
             }
-                else{
+            else{
                 System.out.println("Invalid input!");
                 input.nextLine();
                 continue;
