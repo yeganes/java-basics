@@ -1,5 +1,7 @@
 package Main.Library.UI;
 
+import Main.Library.Service.LimitBorrowedException;
+
 import java.util.Scanner;
 
 /**
@@ -9,7 +11,7 @@ import java.util.Scanner;
 
 public class Menu {
     static Scanner input = new Scanner(System.in);
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws LimitBorrowedException {
         BookMenu bookMenu = new BookMenu();
         MemberMenu memberMenu = new MemberMenu();
 
