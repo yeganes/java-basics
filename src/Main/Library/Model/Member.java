@@ -19,7 +19,7 @@ public class Member {
     //این پراپرتی ها باید خصوصی تعریف بشه که از لحاظ امنیتی کد در حالت استیبلی قرار بگیره
     private String name;
     private int age ;
-    private long phoneNumber;
+    private String phoneNumber;
     private final Integer memberId;
     private Integer borrowLimit;
     private MembershipStatus status;
@@ -59,11 +59,11 @@ public class Member {
     public int getAge(){
         return age;
     }
-    public long setPhoneNumber(long phoneNumber){
+    public String setPhoneNumber(String phoneNumber){
         this.phoneNumber = phoneNumber;
         return phoneNumber;
     }
-    public long getPhoneNumber(){
+    public String getPhoneNumber(){
         return phoneNumber;
     }
     public Gender getGender(){
@@ -79,7 +79,16 @@ public class Member {
     }
 
     // یک سازنده هم نام کلاسمان میسازیم
-    public Member(String name , int age , long phoneNumber , Gender gender ,Integer memberId , Integer borrowLimit , Integer borrowedBooksNum){
+    public Member(String name , int age , String phoneNumber , Gender gender ,Integer memberId , Integer borrowLimit , Integer borrowedBooksNum){
+        if (name == null || name.isEmpty() ){
+            throw new IllegalArgumentException("the name can't be empty");
+        }
+        if (age <= 0) {
+            throw new IllegalArgumentException("Age must be positive");
+        }
+        if (phoneNumber.length() < 10 || phoneNumber.length() > 11) {
+            throw new IllegalArgumentException("phoneNumber should be at leats 10 digits ");
+        }
         this.name = name ;
         this.age = age;
         this.phoneNumber = phoneNumber;

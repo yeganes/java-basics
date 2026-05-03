@@ -20,11 +20,8 @@ public class Book {
     public Integer getPage() {
         return page;
     }
-    public void setPage(Integer page) {
-        this.page = page;
-    }
 
-    public boolean getAvailable() {
+    public boolean isAvailable() {
         return available;
     }
 
@@ -33,6 +30,18 @@ public class Book {
     }
 
     public Book(String title , String author , Integer page , Integer id , boolean available) {
+        if (title==null){
+            throw new IllegalArgumentException("the title shouldn't be empty");
+
+        }
+        if (author ==null){
+            throw new IllegalArgumentException("the author shouldn't be empty");
+
+        }
+        if (page==null || page <= 0){
+            throw new IllegalArgumentException("the page shouldn't be empty or smaller than zero");
+
+        }
         this.title = title;
         this.author = author;
         this.page = page;
