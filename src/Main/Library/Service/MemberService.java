@@ -14,7 +14,7 @@ public class MemberService {
 
     /**
      * سرچ کردن با ورودی ایدی
-      * @param id ایدی وارد شده
+     * @param id ایدی وارد شده
      * @return اطلاعات کاربر
      */
     public Member findMemberById(int id){
@@ -76,7 +76,7 @@ public class MemberService {
             }
 
             System.out.println(" phone number: ");
-            long inputPhoneNumber = Long.parseLong(inputInfo.nextLine());
+            String inputPhoneNumber = inputInfo.nextLine();
 
             Member.Gender gender = null;
             while (gender == null) {
@@ -110,95 +110,94 @@ public class MemberService {
                 if (n == null){
                     System.out.println("NOT FOUND");
                 }else{
-                System.out.println(n.getName() + " " + n.getAge() + " " +n.getGender()+ " " + n.getPhoneNumber() + "\n"+ "you can borrow  " + n.getBorrowLimit() + " books" );
+                    System.out.println(n.getName() + " " + n.getAge() + " " +n.getGender()+ " " + n.getPhoneNumber() + "\n"+ "you can borrow  " + n.getBorrowLimit() + " books" );
                 }
                 break;
             case 2 :
                 Integer enteredId ;
                 while(true){
-                try {
-                    System.out.println("enter the id number : ");
-                    enteredId = Integer.parseInt(inputInfo.nextLine());
-                    break;
-                } catch (Exception e) {
-                    System.out.println("Invalid input!");
-                }
+                    try {
+                        System.out.println("enter the id number : ");
+                        enteredId = Integer.parseInt(inputInfo.nextLine());
+                        break;
+                    } catch (Exception e) {
+                        System.out.println("Invalid input!");
+                    }
                 }
                 Member m = findMemberById(enteredId);
                 if (m == null){
                     System.out.println("NOT FOUND");
                 } else {
                     System.out.println(m.getName() + " " + m.getAge() + " " +m.getGender()+ " " + m.getPhoneNumber()+ "\n"+ "you can borrow  " + m.getBorrowLimit() + " books" );
-                    }
+                }
         }
         return person;
     }
-        public Member update(){
+    public Member update(){
         System.out.println("enter the id number : ");
         int enteredId = Integer.parseInt(inputInfo.nextLine());
-            Member m = findMemberById(enteredId);
-            if (m == null){
-                System.out.println("NOT FOUND");
-            } else {
-                System.out.println("here is your information : ");
-                System.out.println(m.getName());
-                System.out.println(":");
-                String alternativeName = inputInfo.nextLine();
-                boolean spaceEnter = alternativeName.isEmpty();
-                if (spaceEnter){
-                    // intentionally left blank
-                }
-                else{
-                    System.out.println(m.setName(alternativeName));
-                }
-                System.out.println(m.getPhoneNumber());
-                System.out.println(": ");
-                String alternativePhoneNumber  = inputInfo.nextLine();
-                boolean spaceEnter1 = alternativePhoneNumber.isEmpty();
-
-                if (spaceEnter1){
-                    // intentionally left blank
-                }
-                else{
-                    System.out.println(m.setPhoneNumber(Long.parseLong(alternativePhoneNumber)));
-                }
-                System.out.println(m.getAge());
-                System.out.println(": ");
-                String alternativeAge  = inputInfo.nextLine();
-                boolean spaceEnter2 = alternativeAge.isEmpty();
-                if (spaceEnter2){
-                    // intentionally left blank
-                }
-                else{
-                    System.out.println(m.setAge(Integer.parseInt(alternativeAge)));
-                }
+        Member m = findMemberById(enteredId);
+        if (m == null){
+            System.out.println("NOT FOUND");
+        } else {
+            System.out.println("here is your information : ");
+            System.out.println(m.getName());
+            System.out.println(":");
+            String alternativeName = inputInfo.nextLine();
+            boolean spaceEnter = alternativeName.isEmpty();
+            if (spaceEnter){
+                // intentionally left blank
             }
-            return person;
+            else{
+                System.out.println(m.setName(alternativeName));
+            }
+            System.out.println(m.getPhoneNumber());
+            System.out.println(": ");
+            String alternativePhoneNumber  = inputInfo.nextLine();
+            boolean spaceEnter1 = alternativePhoneNumber.isEmpty();
+
+            if (spaceEnter1){
+                // intentionally left blank
+            }
+            else{
+                System.out.println(m.setPhoneNumber((alternativePhoneNumber)));
+            }
+            System.out.println(m.getAge());
+            System.out.println(": ");
+            String alternativeAge  = inputInfo.nextLine();
+            boolean spaceEnter2 = alternativeAge.isEmpty();
+            if (spaceEnter2){
+                // intentionally left blank
+            }
+            else{
+                System.out.println(m.setAge(Integer.parseInt(alternativeAge)));
+            }
         }
-        public Member delete(){
-            System.out.println("enter the id number : ");
-            int enteredId = Integer.parseInt(inputInfo.nextLine());
-            Member m = findMemberById(enteredId);
-            if (m == null){
-                System.out.println("NOT FOUND");
-            } else {
+        return person;
+    }
+    public Member delete(){
+        System.out.println("enter the id number : ");
+        int enteredId = Integer.parseInt(inputInfo.nextLine());
+        Member m = findMemberById(enteredId);
+        if (m == null){
+            System.out.println("NOT FOUND");
+        } else {
             System.out.println("here is your information : ");
             System.out.println(m.getName()  + " " + m.getAge() + " " + m.getPhoneNumber());
             System.out.println("Do you wanna delete the account : \n 1.Yes \n 2. No ");
             int answer = Integer.parseInt(inputInfo.nextLine());
-                int i = listPerson.indexOf(m);
-                if (answer == 1 ){
+            int i = listPerson.indexOf(m);
+            if (answer == 1 ){
                 listPerson.remove(i);
                 System.out.println("this member is no longer available ");
             } else if (answer == 2 ) {
                 System.out.println("Ok , the member is still available ");
             }
         }
-            return person;
+        return person;
     }
 
 
 }
-
 
 

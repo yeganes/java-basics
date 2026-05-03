@@ -45,6 +45,9 @@ public class Member {
 
     //از متود ستر استفاده میکنیم که بتوانیم متغیرمان را تغییر دهیم و انرا تعیین کنیم و یک اشاره گر برای ان بسازیم
     public String setName(String name){
+        if (name == null || name.isEmpty()){
+            throw new IllegalArgumentException("the name can't be empty");
+        }
         this.name = name;
         return name;
     }
@@ -57,6 +60,9 @@ public class Member {
         return age;
     }
     public int getAge(){
+        if (age <= 0) {
+            throw new IllegalArgumentException("Age must be positive");
+        }
         return age;
     }
     public String setPhoneNumber(String phoneNumber){
@@ -64,6 +70,9 @@ public class Member {
         return phoneNumber;
     }
     public String getPhoneNumber(){
+        if (phoneNumber.length() < 10 || phoneNumber.length() > 11) {
+            throw new IllegalArgumentException("phoneNumber should be at leats 10 digits ");
+        }
         return phoneNumber;
     }
     public Gender getGender(){

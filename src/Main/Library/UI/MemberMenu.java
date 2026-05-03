@@ -10,7 +10,7 @@ import static Main.Library.Service.MemberService.listPerson;
 
 public class MemberMenu {
     static Scanner input = new Scanner(System.in);
-LibraryService libraryService  = new LibraryService();
+    LibraryService libraryService  = new LibraryService();
     public  void ask()  {
         MemberService memberService = new MemberService();
         int chosenNumber = 0;

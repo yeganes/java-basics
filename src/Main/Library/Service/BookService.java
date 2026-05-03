@@ -10,6 +10,18 @@ public class BookService {
 
 
     public Book add(String inputTitle, String inputAuthor, Integer inputPage) {
+        if (inputTitle==null || inputTitle.isEmpty()){
+            throw new IllegalArgumentException("the title shouldn't be empty");
+
+        }
+        if (inputAuthor ==null || inputAuthor.isEmpty()){
+            throw new IllegalArgumentException("the author shouldn't be empty");
+
+        }
+        if (inputPage==null || inputPage <= 0){
+            throw new IllegalArgumentException("the page shouldn't be empty or smaller than zero");
+
+        }
         id++;
         Book book = new Book(inputTitle, inputAuthor, inputPage, id, isAvailable);
         listBook.add(book);
@@ -27,30 +39,26 @@ public class BookService {
 
     public Book search(String givenTitle) {
         Book b;
-        while (true) {
-            try {
-                b = findBookByTitle(givenTitle);
-                break;
-            } catch (NullPointerException e) {
-                e.getMessage();
+        b = findBookByTitle(givenTitle);
+
+            if (b == null) {
+                throw new NullPointerException("the book's name doesn't match");
+                //left empty by purpose
             }
-        }
-        if (b == null) {
-            //left empty by purpose
-        }
         return b;
     }
 
     public Book update(String givenTitle, boolean chosen) {
-        Book b = search(givenTitle);
-        if (b.getAvailable()) {
+        Book b;
+            b = search(givenTitle);
+        if (b.isAvailable()) {
             if (chosen) {
-                if (b.getAvailable() == true) {
+                if (b.isAvailable() == true) {
                     b.setAvailable(false);
-                    b.getAvailable();
-                } else if (b.getAvailable() == false){
+                    b.isAvailable();
+                } else if (b.isAvailable() == false) {
                     b.setAvailable(true);
-                    b.getAvailable();
+                    b.isAvailable();
                 }
             }
         }
@@ -58,8 +66,8 @@ public class BookService {
 
     }
 
-    public boolean delete(String givenTitle2) throws NumberFormatException {
-        Book b = findBookByTitle(givenTitle2);
+    public boolean delete(String givenTitle2)  {
+        Book b = search(givenTitle2);
         int i = listBook.indexOf(b);
         listBook.remove(i);
         return true;

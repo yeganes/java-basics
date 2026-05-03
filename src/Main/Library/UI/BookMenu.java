@@ -40,44 +40,65 @@ public class BookMenu {
                         }
                     }
                     for (int i = 0; i < j; i++) {
-                        System.out.println("Enter the book's title: ");
-                        String inputTitle = inputInfo.nextLine();
-                        System.out.println("Enter the book's author: ");
-                        String inputAuthor = inputInfo.nextLine();
-                        System.out.println("How many pages does it have? ");
-                        Integer inputPage = Integer.valueOf(inputInfo.nextLine());
-                        Book book = bookService.add(inputTitle, inputAuthor, inputPage);
-                        System.out.println("this book is added with ID number : " + book.getId());
+                        while(true) {
+                            try {
+                                System.out.println("Enter the book's title: ");
+                                String inputTitle = inputInfo.nextLine();
+                                System.out.println("Enter the book's author: ");
+                                String inputAuthor = inputInfo.nextLine();
+                                System.out.println("How many pages does it have? ");
+                                Integer inputPage = Integer.valueOf(inputInfo.nextLine());
+                                Book book = bookService.add(inputTitle, inputAuthor, inputPage);
+                                System.out.println("this book is added with ID number : " + book.getId());
+                                break;
+
+                            } catch (IllegalArgumentException e) {
+                                System.out.println("error!" + e.getMessage());
+                            }
+
+                        }
                     }
                     break;
                 case 2:
                     System.out.println("you selected number 2 , let's Search through the books");
-                    System.out.println("enter the book you are searching for : ");
-                    String givenTitle = inputInfo.nextLine();
-                    Book book = bookService.search(givenTitle);
-                    System.out.println("this book is : " + book.getTitle() + " written by " + book.getAuthor() + " with " + book.getPage() + " pages the book availability is " + book.getAvailable());
+
+                    while(true){
+                    try{
+                        System.out.println("enter the book you are searching for : ");
+                        String givenTitle = inputInfo.nextLine();
+                        Book book = bookService.search(givenTitle);
+                        System.out.println("this book is : " + book.getTitle() + " written by " + book.getAuthor() + " with " + book.getPage() + " pages the book availability is " + book.isAvailable());
+                        break;
+                    }catch(NullPointerException e ){
+                        System.out.println("error!" + e.getMessage());
+                    }
+                    }
                     break;
+
                 case 3:
                     System.out.println("you selected number 3 , let's update the book's status");
-                    System.out.println("enter the book you're going to update : ");
-                    String givenTitle1;
                     while (true) {
+                        Book book1 = null;
+
                         try {
-                            givenTitle1 = inputInfo.nextLine();
+                            System.out.println("enter the book you're going to update : ");
+                            String givenTitle1 = inputInfo.nextLine();
+                            book1 = bookService.search(givenTitle1);
+                            System.out.println("the book availability is  " + book1.isAvailable() + "if you wanna change it press enter");
+                            boolean chosen = inputInfo.nextLine().isEmpty();
+                            Book b = bookService.update(givenTitle1, chosen);
+                            System.out.println("the book availability is  " + b.isAvailable());
                             break;
-                        }catch(NullPointerException e ){
-                            System.out.println("not found");
+                        } catch (NullPointerException e) {
+                            System.out.println("error!" + e.getMessage());
                         }
                     }
-                    Book book1 = bookService.search(givenTitle1);
-                    System.out.println("the book availability is  " + book1.getAvailable() + "if you wanna change it press enter");
-                    boolean chosen = inputInfo.nextLine().isEmpty();
-                    Book b = bookService.update(givenTitle1, chosen);
-                    System.out.println("the book availability is  " + b.getAvailable());
+
+
                     break;
                 case 4:
                     System.out.println("you selected number 4, deleting a book!");
-                    System.out.println("enter the book title:");
+                    System.out.println("enter the book's title:");
                     String givenTitle2 = inputInfo.nextLine();
                     System.out.println("Do you want to delete this book? 1.yes 2.no");
                     try {
