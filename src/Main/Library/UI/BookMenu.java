@@ -1,6 +1,7 @@
 package Main.Library.UI;
 import Main.Library.Model.Book;
 import Main.Library.Service.BookService;
+import Main.Library.Service.FileService;
 import java.text.MessageFormat;
 
 import java.io.FileWriter;
@@ -8,6 +9,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class BookMenu {
+    FileService fileWriter = new FileService();
+
     static Scanner inputInfo = new Scanner(System.in);
 
     public void ask() {
@@ -55,10 +58,14 @@ public class BookMenu {
                                         book.getTitle(),
                                         book.getId());
                                 System.out.println(msg);
+                                fileWriter.writeFile("C:/Users/My/Desktop/TestData/Books.txt" , book.getId() + " " + book.getTitle() + " " + book.getAuthor() +" " + book.getPage());
+
                                 break;
 
                             } catch (IllegalArgumentException e) {
                                 System.out.println("error!" + e.getMessage());
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
                             }
 
                         }

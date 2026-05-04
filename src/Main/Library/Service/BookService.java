@@ -3,15 +3,20 @@ import Main.Library.Model.Book;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class BookService {
-    public static ArrayList<Book> listBook = new ArrayList<>();    static Integer id = 0;
+    public static ArrayList<Book> listBook = new ArrayList<>();
+    static Integer id = 0;
     static boolean isAvailable = true;
 
 
-    public Book add(String inputTitle, String inputAuthor, Integer inputPage) {
+    public Book add(String inputTitle, String inputAuthor, Integer inputPage) throws IOException {
         if (inputTitle==null || inputTitle.isEmpty()){
             throw new IllegalArgumentException("the title shouldn't be empty");
 
