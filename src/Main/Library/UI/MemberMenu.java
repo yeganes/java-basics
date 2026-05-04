@@ -4,7 +4,7 @@ import Main.Library.Service.LibraryService;
 import Main.Library.Model.Member;
 import Main.Library.Service.LimitBorrowedException;
 import Main.Library.Service.MemberService;
-
+import java.text.MessageFormat;
 import java.util.Scanner;
 
 import static Main.Library.Service.MemberService.listPerson;
@@ -46,6 +46,10 @@ public class MemberMenu {
                             try{
                             System.out.println(" please enter your name: ");
                             String inputName = input.nextLine();
+                            if (inputName.trim().isEmpty()){
+                                return;
+                            }
+
 
                             System.out.println(" age: ");
                             int inputAge = 0;
@@ -95,7 +99,13 @@ public class MemberMenu {
                                         System.out.println("enter your name : ");
                                         String enteredName = input.nextLine();
                                         Member n = memberService.readByName(enteredName);
-                                        System.out.println(n.getName() + " " + n.getAge() + " " +n.getGender()+ " " + n.getPhoneNumber() + "\n"+ "you can borrow  " + n.getBorrowLimit() + " books" );
+                                        String msg = MessageFormat.format("name : {0} \n age : {1} years old \n gender : {2} \n phone number : {3} \n you can borrrow  : {4} books ",
+                                                n.getName(),
+                                                n.getAge(),
+                                                n.getGender(),
+                                                n.getPhoneNumber(),
+                                                n.getBorrowLimit());
+                                        System.out.println(msg);
                                         break;
                                         }catch(NullPointerException e){
                                             System.out.println("error ! " + e.getMessage());
@@ -108,7 +118,13 @@ public class MemberMenu {
                                             System.out.println("enter the id number : ");
                                             Integer enteredId = Integer.valueOf(input.nextLine());
                                             Member m = memberService.readMemberById(enteredId);
-                                            System.out.println(m.getName() + " " + m.getAge() + " " + m.getGender() + " " + m.getPhoneNumber() + "\n" + "you can borrow  " + m.getBorrowLimit() + " books");
+                                            String msg = MessageFormat.format(" name : {0} \n age : {1} years old \n gender : {2} \n phone number : {3} \n you can borrrow  : {4} books ",
+                                                    m.getName(),
+                                                    m.getAge(),
+                                                    m.getGender(),
+                                                    m.getPhoneNumber(),
+                                                    m.getBorrowLimit());
+                                            System.out.println(msg);
                                             break;
                                         }catch(NullPointerException | NumberFormatException e){
                                             System.out.println("error !" + e.getMessage());
@@ -148,9 +164,11 @@ public class MemberMenu {
 
                                 Member n = memberService.readMemberById(enteredId1);
 
-                                System.out.println("here is your information : ");
-                                System.out.println(n.getName()  + " " + n.getAge() + " " + n.getPhoneNumber());
-
+                                String msg = MessageFormat.format(" name : {0} \n age : {1} years old  \n phone number : {2} ",
+                                        n.getName(),
+                                        n.getAge(),
+                                        n.getPhoneNumber());
+                                System.out.println(msg);
                                 System.out.println("Do you wanna delete the account : \n 1.Yes \n 2. No ");
                                 int number = Integer.parseInt(input.nextLine());
 

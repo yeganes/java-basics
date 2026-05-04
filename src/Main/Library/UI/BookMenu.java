@@ -1,8 +1,10 @@
 package Main.Library.UI;
 import Main.Library.Model.Book;
 import Main.Library.Service.BookService;
+import java.text.MessageFormat;
 
-
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class BookMenu {
@@ -49,7 +51,10 @@ public class BookMenu {
                                 System.out.println("How many pages does it have? ");
                                 Integer inputPage = Integer.valueOf(inputInfo.nextLine());
                                 Book book = bookService.add(inputTitle, inputAuthor, inputPage);
-                                System.out.println("this book is added with ID number : " + book.getId());
+                                String msg = MessageFormat.format("the {0} book is added with id number {1}",
+                                        book.getTitle(),
+                                        book.getId());
+                                System.out.println(msg);
                                 break;
 
                             } catch (IllegalArgumentException e) {
@@ -67,7 +72,12 @@ public class BookMenu {
                         System.out.println("enter the book you are searching for : ");
                         String givenTitle = inputInfo.nextLine();
                         Book book = bookService.search(givenTitle);
-                        System.out.println("this book is : " + book.getTitle() + " written by " + book.getAuthor() + " with " + book.getPage() + " pages the book availability is " + book.isAvailable());
+                        String msg = MessageFormat.format("the {0} book is written by {1} and it has got {2} pages the availability status is {3}",
+                                book.getTitle(),
+                                book.getAuthor(),
+                                book.getPage(),
+                                book.isAvailable());
+                        System.out.println(msg);
                         break;
                     }catch(NullPointerException e ){
                         System.out.println("error!" + e.getMessage());
@@ -84,7 +94,9 @@ public class BookMenu {
                             System.out.println("enter the book you're going to update : ");
                             String givenTitle1 = inputInfo.nextLine();
                             book1 = bookService.search(givenTitle1);
-                            System.out.println("the book availability is  " + book1.isAvailable() + "if you wanna change it press enter");
+                            String msg = MessageFormat.format("the {0} book availability is {1} if you  wanna change it press enter",
+                                    book1.isAvailable());
+                            System.out.println(msg);
                             boolean chosen = inputInfo.nextLine().isEmpty();
                             Book b = bookService.update(givenTitle1, chosen);
                             System.out.println("the book availability is  " + b.isAvailable());
