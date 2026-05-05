@@ -26,6 +26,17 @@ public class BookService {
         }
 
     }
+    public void update(Book book){
+        try {
+            FileWriter writer = new FileWriter("book.txt");
+            writer.write(book.getTitle() + " "
+                    + book.getAuthor() + " "
+                    + book.getPage() + "\n");
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public Book add(String inputTitle, String inputAuthor, Integer inputPage) throws IOException {
         if (inputTitle==null || inputTitle.isEmpty()){
             throw new IllegalArgumentException("the title shouldn't be empty");
@@ -80,14 +91,15 @@ public class BookService {
                 }
             }
         }
+        update(b);
         return b;
 
     }
 
     public boolean delete(String givenTitle2)  {
         Book b = search(givenTitle2);
-        int i = listBook.indexOf(b);
-        listBook.remove(i);
+        listBook.remove(b);
+        update(b);
         return true;
     }
 }

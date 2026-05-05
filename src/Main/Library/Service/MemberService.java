@@ -29,6 +29,17 @@ public class MemberService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+    }
+    public void update (Member m){
+        try{
+            FileWriter writer = new FileWriter("Member.txt" );
+            writer.write(person.getName() + " " + person.getAge() +" " +  person.getPhoneNumber() + " " + person.getGender() + "\n");
+            writer.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     public Member create(String inputName , int inputAge , String inputPhoneNumber , Member.Gender gender) throws IOException {
 
@@ -90,7 +101,7 @@ public class MemberService {
         if (age != null  ){
             m.setAge(age);
         }
-
+        update(m);
         return m;
     }
     public Member delete(int enteredId , int number){
