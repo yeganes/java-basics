@@ -103,4 +103,35 @@ public class Member {
     }
     // یک شی به اسم پرسن از کلاس ممبر تعریف میکنیم و انرا اینیشیالایزد میکنیم و چون یک سازنده داشتیم الان اون از بدو تولدش دارای یک شی معتبر است پس میتوانیم با توجه به یک
     //پارامتری بودن سازندهمون به ان یک پارامتر برای استفاده بدهیم.
+    public static Member  fromFileString (String line){
+            String [] parts = line.split("\\|");
+            return new Member(
+            parts[0],
+            Integer.parseInt(parts[1]),
+            parts[2],
+            Gender.valueOf(parts[3]),
+            Integer.parseInt(parts[4]),
+            Integer.parseInt(parts[5]),
+            Integer.parseInt(parts[6]));
+
+
+    }
+    @Override
+    public String toString() {
+        return "Member{" +
+                "memberId=" + memberId +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", gender=" + gender +
+                ", borrowLimit=" + borrowLimit +
+                ", borrowedBooksNum=" + borrowedBooksNum +
+                ", status=" + status +
+                '}';
+    }
+
+
+
+
+
 }

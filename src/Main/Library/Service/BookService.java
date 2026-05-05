@@ -14,8 +14,18 @@ public class BookService {
     public static ArrayList<Book> listBook = new ArrayList<>();
     static Integer id = 0;
     static boolean isAvailable = true;
+    public void save(Book book){
+        try {
+            FileWriter writer = new FileWriter("book.txt", true);
+            writer.write(book.getTitle() + " "
+            + book.getAuthor() + " "
+            + book.getPage() + "\n");
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-
+    }
     public Book add(String inputTitle, String inputAuthor, Integer inputPage) throws IOException {
         if (inputTitle==null || inputTitle.isEmpty()){
             throw new IllegalArgumentException("the title shouldn't be empty");
@@ -30,8 +40,9 @@ public class BookService {
 
         }
         id++;
-        Book book = new Book(inputTitle, inputAuthor, inputPage, id, isAvailable);
+        Book book = new Book(id, inputTitle, inputAuthor, inputPage,  isAvailable);
         listBook.add(book);
+        save(book);
         return book;
     }
 

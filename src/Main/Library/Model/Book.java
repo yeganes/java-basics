@@ -5,7 +5,7 @@ public class Book {
     private final String author;
     private final Integer page;
     private boolean available;
-    final private  Integer id;
+    final private Integer id;
 
     public Integer getId() {
         return id;
@@ -14,9 +14,11 @@ public class Book {
     public String getTitle() {
         return title;
     }
+
     public String getAuthor() {
         return author;
     }
+
     public Integer getPage() {
         return page;
     }
@@ -29,12 +31,24 @@ public class Book {
         this.available = available;
     }
 
-    public Book(String title , String author , Integer page , Integer id , boolean available) {
+    public Book(int id, String title, String author, int page, boolean available) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.page = page;
-        this.id = id;
         this.available = available;
+    }
+
+// یک متود برای اینکه اگر از فایل رشته ای خواندیم بتوانیم انرا به یک شی از کلاس کتاب تبدیل کنیم
+    public static Book fromFileString(String line) {
+        String[] parts = line.split("\\|");
+        return new Book(
+                Integer.parseInt(parts[0]),
+                parts[1],
+                parts[2],
+                Integer.parseInt(parts[3]),
+                Boolean.parseBoolean(parts[4])
+        );
 
     }
 

@@ -1,21 +1,25 @@
-package Main.Library.Service;
+//package Main.Library.Service;
+//
+//import Main.Library.Model.Book;
+//
+//import java.io.*;
+//import java.util.ArrayList;
+//
+//public class FileService {
+//
+//    public  static ArrayList<Book> loadBooks(String address) throws IOException {
+//        ArrayList<Book> books = new ArrayList<>();
+//        BufferedReader reader = new BufferedReader(new FileReader(address));
+//
+//        String line;
+//        while (((line = reader.readLine()) != null)) {
+//            books.add(Book.fromFileString(line));
+//        }
+//        reader.close();
+//        return books;
+//    }
+//
+//    public static void saveBooks(){
+//
+//    }
 
-import Main.Library.Model.Book;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-
-public class FileService {
-    public void writeFile(String address , Object obj) throws IOException {
-        try {
-
-            FileWriter fileWriter = new FileWriter(address , true) ;
-
-            fileWriter.write(obj.toString());
-            fileWriter.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-}

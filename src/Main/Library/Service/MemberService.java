@@ -1,6 +1,8 @@
 package Main.Library.Service;
 import Main.Library.Model.Member;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,8 +20,17 @@ public class MemberService {
     public static Integer borrowLimit = 2;
     public static Integer borrowedBooks = 0;
 
+    public void save(Member person){
+        try{
+            FileWriter writer = new FileWriter("Member.txt" , true);
+            writer.write(person.getName() + " " + person.getAge() +" " +  person.getPhoneNumber() + " " + person.getGender() + "\n");
+            writer.close();
 
-    public Member create(String inputName , int inputAge , String inputPhoneNumber , Member.Gender gender) {
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public Member create(String inputName , int inputAge , String inputPhoneNumber , Member.Gender gender) throws IOException {
 
 
         //validations
@@ -35,6 +46,8 @@ public class MemberService {
         idMember++;
         person = new Member(inputName, inputAge, inputPhoneNumber, gender, idMember ,borrowLimit ,borrowedBooks);
         listPerson.add(person);
+        save(person);
+
         return  person;
     }
 
