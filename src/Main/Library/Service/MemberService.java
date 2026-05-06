@@ -1,9 +1,9 @@
 package Main.Library.Service;
 import Main.Library.Model.Member;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -16,33 +16,82 @@ public class MemberService {
     Member person = null;
     static Scanner inputInfo = new Scanner(System.in);
     public static ArrayList<Member> listPerson = new ArrayList<>();
-    static Integer idMember = 0 ;
     public static Integer borrowLimit = 2;
     public static Integer borrowedBooks = 0;
 
+    public int getMaxId() {
+        int max = 0;
+        //متغیر ماکسیمم داریم
+        for (Member m : listPerson) {
+            if (m.getMemberId() > max) {
+                max = m.getMemberId();
+            }
+        }
+        return max;
+    }
     public void save(Member person){
         try{
             FileWriter writer = new FileWriter("Member.txt" , true);
-            writer.write(person.getName() + " " + person.getAge() +" " +  person.getPhoneNumber() + " " + person.getGender() + "\n");
-            writer.close();
-
+            writer.write(
+                    person.getMemberId() + "|" +
+                            person.getName() + "|" +
+                            person.getAge() + "|" +
+                            person.getPhoneNumber() + "|" +
+                            person.getGender() + "|" +
+                            person.getBorrowLimit() + "|" +
+                            person.getBorrowedBooksNum() + "\n"
+            );            writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
     }
-    public void update (Member m){
+    public void update (){
         try{
-            FileWriter writer = new FileWriter("Member.txt" );
-            writer.write(person.getName() + " " + person.getAge() +" " +  person.getPhoneNumber() + " " + person.getGender() + "\n");
-            writer.close();
+            FileWriter writer = new FileWriter("Member.txt");
+            for (Member person : listPerson){
+            writer.write(
+                    person.getMemberId() + "|" +
+                            person.getName() + "|" +
+                            person.getAge() + "|" +
+                            person.getPhoneNumber() + "|" +
+                            person.getGender() + "|" +
+                            person.getBorrowLimit() + "|" +
+                            person.getBorrowedBooksNum() + "\n"
+            );} writer.close();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public ArrayList<Member> readFromFile(String path ) {
+        listPerson.clear();
+        //یکبار لیست پاک میکنیم
+        Member m = null;
+        try (Scanner scanner = new Scanner(new File(path))) {
+            while (scanner.hasNextLine()) {
+
+                String line = scanner.nextLine();
+                String[] parts = line.split("\\|");
+                Integer idMember1 = Integer.valueOf(parts[0]);
+                String name = parts[1];
+                Integer age = Integer.valueOf(parts[2]);
+                String phoneNumber = parts[3];
+                Member.Gender gender = Member.Gender.valueOf(parts[4]);
+                Integer borrowLimit = Integer.valueOf(parts[5]);
+                Integer borrowedBooks = Integer.parseInt(parts[6]);
+                m = new Member(idMember1 ,name, age, phoneNumber, gender, borrowLimit, borrowedBooks);
+
+                listPerson.add(m);
+
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return listPerson;
     }
     public Member create(String inputName , int inputAge , String inputPhoneNumber , Member.Gender gender) throws IOException {
-
 
         //validations
         if (inputName == null || inputName.isEmpty() ){
@@ -54,10 +103,12 @@ public class MemberService {
         if (inputPhoneNumber.length() < 10 || inputPhoneNumber.length() > 11) {
             throw new IllegalArgumentException(" phoneNumber should be at least 10 digits ");
         }
-        idMember++;
-        person = new Member(inputName, inputAge, inputPhoneNumber, gender, idMember ,borrowLimit ,borrowedBooks);
+        int newId = getMaxId() + 1;
+
+        person = new Member(newId , inputName, inputAge, inputPhoneNumber, gender,borrowLimit ,borrowedBooks);
         listPerson.add(person);
         save(person);
+
 
         return  person;
     }
@@ -101,7 +152,7 @@ public class MemberService {
         if (age != null  ){
             m.setAge(age);
         }
-        update(m);
+        update();
         return m;
     }
     public Member delete(int enteredId , int number){
@@ -117,6 +168,7 @@ public class MemberService {
                 return m;
             }
         }
+        update();
         return person;
     }
 

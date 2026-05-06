@@ -3,32 +3,42 @@ import Main.Library.Model.Book;
 import Main.Library.Service.BookService;
 
 import java.text.MessageFormat;
-
+import static Main.Library.Service.BookService.listBook;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class BookMenu {
 
+    BookService bookService = new BookService();
     static Scanner inputInfo = new Scanner(System.in);
 
+    public BookMenu(){
+        bookService.readFromFile("book.txt");
+    }
+
     public void ask() {
-        BookService bookService = new BookService();
 
         int chosenNumber = 0;
+
         do {
+
             System.out.println("please choose a number: \n 1 : Add book \n 2 : Search \n 3 : Update the status\n 4 : Delete \n 5 : EXIT");
+
             if (inputInfo.hasNextInt()){
                 //the output of hasnextint is always a boolean
                 chosenNumber = Integer.parseInt(inputInfo.nextLine());
             }
+
             else{
                 System.out.println("Invalid input!");
                 inputInfo.nextLine();
                 continue;
             }
+
                 //input.next == clears the buffer
             switch (chosenNumber) {
+
                 case 1:
                     System.out.println("you selected number 1 , let's add the book");
                     System.out.println("How many books are you going to add? ");
@@ -48,15 +58,19 @@ public class BookMenu {
                             try {
                                 System.out.println("Enter the book's title: ");
                                 String inputTitle = inputInfo.nextLine();
+
                                 System.out.println("Enter the book's author: ");
                                 String inputAuthor = inputInfo.nextLine();
+
                                 System.out.println("How many pages does it have? ");
                                 Integer inputPage = Integer.valueOf(inputInfo.nextLine());
+
                                 Book book = bookService.add(inputTitle, inputAuthor, inputPage);
+
                                 String msg = MessageFormat.format("the {0} book is added with id number {1}",
                                         book.getTitle(),
                                         book.getId());
-                                System.out.println(msg);
+                                //System.out.println(msg);
 
                                 break;
 
@@ -69,12 +83,18 @@ public class BookMenu {
                         }
                     }
                     break;
+
+
                 case 2:
                     System.out.println("you selected number 2 , let's Search through the books");
 
                     while(true){
                     try{
                         System.out.println("enter the book you are searching for : ");
+                        listBook = bookService.readFromFile("book.txt");
+                        for (Book b : listBook){
+                            System.out.println(b);
+                        }
                         String givenTitle = inputInfo.nextLine();
                         Book book = bookService.search(givenTitle);
                         String msg = MessageFormat.format("the {0} book is written by {1} and it has got {2} pages the availability status is {3}",
@@ -89,6 +109,8 @@ public class BookMenu {
                     }
                     }
                     break;
+
+
 
                 case 3:
                     System.out.println("you selected number 3 , let's update the book's status");
@@ -133,12 +155,17 @@ public class BookMenu {
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid input, please enter a valid number.");
                     }
-
                     break;
+
+
                 case 5:
                     System.out.println("you selected number 5 , Bye");
                     break;
             }
+
+
+
+
         } while (chosenNumber != 5);
     }
 }

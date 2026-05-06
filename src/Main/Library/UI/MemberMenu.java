@@ -5,6 +5,7 @@ import Main.Library.Model.Member;
 import Main.Library.Service.LimitBorrowedException;
 import Main.Library.Service.MemberService;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Scanner;
@@ -16,8 +17,12 @@ public class MemberMenu {
 
     static Scanner input = new Scanner(System.in);
     LibraryService libraryService = new LibraryService();
-
+    public MemberMenu() {
+        memberService.readFromFile("Member.txt");
+    }
     public void ask() throws LimitBorrowedException {
+
+
         int chosenNumber = 0;
         do {
             System.out.println("please choose a number: \n 1 : Create \n 2 : Read \n 3 : Update\n 4 : Delete \n 5 : Borrow \n 6 : EXIT");
@@ -94,7 +99,7 @@ public class MemberMenu {
                     break;
                 case 2:
                     System.out.println("you selected number 2 , let's read the member");
-                    System.out.println(" 1. search by name \n 2. search by id");
+                    System.out.println(" 1. search by name \n 2. search by id \n 3. read all the members");
                     int searchBy = Integer.parseInt(input.nextLine());
                     switch(searchBy){
                         case 1 :
@@ -134,6 +139,13 @@ public class MemberMenu {
                                     System.out.println("error !" + e.getMessage());
                                 }
                             }
+                            break;
+                        case 3 :
+                           listPerson = memberService.readFromFile("Member.txt" );
+                            for (Member m  : listPerson){
+                            System.out.println(m);
+                            }
+                            break;
                     }
                     break;
                 case 3:
@@ -154,9 +166,6 @@ public class MemberMenu {
 
 
                     memberService.update(enteredId , name , phoneNumber , age);
-
-
-
 
 
                     break;
