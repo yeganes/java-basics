@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -103,15 +104,36 @@ public class BookService {
 
     public Book findBookByTitle(String title) {
 
+
+
         for (Book b : listBook) {
-            if (title.equalsIgnoreCase(b.getTitle())) {
-                return b;
+
+            int length1 = title.length();
+            int length = b.getTitle().length();
+            String[] nameArrayBook = new String[length];
+            String[] nameArray = new String[length1];
+            for (int i = 0; i <= length1 - 1; i++) {
+
+                nameArray[i] = String.valueOf(title.charAt(i));
             }
-        }
+            for (int i = 0; i <= length - 1; i++) {
+                nameArrayBook[i] = String.valueOf(b.getTitle().charAt(i));
+            }
+            if (Objects.equals(nameArray[0], nameArrayBook[0] )){
+                System.out.println(b.getTitle() + "\n" + title);
+
+                if (Objects.equals(nameArray[1], nameArrayBook[1] )){
+                    System.out.println(b.getTitle() + "\n" + title);
+
+                    if (Objects.equals(nameArray[2], nameArrayBook[2] ))
+                        System.out.println(b.getTitle() + "\n" + title);
+                }
+        }}
         return null;
     }
 
     public Book search(String givenTitle) {
+
 
         Book b = null;
 
