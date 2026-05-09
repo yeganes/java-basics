@@ -13,6 +13,8 @@ import java.util.Scanner;
 
 public class MemberService {
 
+    FileService fileService = new FileService();
+
     Member person = null;
     static Scanner inputInfo = new Scanner(System.in);
     public static ArrayList<Member> listPerson = new ArrayList<>();
@@ -31,7 +33,7 @@ public class MemberService {
     }
     public void save(Member person){
         try{
-            FileWriter writer = new FileWriter("Member.txt" , true);
+            FileWriter writer = new FileWriter("member.txt" , true);
             writer.write(
                     person.getMemberId() + "|" +
                             person.getName() + "|" +
@@ -48,7 +50,7 @@ public class MemberService {
     }
     public void update (){
         try{
-            FileWriter writer = new FileWriter("Member.txt");
+            FileWriter writer = new FileWriter("member.txt");
             for (Member person : listPerson){
             writer.write(
                     person.getMemberId() + "|" +
@@ -66,14 +68,21 @@ public class MemberService {
     }
 
     public ArrayList<Member> readFromFile(String path ) {
+        fileService.addFile("member.txt");
         listPerson.clear();
         //یکبار لیست پاک میکنیم
-        Member m = null;
         try (Scanner scanner = new Scanner(new File(path))) {
             while (scanner.hasNextLine()) {
 
                 String line = scanner.nextLine();
+                if (line.isEmpty()){
+                    continue;
+                }
+
                 String[] parts = line.split("\\|");
+                if (parts.length < 7){
+                    continue;
+                }
                 Integer idMember1 = Integer.valueOf(parts[0]);
                 String name = parts[1];
                 Integer age = Integer.valueOf(parts[2]);
@@ -81,7 +90,7 @@ public class MemberService {
                 Member.Gender gender = Member.Gender.valueOf(parts[4]);
                 Integer borrowLimit = Integer.valueOf(parts[5]);
                 Integer borrowedBooks = Integer.parseInt(parts[6]);
-                m = new Member(idMember1 ,name, age, phoneNumber, gender, borrowLimit, borrowedBooks);
+                Member m = new Member(idMember1 ,name, age, phoneNumber, gender, borrowLimit, borrowedBooks);
 
                 listPerson.add(m);
 

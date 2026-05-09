@@ -6,6 +6,7 @@ import java.text.MessageFormat;
 import static Main.Library.Service.BookService.listBook;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class BookMenu {
@@ -87,30 +88,52 @@ public class BookMenu {
 
                 case 2:
                     System.out.println("you selected number 2 , let's Search through the books");
+                    System.out.println(" 1.exact match \n 2.know the beginning");
+                    int number = Integer.parseInt(inputInfo.nextLine());
+                    switch (number){
+                        case 1:
+                            while(true){
+                                try{
+                                    System.out.println("enter the book you are searching for : ");
+                                    listBook = bookService.readFromFile("book.txt");
+                                    for (Book b : listBook){
+                                        System.out.println(b);
+                                    }
+                                    String givenTitle = inputInfo.nextLine();
+                                    Book book = bookService.search(givenTitle);
+                                    String msg = MessageFormat.format("the {0} book is written by {1} and it has got {2} pages the availability status is {3}",
+                                            book.getTitle(),
+                                            book.getAuthor(),
+                                            book.getPage(),
+                                            book.isAvailable());
+                                    System.out.println(msg);
+                                    break;
+                                }catch(NullPointerException e ){
+                                    System.out.println("error!" + e.getMessage());
+                                }
+                            }
+                            break;
+                        case 2:
+                            while(true){
+                                try{
+                                    System.out.println("search here:");
+                                    listBook = bookService.readFromFile("book.txt");
+                                    for (Book b : listBook){
+                                        System.out.println(b);
+                                    }
+                                    String prefix = inputInfo.nextLine();
+                                    List<Book> book = bookService.findPrefix(prefix);
+                                    for (Book b : book){
+                                        System.out.println(b);
+                                    }
 
-                    while(true){
-                    try{
-                        System.out.println("enter the book you are searching for : ");
-                        listBook = bookService.readFromFile("book.txt");
-                        for (Book b : listBook){
-                            System.out.println(b);
-                        }
-                        String givenTitle = inputInfo.nextLine();
-                        Book book = bookService.search(givenTitle);
-                        String msg = MessageFormat.format("the {0} book is written by {1} and it has got {2} pages the availability status is {3}",
-                                book.getTitle(),
-                                book.getAuthor(),
-                                book.getPage(),
-                                book.isAvailable());
-                        System.out.println(msg);
-                        break;
-                    }catch(NullPointerException e ){
-                        System.out.println("error!" + e.getMessage());
-                    }
+                                    break;
+                                }catch(NullPointerException e){
+                                    System.out.println("error!" + e.getMessage());
+                                }
+                                }
                     }
                     break;
-
-
 
                 case 3:
                     System.out.println("you selected number 3 , let's update the book's status");

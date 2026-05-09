@@ -8,7 +8,7 @@ public class LibraryService  {
     BookService bookService = new BookService();
 
     public void borrow(int member, String books) throws LimitBorrowedException {
-        Book book = bookService.findBookByTitle(books);
+        Book book = bookService.findExactMatch(books);
         Member name = memberService.readMemberById(member);
         boolean b1 = name.getBorrowedBooksNum() <= name.getBorrowLimit();
         boolean b2 = book.isAvailable();
