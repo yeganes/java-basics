@@ -14,7 +14,6 @@ import java.util.regex.Pattern;
 
 
 public class BookService {
-    FileService fileService = new FileService();
 
 
     public static ArrayList<Book> listBook = new ArrayList<>();
@@ -34,73 +33,6 @@ public class BookService {
 
 
 
-
-    public void save(Book book){
-        try {
-
-            FileWriter writer = new FileWriter("book.txt", true);
-            writer.write(book.getId() + "|"
-                    +book.getTitle() + "|"
-                    + book.getAuthor() + "|"
-                    + book.getPage() +"|"
-                    +book.isAvailable()
-                    +  "\n");
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-
-    public ArrayList<Book> readFromFile(String path){
-        fileService.addFile(path);
-        listBook.clear();
-            try (Scanner scanner = new Scanner(new File(path))) {
-                while(scanner.hasNextLine()){
-
-                    String line = scanner.nextLine();
-                    if (line.isEmpty()){
-                        continue;
-                    }
-                    String[] parts = line.split("\\|");
-                    if (parts.length < 5){
-                        continue;
-                    }
-                    int id = Integer.parseInt(parts[0]);
-                    String title = parts[1];
-                    String author = parts[2];
-                    Integer page = Integer.valueOf(parts[3]);
-                    boolean status = Boolean.parseBoolean(parts[4]);
-                    Book b = new Book(id , title , author , page , status);
-
-                    listBook.add(b);
-                }
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        return listBook;
-    }
-
-
-    public void updateFile(String path ){
-        try {
-            FileWriter writer = new FileWriter(path);
-            for (Book book : listBook){
-            writer.write(book.getId() + "|"
-                    +book.getTitle() + "|"
-                    + book.getAuthor() + "|"
-                    + book.getPage() +"|"
-                    +book.isAvailable()
-                    +  "\n");
-            }
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public Book add(String inputTitle, String inputAuthor, Integer inputPage) throws IOException {
         if (inputTitle==null || inputTitle.isEmpty()){
             throw new IllegalArgumentException("the title shouldn't be empty");
@@ -117,7 +49,6 @@ public class BookService {
         int id = getMaxId() + 1 ;
         Book book = new Book(id, inputTitle, inputAuthor, inputPage,  isAvailable);
         listBook.add(book);
-        save(book);
         return book;
     }
     public Book findExactMatch (String title){
@@ -172,7 +103,7 @@ public class BookService {
                 }
             }
         }
-        updateFile("book.txt");
+
         return b;
 
     }
@@ -180,7 +111,6 @@ public class BookService {
     public boolean delete(String givenTitle2)  {
         Book b = search(givenTitle2);
         listBook.remove(b);
-        updateFile("book.txt");
         return true;
     }
 }
