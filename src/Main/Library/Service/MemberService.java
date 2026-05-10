@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class MemberService {
 
-    FileService fileService = new FileService();
+
 
     Member person = null;
     static Scanner inputInfo = new Scanner(System.in);
@@ -31,75 +31,8 @@ public class MemberService {
         }
         return max;
     }
-    public void save(Member person){
-        try{
-            FileWriter writer = new FileWriter("member.txt" , true);
-            writer.write(
-                    person.getMemberId() + "|" +
-                            person.getName() + "|" +
-                            person.getAge() + "|" +
-                            person.getPhoneNumber() + "|" +
-                            person.getGender() + "|" +
-                            person.getBorrowLimit() + "|" +
-                            person.getBorrowedBooksNum() + "\n"
-            );            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
-    }
-    public void update (){
-        try{
-            FileWriter writer = new FileWriter("member.txt");
-            for (Member person : listPerson){
-            writer.write(
-                    person.getMemberId() + "|" +
-                            person.getName() + "|" +
-                            person.getAge() + "|" +
-                            person.getPhoneNumber() + "|" +
-                            person.getGender() + "|" +
-                            person.getBorrowLimit() + "|" +
-                            person.getBorrowedBooksNum() + "\n"
-            );} writer.close();
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public ArrayList<Member> readFromFile(String path ) {
-        fileService.addFile("member.txt");
-        listPerson.clear();
-        //یکبار لیست پاک میکنیم
-        try (Scanner scanner = new Scanner(new File(path))) {
-            while (scanner.hasNextLine()) {
-
-                String line = scanner.nextLine();
-                if (line.isEmpty()){
-                    continue;
-                }
-
-                String[] parts = line.split("\\|");
-                if (parts.length < 7){
-                    continue;
-                }
-                Integer idMember1 = Integer.valueOf(parts[0]);
-                String name = parts[1];
-                Integer age = Integer.valueOf(parts[2]);
-                String phoneNumber = parts[3];
-                Member.Gender gender = Member.Gender.valueOf(parts[4]);
-                Integer borrowLimit = Integer.valueOf(parts[5]);
-                Integer borrowedBooks = Integer.parseInt(parts[6]);
-                Member m = new Member(idMember1 ,name, age, phoneNumber, gender, borrowLimit, borrowedBooks);
-
-                listPerson.add(m);
-
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return listPerson;
-    }
     public Member create(String inputName , int inputAge , String inputPhoneNumber , Member.Gender gender) throws IOException {
 
         //validations
@@ -116,7 +49,7 @@ public class MemberService {
 
         person = new Member(newId , inputName, inputAge, inputPhoneNumber, gender,borrowLimit ,borrowedBooks);
         listPerson.add(person);
-        save(person);
+
 
 
         return  person;
@@ -161,7 +94,6 @@ public class MemberService {
         if (age != null  ){
             m.setAge(age);
         }
-        update();
         return m;
     }
     public Member delete(int enteredId , int number){
@@ -177,7 +109,7 @@ public class MemberService {
                 return m;
             }
         }
-        update();
+
         return person;
     }
 
