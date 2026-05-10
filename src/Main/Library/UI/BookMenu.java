@@ -15,7 +15,7 @@ public class BookMenu {
     static Scanner inputInfo = new Scanner(System.in);
 
     public BookMenu(){
-        bookService.readFromFile("book.txt");
+
     }
 
     public void ask() {
@@ -95,7 +95,6 @@ public class BookMenu {
                             while(true){
                                 try{
                                     System.out.println("enter the book you are searching for : ");
-                                    listBook = bookService.readFromFile("book.txt");
                                     for (Book b : listBook){
                                         System.out.println(b);
                                     }
@@ -117,7 +116,6 @@ public class BookMenu {
                             while(true){
                                 try{
                                     System.out.println("search here:");
-                                    listBook = bookService.readFromFile("book.txt");
                                     for (Book b : listBook){
                                         System.out.println(b);
                                     }
