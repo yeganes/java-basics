@@ -18,7 +18,6 @@ public class MemberMenu {
     static Scanner input = new Scanner(System.in);
     LibraryService libraryService = new LibraryService();
     public MemberMenu() {
-        memberService.readFromFile("Member.txt");
     }
     public void ask() throws LimitBorrowedException {
 
@@ -141,7 +140,6 @@ public class MemberMenu {
                             }
                             break;
                         case 3 :
-                           listPerson = memberService.readFromFile("Member.txt" );
                             for (Member m  : listPerson){
                             System.out.println(m);
                             }
