@@ -84,7 +84,7 @@ public class MemberMenu {
 
                                 }
                                 Member person = memberService.create(inputName, inputAge, inputPhoneNumber, gender);
-                                System.out.println("Added! ID: " + person.getMemberId() );
+                                System.out.println("Added!  ");
                             }catch(IllegalArgumentException e){
                                 System.out.println("error !" + e.getMessage());
 

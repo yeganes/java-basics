@@ -6,7 +6,6 @@ import Main.Library.Service.BookService;
 
 import java.text.MessageFormat;
 import static Main.Library.Service.BookService.listBook;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -16,9 +15,6 @@ public class BookMenu {
     BookService bookService = new BookService();
     static Scanner inputInfo = new Scanner(System.in);
 
-    public BookMenu(){
-        bookService.readFromFile("book.txt");
-    }
 
     public void ask() {
 
@@ -43,46 +39,41 @@ public class BookMenu {
             switch (chosenNumber) {
 
                 case 1:
-                    System.out.println("you selected number 1 , let's add the book");
+                    System.out.println("you selected number 1, let's add the book");
+
                     System.out.println("How many books are you going to add? ");
                     int j;
+
                     while (true) {
                         try {
                             j = Integer.parseInt(inputInfo.nextLine());
                             break;
                         } catch (NumberFormatException e) {
-                            System.out.println("invalid input , please add a number");
-
-
+                            System.out.println("invalid input, please add a number");
                         }
                     }
+
                     for (int i = 0; i < j; i++) {
-                        while(true) {
-                            try {
-                                System.out.println("Enter the book's title: ");
-                                String inputTitle = inputInfo.nextLine();
 
-                                System.out.println("Enter the book's author: ");
-                                String inputAuthor = inputInfo.nextLine();
+                        try {
+                            System.out.println("Enter the book's title: ");
+                            String inputTitle = inputInfo.nextLine();
 
-                                System.out.println("How many pages does it have? ");
-                                Integer inputPage = Integer.valueOf(inputInfo.nextLine());
+                            System.out.println("Enter the book's author: ");
+                            String inputAuthor = inputInfo.nextLine();
 
-                                Book book = bookService.add(inputTitle, inputAuthor, inputPage);
+                            System.out.println("How many pages does it have? ");
+                            Integer inputPage = Integer.valueOf(inputInfo.nextLine());
 
-                                String msg = MessageFormat.format("the {0} book is added with id number {1}",
-                                        book.getTitle(),
-                                        book.getId());
-                                //System.out.println(msg);
+                            bookService.add(inputTitle, inputAuthor, inputPage);
 
-                                break;
+                            System.out.println("Book added successfully ✔");
 
-                            } catch (IllegalArgumentException e) {
-                                System.out.println("error!" + e.getMessage());
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("error: " + e.getMessage());
+                            i--; // دوباره همین کتاب رو بگیر
+                        } catch (Exception e) {
+                            System.out.println("unexpected error: " + e.getMessage());
                         }
                     }
                     break;
@@ -97,7 +88,6 @@ public class BookMenu {
                             while(true){
                                 try{
                                     System.out.println("enter the book you are searching for : ");
-                                    listBook = bookService.readFromFile("book.txt");
                                     for (Book b : listBook){
                                         System.out.println(b);
                                     }
@@ -119,7 +109,6 @@ public class BookMenu {
                             while(true){
                                 try{
                                     System.out.println("search here:");
-                                    listBook = bookService.readFromFile("book.txt");
                                     for (Book b : listBook){
                                         System.out.println(b);
                                     }

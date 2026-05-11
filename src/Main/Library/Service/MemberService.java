@@ -19,17 +19,6 @@ public class MemberService {
     public static Integer borrowLimit = 2;
     public static Integer borrowedBooks = 0;
 
-    public int getMaxId() {
-        int max = 0;
-        //متغیر ماکسیمم داریم
-        for (Member m : listPerson) {
-            if (m.getMemberId() > max) {
-                max = m.getMemberId();
-            }
-        }
-        return max;
-    }
-
     public Member create(String inputName , int inputAge , String inputPhoneNumber , Member.Gender gender) throws IOException {
 
         //validations
