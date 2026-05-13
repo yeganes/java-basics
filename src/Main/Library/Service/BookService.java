@@ -17,10 +17,8 @@ import java.util.regex.Pattern;
 public class BookService {
     BookRepo bookRepo = new BookRepo();
 
-
     public static ArrayList<Book> listBook = new ArrayList<>();
 
-    static boolean isAvailable = true;
 
     public int getMaxId(){
         int max = 0 ;
@@ -32,7 +30,10 @@ public class BookService {
         return max;
     }
 
-    public Book add(String inputTitle, String inputAuthor, Integer inputPage) throws IOException {
+    public Book add(String inputTitle, String inputAuthor, Integer inputPage) {
+
+         boolean isAvailable = true;
+
         if (inputTitle==null || inputTitle.isEmpty()){
             throw new IllegalArgumentException("the title shouldn't be empty");
 
@@ -52,8 +53,9 @@ public class BookService {
         return book;
     }
     public Book findExactMatch (String title){
+        ArrayList<Book> a = bookRepo.Select();
 
-        for (Book b : listBook) {
+        for (Book b : a) {
 
             if (b.getTitle().equalsIgnoreCase(title)) {
                 return b;
@@ -63,20 +65,21 @@ public class BookService {
         return null ;
     }
     public List<Book> findPrefix(String preFix){
-        List<Book> result = new ArrayList<>();
-        for (Book b : listBook){
+        ArrayList<Book> a = bookRepo.Select();
+        for (Book b : a){
             String [] words = b.getTitle().split(" ");
             for(String w : words){
                 if (w.toLowerCase().startsWith(preFix.toLowerCase())){
-                    result.add(b);
+                    a.add(b);
                     break;
                 }
             }
         }
-        return result;
+        return a;
     }
 
     public Book search(String givenTitle) {
+        ArrayList<Book> a = bookRepo.Select();
 
         Book b = null;
 
@@ -90,27 +93,34 @@ public class BookService {
     }
 
     public Book update(String givenTitle, boolean chosen) {
+
         Book b;
             b = search(givenTitle);
-        if (b.isAvailable()) {
             if (chosen) {
                 if (b.isAvailable() == true) {
                     b.setAvailable(false);
+                    bookRepo.updateStatus(givenTitle , b.isAvailable());
                     b.isAvailable();
-                } else if (b.isAvailable() == false) {
+                } else {
                     b.setAvailable(true);
+                    bookRepo.updateStatus(givenTitle ,  b.isAvailable());
                     b.isAvailable();
+
                 }
             }
-        }
+
 
         return b;
 
     }
 
     public boolean delete(String givenTitle2)  {
+        ArrayList<Book> a = bookRepo.Select();
+
         Book b = search(givenTitle2);
         listBook.remove(b);
+        bookRepo.Delete(b.getTitle());
+        a.remove(b);
 
         return true;
     }

@@ -2,16 +2,18 @@ package Main.Library.UI;
 
 
 import Main.Library.Model.Book;
+import Main.Library.Repository.BookRepo;
 import Main.Library.Service.BookService;
 
 import java.text.MessageFormat;
 import static Main.Library.Service.BookService.listBook;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class BookMenu {
-
+    BookRepo bookRepo = new BookRepo();
     BookService bookService = new BookService();
     static Scanner inputInfo = new Scanner(System.in);
 
@@ -85,10 +87,11 @@ public class BookMenu {
                     int number = Integer.parseInt(inputInfo.nextLine());
                     switch (number){
                         case 1:
+                            ArrayList<Book> a = bookRepo.Select();
                             while(true){
                                 try{
                                     System.out.println("enter the book you are searching for : ");
-                                    for (Book b : listBook){
+                                    for (Book b : a){
                                         System.out.println(b);
                                     }
                                     String givenTitle = inputInfo.nextLine();
@@ -106,10 +109,11 @@ public class BookMenu {
                             }
                             break;
                         case 2:
+                            ArrayList<Book> d = bookRepo.Select();
                             while(true){
                                 try{
                                     System.out.println("search here:");
-                                    for (Book b : listBook){
+                                    for (Book b : d){
                                         System.out.println(b);
                                     }
                                     String prefix = inputInfo.nextLine();
@@ -136,6 +140,7 @@ public class BookMenu {
                             String givenTitle1 = inputInfo.nextLine();
                             book1 = bookService.search(givenTitle1);
                             String msg = MessageFormat.format("the {0} book availability is {1} if you  wanna change it press enter",
+                                    book1.getTitle(),
                                     book1.isAvailable());
                             System.out.println(msg);
                             boolean chosen = inputInfo.nextLine().isEmpty();

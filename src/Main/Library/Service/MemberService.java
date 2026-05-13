@@ -1,4 +1,5 @@
 package Main.Library.Service;
+import Main.Library.Exceptions.MemberNotFoundException;
 import Main.Library.Model.Member;
 import Main.Library.Repository.MemberRepo;
 
@@ -35,10 +36,10 @@ public class MemberService {
         id ++;
 
         person = new Member(id , inputName, inputAge, inputPhoneNumber, gender,borrowLimit ,borrowedBooks);
+
         listPerson.add(person);
+
         memberRepo.insert(inputName, inputAge, inputPhoneNumber, gender,borrowLimit ,borrowedBooks);
-
-
 
         return  person;
     }
@@ -54,20 +55,26 @@ public class MemberService {
         }
         return result;
     }
-    public Member readMemberById(Integer id) throws RuntimeException{
+    public Member readMemberById(Integer id) throws RuntimeException , MemberNotFoundException {
+
         ArrayList<Member> a = memberRepo.select();
-        Member result =  null;
-        for (Member m : a){
-            if (id ==  m.getMemberId()){
-                result = m ;
+        Member result = null;
+        for (Member m : a) {
+            if (id == m.getMemberId()) {
+                result = m;
                 break;
             }
+            throw new MemberNotFoundException(
+                    "member with id " + id + " not found"
+            );
         }
         return result;
+
+
     }
 
 
-    public Member update(Integer id , String name , String phoneNumber , Integer age ) {
+    public Member update(Integer id , String name , String phoneNumber , Integer age ) throws MemberNotFoundException {
         Member m = readMemberById(id);
 
         if (m==null){
@@ -89,7 +96,7 @@ public class MemberService {
         }
         return m;
     }
-    public Member delete(int enteredId , int number){
+    public Member delete(int enteredId , int number) throws MemberNotFoundException {
 
         Member m = readMemberById(enteredId);
         if (m == null){

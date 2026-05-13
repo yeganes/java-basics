@@ -2,7 +2,8 @@ package Main.Library.UI;
 
 
 
-import Main.Library.Service.LimitBorrowedException;
+import Main.Library.Exceptions.LimitBorrowedException;
+import Main.Library.Exceptions.MemberNotFoundException;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -14,7 +15,7 @@ import java.util.Scanner;
 
 public class Menu {
     static Scanner input = new Scanner(System.in);
-    public static void main(String[] args) throws IOException, LimitBorrowedException {
+    public static void main(String[] args) throws IOException, LimitBorrowedException, MemberNotFoundException {
         BookMenu bookMenu = new BookMenu();
         MemberMenu memberMenu = new MemberMenu();
 

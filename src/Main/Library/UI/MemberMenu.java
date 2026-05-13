@@ -1,25 +1,25 @@
 package Main.Library.UI;
 
+import Main.Library.Exceptions.MemberNotFoundException;
+import Main.Library.Repository.MemberRepo;
 import Main.Library.Service.LibraryService;
 import Main.Library.Model.Member;
-import Main.Library.Service.LimitBorrowedException;
+import Main.Library.Exceptions.LimitBorrowedException;
 import Main.Library.Service.MemberService;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
-
-import static Main.Library.Service.MemberService.listPerson;
 
 public class MemberMenu {
     MemberService memberService = new MemberService();
-
+    MemberRepo memberRepo = new MemberRepo();
     static Scanner input = new Scanner(System.in);
     LibraryService libraryService = new LibraryService();
     public MemberMenu() {
     }
-    public void ask() throws LimitBorrowedException {
+    public void ask() throws LimitBorrowedException, MemberNotFoundException {
 
 
         int chosenNumber = 0;
@@ -140,7 +140,8 @@ public class MemberMenu {
                             }
                             break;
                         case 3 :
-                            for (Member m  : listPerson){
+                            ArrayList<Member> a =  memberRepo.select();
+                            for (Member m  : a){
                             System.out.println(m);
                             }
                             break;
@@ -188,6 +189,8 @@ public class MemberMenu {
                         break;
                     }catch(NullPointerException | NumberFormatException e) {
                         System.out.println("error !" + e.getMessage());
+                    } catch (MemberNotFoundException e) {
+                        throw new RuntimeException(e);
                     }
                     }
                     break;
