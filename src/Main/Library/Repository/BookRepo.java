@@ -29,7 +29,7 @@ public class BookRepo {
         }
     }
 
-    public ArrayList<Book> Select(){
+    public ArrayList<Book> select(){
         ArrayList<Book> listBook = new ArrayList<>();
         String sql = "SELECT * FROM books";
         try (
@@ -70,7 +70,7 @@ public class BookRepo {
 
 
     }
-    public void Delete(String title){
+    public void delete(String title){
         String sql = "DELETE FROM books WHERE title = ? ";
         try(
             Connection connection = db.connect();

@@ -87,7 +87,7 @@ public class BookMenu {
                     int number = Integer.parseInt(inputInfo.nextLine());
                     switch (number){
                         case 1:
-                            ArrayList<Book> a = bookRepo.Select();
+                            ArrayList<Book> a = bookRepo.select();
                             while(true){
                                 try{
                                     System.out.println("enter the book you are searching for : ");
@@ -109,7 +109,7 @@ public class BookMenu {
                             }
                             break;
                         case 2:
-                            ArrayList<Book> d = bookRepo.Select();
+                            ArrayList<Book> d = bookRepo.select();
                             while(true){
                                 try{
                                     System.out.println("search here:");

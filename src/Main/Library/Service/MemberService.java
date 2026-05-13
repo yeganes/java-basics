@@ -64,9 +64,6 @@ public class MemberService {
                 result = m;
                 break;
             }
-            throw new MemberNotFoundException(
-                    "member with id " + id + " not found"
-            );
         }
         return result;
 

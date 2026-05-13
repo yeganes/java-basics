@@ -53,7 +53,7 @@ public class BookService {
         return book;
     }
     public Book findExactMatch (String title){
-        ArrayList<Book> a = bookRepo.Select();
+        ArrayList<Book> a = bookRepo.select();
 
         for (Book b : a) {
 
@@ -65,7 +65,7 @@ public class BookService {
         return null ;
     }
     public List<Book> findPrefix(String preFix){
-        ArrayList<Book> a = bookRepo.Select();
+        ArrayList<Book> a = bookRepo.select();
         for (Book b : a){
             String [] words = b.getTitle().split(" ");
             for(String w : words){
@@ -79,7 +79,7 @@ public class BookService {
     }
 
     public Book search(String givenTitle) {
-        ArrayList<Book> a = bookRepo.Select();
+        ArrayList<Book> a = bookRepo.select();
 
         Book b = null;
 
@@ -115,11 +115,11 @@ public class BookService {
     }
 
     public boolean delete(String givenTitle2)  {
-        ArrayList<Book> a = bookRepo.Select();
+        ArrayList<Book> a = bookRepo.select();
 
         Book b = search(givenTitle2);
         listBook.remove(b);
-        bookRepo.Delete(b.getTitle());
+        bookRepo.delete(b.getTitle());
         a.remove(b);
 
         return true;
