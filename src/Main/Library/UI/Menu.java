@@ -29,19 +29,22 @@ public class Menu {
                 System.out.println("invalid input ! please enter a number");
                 input.nextLine();
                 continue;
-
             }
+
             switch (clarification) {
-                case 1 :
+
+                case 1:
                     memberMenu.ask();
                     break;
-                case 2  :
+
+                case 2:
                     bookMenu.ask();
                     break;
                 case 3 :
                     System.out.println("you selected number 3 , Bye");
                     break;
             }
+
         } while (clarification != 3);
     }
 }
