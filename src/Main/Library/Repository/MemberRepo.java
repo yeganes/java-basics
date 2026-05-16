@@ -15,7 +15,7 @@ public class MemberRepo {
 
 
     public void insert(String name , int age , String phoneNumber, Member.Gender gender ,Integer borrowLimit ,Integer borrowedBooks){
-        String sql = "INSERT INTO members(name , age , phone_number , gender , borrow_limit , borrowed_books_num) VALUES (?, ?, ? , ? , ? , ?  )";
+        String sql = "INSERT INTO members(name , age , phone_number , gender , borrow_limit ) VALUES (?, ?, ? , ? , ? , ?  )";
         try {
             Connection connection = db.connect();
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -24,7 +24,7 @@ public class MemberRepo {
             ps.setString(3 , phoneNumber);
             ps.setString(4 , String.valueOf(gender));
             ps.setInt(5, borrowLimit);
-            ps.setInt(6, borrowedBooks);
+
 
             ps.executeUpdate();
             ps.close();
@@ -52,8 +52,8 @@ public class MemberRepo {
                 String genderStr = rs.getString("gender");
                 Member.Gender gender = Member.Gender.valueOf(genderStr);
                 Integer borrowLimit = rs.getInt("borrow_limit");
-                Integer borrowedBooksNum = rs.getInt("borrowed_books_num");
-                person = new Member(id, name, age, phoneNumber, gender, borrowLimit, borrowedBooksNum);
+
+                person = new Member(id, name, age, phoneNumber, gender, borrowLimit);
                 listPerson.add(person);
             }
 

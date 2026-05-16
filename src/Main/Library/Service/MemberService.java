@@ -32,7 +32,7 @@ public class MemberService {
         int id = 0 ;
         id ++;
 
-        person = new Member(id , inputName, inputAge, inputPhoneNumber, gender,borrowLimit ,borrowedBooks);
+        person = new Member(id , inputName, inputAge, inputPhoneNumber, gender,borrowLimit );
 
         listPerson.add(person);
 

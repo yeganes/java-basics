@@ -213,6 +213,7 @@ public class MemberMenu {
                     System.out.println("enter the book you wanna borrow");
                     String givenBook = input.nextLine();
                     try{
+                        System.out.println();
                         libraryService.borrow(givenId, givenBook);
                         System.out.println("the book is borrowed");
 

@@ -66,10 +66,8 @@ public class BookMenu {
                             System.out.println("How many pages does it have? ");
                             Integer inputPage = Integer.valueOf(inputInfo.nextLine());
 
-                            System.out.println("How many of this book have you got ? ");
-                            int bookStock = Integer.valueOf(inputInfo.nextLine());
 
-                            bookService.add(inputTitle, inputAuthor, inputPage , bookStock);
+                            bookService.add(inputTitle, inputAuthor, inputPage  );
 
                             System.out.println("Book added successfully ✔");
 

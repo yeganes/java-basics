@@ -41,7 +41,7 @@ public class Book {
         this.bookStock = bookStock;
     }
 
-    public Book(int id, String title, String author, int page, boolean available , int bookStock) {
+    public Book(int id, String title, String author, int page, boolean available) {
         this.id = id;
         this.title = title;
         this.author = author;

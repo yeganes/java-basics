@@ -2,16 +2,8 @@ package Main.Library.Service;
 import Main.Library.Model.Book;
 import Main.Library.Repository.BookRepo;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class BookService {
@@ -30,7 +22,7 @@ public class BookService {
         return max;
     }
 
-    public Book add(String inputTitle, String inputAuthor, Integer inputPage , int bookStock) {
+    public Book add(String inputTitle, String inputAuthor, Integer inputPage) {
 
          boolean isAvailable = true;
 
@@ -47,23 +39,26 @@ public class BookService {
 
         }
         int id = getMaxId() + 1 ;
-        Book book = new Book(id, inputTitle, inputAuthor, inputPage,  isAvailable , bookStock);
+        Book book = new Book(id, inputTitle, inputAuthor, inputPage,  isAvailable);
         listBook.add(book);
-        bookRepo.insert(inputTitle, inputAuthor, inputPage,  isAvailable ,bookStock);
+        bookRepo.insert(inputTitle, inputAuthor, inputPage,  isAvailable );
         return book;
     }
-    public Book findExactMatch (String title){
-        ArrayList<Book> a = bookRepo.select();
+    public ArrayList<Book> findExactMatch (String title){
+        ArrayList<Book> allBooks = bookRepo.select();
+        ArrayList<Book> result = new ArrayList<>();
 
-        for (Book b : a) {
+        for (Book b : allBooks) {
 
             if (b.getTitle().equalsIgnoreCase(title)) {
-                return b;
+                result.add(b);
             }
         }
 
-        return null ;
+        return result ;
     }
+
+
     public List<Book> findPrefix(String preFix) {
         List<Book> allBooks = bookRepo.select();
         List<Book> result = new ArrayList<>(); // Separate list for results
@@ -80,10 +75,10 @@ public class BookService {
         return result;
     }
 
-    public Book search(String givenTitle) {
+    public ArrayList<Book> search(String givenTitle) {
         ArrayList<Book> a = bookRepo.select();
 
-        Book b = null;
+        ArrayList<Book> b = null;
 
         b = findExactMatch(givenTitle);
 
@@ -96,8 +91,9 @@ public class BookService {
 
     public Book update(String givenTitle, boolean chosen) {
 
-        Book b;
+        ArrayList<Book> book;
             b = search(givenTitle);
+            for()
             if (chosen) {
                 if (b.isAvailable() == true) {
                     b.setAvailable(false);
