@@ -6,8 +6,6 @@ import Main.Library.Repository.BookRepo;
 import Main.Library.Service.BookService;
 
 import java.text.MessageFormat;
-import static Main.Library.Service.BookService.listBook;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -99,7 +97,7 @@ public class BookMenu {
                                     String msg = MessageFormat.format("the {0} book is written by {1} and it has got {2} pages the availability status is {3}",
                                             book.getTitle(),
                                             book.getAuthor(),
-                                            book.getPage(),
+                                            book.getTotalPages(),
                                             book.isAvailable());
                                     System.out.println(msg);
                                     break;

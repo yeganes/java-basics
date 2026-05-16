@@ -4,7 +4,7 @@ package Main.Library.Model;
 public class Book {
     private final String title;
     private final String author;
-    private final Integer page;
+    private final Integer totalPages;
     private boolean available;
     final private Integer id;
 
@@ -20,8 +20,8 @@ public class Book {
         return author;
     }
 
-    public Integer getPage() {
-        return page;
+    public Integer getTotalPages() {
+        return totalPages;
     }
 
     public boolean isAvailable() {
@@ -36,29 +36,17 @@ public class Book {
         this.id = id;
         this.title = title;
         this.author = author;
-        this.page = page;
+        this.totalPages = page;
         this.available = available;
     }
 
-    // یک متود برای اینکه اگر از فایل رشته ای خواندیم بتوانیم انرا به یک شی از کلاس کتاب تبدیل کنیم
-    public static Book fromFileString(String line) {
-        String[] parts = line.split("\\|");
-        return new Book(
-                Integer.parseInt(parts[0]),
-                parts[1],
-                parts[2],
-                Integer.parseInt(parts[3]),
-                Boolean.parseBoolean(parts[4])
-        );
-
-    }
     @Override
     public String toString() {
         return "Book{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
-                ", page=" + page +
+                ", page=" + totalPages +
                 ", available=" + available +
                 '}';
     }
