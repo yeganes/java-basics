@@ -30,7 +30,7 @@ public class BookService {
         return max;
     }
 
-    public Book add(String inputTitle, String inputAuthor, Integer inputPage) {
+    public Book add(String inputTitle, String inputAuthor, Integer inputPage , int bookStock) {
 
          boolean isAvailable = true;
 
@@ -47,9 +47,9 @@ public class BookService {
 
         }
         int id = getMaxId() + 1 ;
-        Book book = new Book(id, inputTitle, inputAuthor, inputPage,  isAvailable);
+        Book book = new Book(id, inputTitle, inputAuthor, inputPage,  isAvailable , bookStock);
         listBook.add(book);
-        bookRepo.insert(inputTitle, inputAuthor, inputPage,  isAvailable);
+        bookRepo.insert(inputTitle, inputAuthor, inputPage,  isAvailable ,bookStock);
         return book;
     }
     public Book findExactMatch (String title){
@@ -64,18 +64,20 @@ public class BookService {
 
         return null ;
     }
-    public List<Book> findPrefix(String preFix){
-        ArrayList<Book> a = bookRepo.select();
-        for (Book b : a){
-            String [] words = b.getTitle().split(" ");
-            for(String w : words){
-                if (w.toLowerCase().startsWith(preFix.toLowerCase())){
-                    a.add(b);
+    public List<Book> findPrefix(String preFix) {
+        List<Book> allBooks = bookRepo.select();
+        List<Book> result = new ArrayList<>(); // Separate list for results
+
+        for (Book b : allBooks) {
+            String[] words = b.getTitle().split(" ");
+            for (String w : words) {
+                if (w.toLowerCase().startsWith(preFix.toLowerCase())) {
+                    result.add(b);
                     break;
                 }
             }
         }
-        return a;
+        return result;
     }
 
     public Book search(String givenTitle) {

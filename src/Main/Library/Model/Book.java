@@ -7,6 +7,7 @@ public class Book {
     private final Integer totalPages;
     private boolean available;
     final private Integer id;
+    private int bookStock;
 
     public Integer getId() {
         return id;
@@ -32,12 +33,21 @@ public class Book {
         this.available = available;
     }
 
-    public Book(int id, String title, String author, int page, boolean available) {
+    public int getBookStock() {
+        return bookStock;
+    }
+
+    public void setBookStock(int bookStock) {
+        this.bookStock = bookStock;
+    }
+
+    public Book(int id, String title, String author, int page, boolean available , int bookStock) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.totalPages = page;
         this.available = available;
+        this.bookStock = bookStock;
     }
 
     @Override

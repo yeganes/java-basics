@@ -29,9 +29,6 @@ public class MemberService {
         if (inputAge <= 0) {
             throw new IllegalArgumentException(" Age must be positive");
         }
-        if (inputPhoneNumber.length() < 10 || inputPhoneNumber.length() > 11) {
-            throw new IllegalArgumentException(" phoneNumber should be at least 10 digits ");
-        }
         int id = 0 ;
         id ++;
 

@@ -13,8 +13,8 @@ import java.util.ArrayList;
 public class BookRepo {
 
     DBConnection db = new DBConnection();
-    public void insert(String title , String author , Integer page ,  boolean isAvailable){
-        String sql = "INSERT INTO books(title , author , page, isAvailable ) VALUES( ? , ? , ? , ? )";
+    public void insert(String title , String author , Integer page ,  boolean isAvailable , int NumbersOfBook){
+        String sql = "INSERT INTO books(title , author , page, isAvailable , NumbersOfBook) VALUES( ? , ? , ? , ? ,? )";
         try(
         Connection connection = db.connect();
         PreparedStatement ps = connection.prepareStatement(sql);
@@ -23,6 +23,7 @@ public class BookRepo {
             ps.setString(2, author);
             ps.setInt(3 , page);
             ps.setBoolean(4 , isAvailable);
+            ps.setInt(5 , NumbersOfBook);
             ps.executeUpdate();
         }catch (SQLException e) {
             throw new RuntimeException(e);
@@ -45,7 +46,8 @@ public class BookRepo {
                 String author = rs.getString("author");
                 Integer page = rs.getInt("page");
                 boolean isAvailable = rs.getBoolean("isAvailable");
-                book = new Book(id , title , author , page , isAvailable);
+                int NumbersOfBook = rs.getInt("NumbersOfBook");
+                book = new Book(id , title , author , page , isAvailable ,NumbersOfBook);
                 listBook.add(book);
             }
             return listBook;

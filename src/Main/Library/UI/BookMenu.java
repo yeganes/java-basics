@@ -56,6 +56,7 @@ public class BookMenu {
                     for (int i = 0; i < j; i++) {
 
                         try {
+
                             System.out.println("Enter the book's title: ");
                             String inputTitle = inputInfo.nextLine();
 
@@ -65,7 +66,10 @@ public class BookMenu {
                             System.out.println("How many pages does it have? ");
                             Integer inputPage = Integer.valueOf(inputInfo.nextLine());
 
-                            bookService.add(inputTitle, inputAuthor, inputPage);
+                            System.out.println("How many of this book have you got ? ");
+                            int bookStock = Integer.valueOf(inputInfo.nextLine());
+
+                            bookService.add(inputTitle, inputAuthor, inputPage , bookStock);
 
                             System.out.println("Book added successfully ✔");
 

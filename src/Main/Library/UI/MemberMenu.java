@@ -49,10 +49,10 @@ public class MemberMenu {
                     }
                     for (int i = 0; i < j; i++) {
                         while (true){
-                            try{
+                            try {
                                 System.out.println(" please enter your name: ");
                                 String inputName = input.nextLine();
-                                if (inputName.trim().isEmpty()){
+                                if (inputName.trim().isEmpty()) {
                                     return;
                                 }
 
@@ -65,9 +65,21 @@ public class MemberMenu {
                                     System.out.println("Invalid input! please enter a number");
                                 }
 
+                                String inputPhoneNumber;
+                                while (true) {
+                                    try {
+                                        System.out.println(" phone number: ");
 
-                                System.out.println(" phone number: ");
-                                String inputPhoneNumber = input.nextLine();
+                                        inputPhoneNumber = input.nextLine();
+                                        if (inputPhoneNumber.length() < 10 || inputPhoneNumber.length() > 11) {
+                                            throw new IllegalArgumentException(" phoneNumber should be at least 10 digits ");
+                                        }
+                                         break;
+                                    } catch (IllegalArgumentException e) {
+                                        System.out.println(" phoneNumber should be at least 10 digits ");                                    }
+
+                                }
+
 
                                 Member.Gender gender = null;
 
