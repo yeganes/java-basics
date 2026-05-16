@@ -92,8 +92,8 @@ public class BookService {
     public Book update(String givenTitle, boolean chosen) {
 
         ArrayList<Book> book;
-            b = search(givenTitle);
-            for()
+            book = search(givenTitle);
+            for(Book b : book){
             if (chosen) {
                 if (b.isAvailable() == true) {
                     b.setAvailable(false);
@@ -103,19 +103,18 @@ public class BookService {
                     b.setAvailable(true);
                     bookRepo.updateStatus(givenTitle ,  b.isAvailable());
                     b.isAvailable();
-
                 }
+                }
+                return b;
+
             }
-
-
-        return b;
-
+            return null;
     }
 
     public boolean delete(String givenTitle2)  {
         ArrayList<Book> a = bookRepo.select();
 
-        Book b = search(givenTitle2);
+        ArrayList<Book> b = search(givenTitle2);
         listBook.remove(b);
         bookRepo.delete(b.getTitle());
         a.remove(b);
