@@ -41,7 +41,7 @@ public class Book {
         this.bookStock = bookStock;
     }
 
-    public Book(int id, String title, String author, int page, boolean available) {
+    public Book(int id, String title, String author, int page, boolean available , int bookStock) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -58,6 +58,7 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", page=" + totalPages +
                 ", available=" + available +
+                ", bookStock=" + bookStock+
                 '}';
     }
 

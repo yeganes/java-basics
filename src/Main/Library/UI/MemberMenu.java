@@ -1,13 +1,16 @@
 package Main.Library.UI;
 
 import Main.Library.Exceptions.MemberNotFoundException;
+import Main.Library.Model.Book;
 import Main.Library.Repository.MemberRepo;
+import Main.Library.Service.BookService;
 import Main.Library.Service.LibraryService;
 import Main.Library.Model.Member;
 import Main.Library.Exceptions.LimitBorrowedException;
 import Main.Library.Service.MemberService;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -17,6 +20,7 @@ public class MemberMenu {
     MemberRepo memberRepo = new MemberRepo();
     static Scanner input = new Scanner(System.in);
     LibraryService libraryService = new LibraryService();
+    BookService bookService = new BookService();
     public MemberMenu() {
     }
     public void ask() throws LimitBorrowedException, MemberNotFoundException {
@@ -212,9 +216,16 @@ public class MemberMenu {
                     int givenId = Integer.parseInt(input.nextLine());
                     System.out.println("enter the book you wanna borrow");
                     String givenBook = input.nextLine();
+
                     try{
+                        ArrayList<Book> book = bookService.findExactMatch(givenBook);
+                        for (Book b : book){
+                            System.out.println(b.getId() + " " + b.getTitle() + " " + b.getAuthor() + " " + b.getTotalPages() + "\n");
+                        }
+                        System.out.println("enter the book ID you wanna borrow :");
+                        int id = Integer.parseInt(input.nextLine());
                         System.out.println();
-                        libraryService.borrow(givenId, givenBook);
+                        libraryService.borrow(givenId, id);
                         System.out.println("the book is borrowed");
 
                     }catch (LimitBorrowedException l){

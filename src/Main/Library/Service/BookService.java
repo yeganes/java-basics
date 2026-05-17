@@ -22,7 +22,7 @@ public class BookService {
         return max;
     }
 
-    public Book add(String inputTitle, String inputAuthor, Integer inputPage) {
+    public Book add(String inputTitle, String inputAuthor, Integer inputPage , int bookStock) {
 
          boolean isAvailable = true;
 
@@ -39,9 +39,9 @@ public class BookService {
 
         }
         int id = getMaxId() + 1 ;
-        Book book = new Book(id, inputTitle, inputAuthor, inputPage,  isAvailable);
+        Book book = new Book(id, inputTitle, inputAuthor, inputPage,  isAvailable , bookStock);
         listBook.add(book);
-        bookRepo.insert(inputTitle, inputAuthor, inputPage,  isAvailable );
+        bookRepo.insert(inputTitle, inputAuthor, inputPage,  isAvailable  , bookStock);
         return book;
     }
     public ArrayList<Book> findExactMatch (String title){
@@ -56,6 +56,19 @@ public class BookService {
         }
 
         return result ;
+    }
+    
+    public Book findById( int id){
+        ArrayList<Book> allBooks = bookRepo.select();
+        ArrayList<Book> result = new ArrayList<>();
+            Book book = null;
+        for (Book b : allBooks){
+            if (b.getId().equals(id)){
+                result.add(b);
+                book = b;
+            }
+        }
+        return book;
     }
 
 
@@ -114,10 +127,13 @@ public class BookService {
     public boolean delete(String givenTitle2)  {
         ArrayList<Book> a = bookRepo.select();
 
-        ArrayList<Book> b = search(givenTitle2);
+
+        ArrayList<Book> book = search(givenTitle2);
+        for (Book b :  book){
         listBook.remove(b);
         bookRepo.delete(b.getTitle());
         a.remove(b);
+        }
 
         return true;
     }

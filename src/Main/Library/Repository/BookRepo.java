@@ -13,8 +13,8 @@ public class BookRepo {
 
     DBConnection db = new DBConnection();
 
-    public void insert(String title, String author, Integer page, boolean isAvailable) {
-        String sql = "INSERT INTO books(title , author , page, isAvailable) VALUES( ? , ? , ? , ?  )";
+    public void insert(String title, String author, Integer page, boolean isAvailable , int bookStock) {
+        String sql = "INSERT INTO books(title , author , page, isAvailable , stock) VALUES( ? , ? , ? , ? , ?  )";
         try (
                 Connection connection = db.connect();
                 PreparedStatement ps = connection.prepareStatement(sql);
@@ -23,6 +23,7 @@ public class BookRepo {
             ps.setString(2, author);
             ps.setInt(3, page);
             ps.setBoolean(4, isAvailable);
+            ps.setInt(5 , bookStock);
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -44,7 +45,8 @@ public class BookRepo {
                 String author = rs.getString("author");
                 Integer page = rs.getInt("page");
                 boolean isAvailable = rs.getBoolean("isAvailable");
-                book = new Book(id, title, author, page, isAvailable);
+                int stock = rs.getInt("stock");
+                book = new Book(id, title, author, page, isAvailable , stock);
                 listBook.add(book);
             }
             return listBook;
@@ -61,6 +63,22 @@ public class BookRepo {
         ) {
             ps.setBoolean(1, isAvailable);
             ps.setString(2, title);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+    public void updateStock(int bookId, int bookStock) {
+        String sql = "UPDATE books SET stock = ? WHERE id = ? ";
+        try (
+                Connection connection = db.connect();
+                PreparedStatement ps = connection.prepareStatement(sql);
+        ) {
+            ps.setInt(1, bookStock);
+            ps.setInt(2, bookId);
             ps.executeUpdate();
 
         } catch (SQLException e) {

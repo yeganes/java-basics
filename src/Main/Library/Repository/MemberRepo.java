@@ -117,6 +117,24 @@ public class MemberRepo {
         }
 
     }
+
+    public void updateLimit(Integer id , int borrowLimit  ){
+        String sql = "UPDATE members SET borrow_limit = ? WHERE member_id = ?";
+        try (
+                Connection connection = db.connect();
+                PreparedStatement ps = connection.prepareStatement(sql);
+        ){
+            ps.setInt(1 ,  borrowLimit );
+            ps.setInt(2 , id);
+
+            ps.executeUpdate();
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
     public void delete(int id) {
 
         String sql = "DELETE FROM members WHERE member_id = ?";

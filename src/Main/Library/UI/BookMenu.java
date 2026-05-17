@@ -66,8 +66,10 @@ public class BookMenu {
                             System.out.println("How many pages does it have? ");
                             Integer inputPage = Integer.valueOf(inputInfo.nextLine());
 
+                            System.out.println("How many edition have you got of this book? ");
+                            int bookStock = Integer.parseInt(inputInfo.nextLine());
 
-                            bookService.add(inputTitle, inputAuthor, inputPage  );
+                            bookService.add(inputTitle, inputAuthor, inputPage , bookStock );
 
                             System.out.println("Book added successfully ✔");
 
@@ -95,13 +97,15 @@ public class BookMenu {
                                         System.out.println(b);
                                     }
                                     String givenTitle = inputInfo.nextLine();
-                                    Book book = bookService.search(givenTitle);
+                                    ArrayList<Book> bookList = bookService.search(givenTitle);
+                                    for ( Book book : bookList){
                                     String msg = MessageFormat.format("the {0} book is written by {1} and it has got {2} pages the availability status is {3}",
                                             book.getTitle(),
                                             book.getAuthor(),
                                             book.getTotalPages(),
                                             book.isAvailable());
                                     System.out.println(msg);
+                                    }
                                     break;
                                 }catch(NullPointerException e ){
                                     System.out.println("error!" + e.getMessage());
@@ -133,12 +137,13 @@ public class BookMenu {
                 case 3:
                     System.out.println("you selected number 3 , let's update the book's status");
                     while (true) {
-                        Book book1 = null;
+                        ArrayList<Book> book = null;
 
                         try {
                             System.out.println("enter the book you're going to update : ");
                             String givenTitle1 = inputInfo.nextLine();
-                            book1 = bookService.search(givenTitle1);
+                             for(Book book1 : book){
+                            book = bookService.search(givenTitle1);
                             String msg = MessageFormat.format("the {0} book availability is {1} if you  wanna change it press enter",
                                     book1.getTitle(),
                                     book1.isAvailable());
@@ -146,6 +151,7 @@ public class BookMenu {
                             boolean chosen = inputInfo.nextLine().isEmpty();
                             Book b = bookService.update(givenTitle1, chosen);
                             System.out.println("the book availability is  " + b.isAvailable());
+                             }
                             break;
                         } catch (NullPointerException e) {
                             System.out.println("error!" + e.getMessage());
