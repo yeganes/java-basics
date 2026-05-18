@@ -89,11 +89,11 @@ public class BookMenu {
                     int number = Integer.parseInt(inputInfo.nextLine());
                     switch (number){
                         case 1:
-                            ArrayList<Book> a = bookRepo.select();
+                            ArrayList<Book> allBooks = bookRepo.select();
                             while(true){
                                 try{
                                     System.out.println("enter the book you are searching for : ");
-                                    for (Book b : a){
+                                    for (Book b :allBooks){
                                         System.out.println(b);
                                     }
                                     String givenTitle = inputInfo.nextLine();
@@ -113,11 +113,11 @@ public class BookMenu {
                             }
                             break;
                         case 2:
-                            ArrayList<Book> d = bookRepo.select();
+                            ArrayList<Book> allBooks1 = bookRepo.select();
                             while(true){
                                 try{
                                     System.out.println("search here:");
-                                    for (Book b : d){
+                                    for (Book b : allBooks1){
                                         System.out.println(b);
                                     }
                                     String prefix = inputInfo.nextLine();

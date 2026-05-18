@@ -2,6 +2,8 @@ package Main.Library.UI;
 
 import Main.Library.Exceptions.MemberNotFoundException;
 import Main.Library.Model.Book;
+import Main.Library.Model.Borrow;
+import Main.Library.Repository.BorrowRepo;
 import Main.Library.Repository.MemberRepo;
 import Main.Library.Service.BookService;
 import Main.Library.Service.LibraryService;
@@ -10,7 +12,6 @@ import Main.Library.Exceptions.LimitBorrowedException;
 import Main.Library.Service.MemberService;
 
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -21,6 +22,7 @@ public class MemberMenu {
     static Scanner input = new Scanner(System.in);
     LibraryService libraryService = new LibraryService();
     BookService bookService = new BookService();
+    BorrowRepo borrowRepo = new BorrowRepo();
     public MemberMenu() {
     }
     public void ask() throws LimitBorrowedException, MemberNotFoundException {
@@ -28,7 +30,7 @@ public class MemberMenu {
 
         int chosenNumber = 0;
         do {
-            System.out.println("please choose a number: \n 1 : Create \n 2 : Read \n 3 : Update\n 4 : Delete \n 5 : Borrow \n 6 : EXIT");
+            System.out.println("please choose a number: \n 1 : Create \n 2 : Read \n 3 : Update\n 4 : Delete \n 5 : Borrow \n 6 : Return \n 7 : Exit! ");
             if (input.hasNextInt()) {
                 //the output of hasnextint is always a boolean
                 chosenNumber = Integer.parseInt(input.nextLine());
@@ -233,10 +235,32 @@ public class MemberMenu {
                     }
 
                     break;
-                case 6:
-                    System.out.println("you selected number 6 , Bye");
+                case 6 :
+                    System.out.println("you selected number 6 , let's return a book");
+
+                    try {
+                        System.out.println("enter you member id to return a book");
+                        int givenId1 = Integer.parseInt(input.nextLine());
+                        ArrayList<Borrow> borrowList = borrowRepo.selectMemberBook(givenId1);
+                        for (Borrow borrow : borrowList){
+                            Book book =  bookService.findById(borrow.getBook_id());
+                            System.out.println(borrow.getBook_id() + " " + book.getTitle());
+                        }
+                        System.out.println("which book do you wanna return , enter the id number ");
+                        int bookId = Integer.parseInt(input.nextLine());
+                        libraryService.returnBook(givenId1 , bookId);
+                    }catch (NullPointerException e){
+                        System.out.println("you didn't borrow any");
+                    }
+
+
+
+                    break;
+
+                case 7:
+                    System.out.println("you selected number 7 , Bye");
                     break;
             }
-        }while (chosenNumber != 6) ;
+        }while (chosenNumber != 7) ;
     }
 }

@@ -24,6 +24,7 @@ public class BookService {
 
     public Book add(String inputTitle, String inputAuthor, Integer inputPage , int bookStock) {
 
+
          boolean isAvailable = true;
 
         if (inputTitle==null || inputTitle.isEmpty()){
@@ -45,7 +46,10 @@ public class BookService {
         return book;
     }
     public ArrayList<Book> findExactMatch (String title){
-        ArrayList<Book> allBooks = bookRepo.select();
+        if (title == null || title.isEmpty()) {
+            throw new IllegalArgumentException("Title cannot be null or empty");
+        }
+        ArrayList<Book> allBooks = bookRepo.selectTitle(title);
         ArrayList<Book> result = new ArrayList<>();
 
         for (Book b : allBooks) {
@@ -59,7 +63,10 @@ public class BookService {
     }
     
     public Book findById( int id){
-        ArrayList<Book> allBooks = bookRepo.select();
+        if (id <= 0) {
+            throw new IllegalArgumentException("Invalid book ID");
+        }
+        ArrayList<Book> allBooks = bookRepo.selectId(id);
         ArrayList<Book> result = new ArrayList<>();
             Book book = null;
         for (Book b : allBooks){
@@ -73,6 +80,9 @@ public class BookService {
 
 
     public List<Book> findPrefix(String preFix) {
+        if (preFix == null || preFix.isEmpty()) {
+            throw new IllegalArgumentException("Prefix cannot be empty");
+        }
         List<Book> allBooks = bookRepo.select();
         List<Book> result = new ArrayList<>(); // Separate list for results
 
@@ -89,13 +99,16 @@ public class BookService {
     }
 
     public ArrayList<Book> search(String givenTitle) {
-        ArrayList<Book> a = bookRepo.select();
+        if (givenTitle == null || givenTitle.isEmpty()) {
+            throw new IllegalArgumentException("Title cannot be empty");
+        }
+        bookRepo.selectTitle(givenTitle);
 
         ArrayList<Book> b = null;
 
         b = findExactMatch(givenTitle);
 
-            if (b == null) {
+            if (b.isEmpty()) {
                 throw new NullPointerException("the book's name doesn't match");
                 //left empty by purpose
             }
@@ -103,6 +116,9 @@ public class BookService {
     }
 
     public Book update(String givenTitle, boolean chosen) {
+        if (givenTitle == null || givenTitle.isEmpty()) {
+            throw new IllegalArgumentException("Title cannot be empty");
+        }
 
         ArrayList<Book> book;
             book = search(givenTitle);
@@ -125,14 +141,19 @@ public class BookService {
     }
 
     public boolean delete(String givenTitle2)  {
-        ArrayList<Book> a = bookRepo.select();
+
+        if (givenTitle2 == null || givenTitle2.isEmpty()) {
+            throw new IllegalArgumentException("Title cannot be empty");
+        }
+
+        ArrayList<Book> allBooks = bookRepo.selectTitle(givenTitle2);
 
 
         ArrayList<Book> book = search(givenTitle2);
         for (Book b :  book){
         listBook.remove(b);
         bookRepo.delete(b.getTitle());
-        a.remove(b);
+            allBooks.remove(b);
         }
 
         return true;

@@ -42,6 +42,10 @@ public class MemberService {
     }
 
     public  Member readByName(String member){
+        if (member == null || member.isEmpty()) {
+            throw new IllegalArgumentException("Search name cannot be null or empty");
+        }
+
         ArrayList<Member> a = memberRepo.select();
         Member result = null;
         for (Member m : a){
@@ -53,6 +57,9 @@ public class MemberService {
         return result;
     }
     public Member readMemberById(Integer id) throws RuntimeException , MemberNotFoundException {
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("Invalid member ID");
+        }
 
         ArrayList<Member> a = memberRepo.select();
         Member result = null;
@@ -69,6 +76,10 @@ public class MemberService {
 
 
     public Member update(Integer id , String name , String phoneNumber , Integer age ) throws MemberNotFoundException {
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("Invalid member ID");
+        }
+
         Member m = readMemberById(id);
 
         if (m==null){
@@ -85,12 +96,16 @@ public class MemberService {
         }
 
         if (age != null  ){
+
             m.setAge(age);
             memberRepo.updateAge(id , age);
         }
         return m;
     }
     public Member delete(int enteredId , int number) throws MemberNotFoundException {
+        if (enteredId <= 0) {
+            throw new IllegalArgumentException("Invalid member ID");
+        }
 
         Member m = readMemberById(enteredId);
         if (m == null){

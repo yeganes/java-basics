@@ -40,9 +40,11 @@ public class Menu {
                 case 2:
                     bookMenu.ask();
                     break;
+
                 case 3 :
                     System.out.println("you selected number 3 , Bye");
                     break;
+
             }
 
         } while (clarification != 3);

@@ -54,6 +54,60 @@ public class BookRepo {
             throw new RuntimeException(e);
         }
     }
+    public ArrayList<Book> selectTitle(String title) {
+        ArrayList<Book> listBook = new ArrayList<>();
+        String sql = "SELECT * FROM books WHERE title = ?";
+        try (
+                Connection connection = db.connect();
+                PreparedStatement ps = connection.prepareStatement(sql);
+
+        ) {
+            Book book = null;
+
+            ps.setString(1 , title);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String author = rs.getString("author");
+                Integer page = rs.getInt("page");
+                boolean isAvailable = rs.getBoolean("isAvailable");
+                int stock = rs.getInt("stock");
+                book = new Book(id, title, author, page, isAvailable , stock);
+                listBook.add(book);
+            }
+            return listBook;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public ArrayList<Book> selectId(int id) {
+        ArrayList<Book> listBook = new ArrayList<>();
+        String sql = "SELECT * FROM books WHERE id = ?";
+        try (
+                Connection connection = db.connect();
+                PreparedStatement ps = connection.prepareStatement(sql);
+
+        ) {
+            Book book = null;
+
+            ps.setInt(1 , id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String title = rs.getString("title");
+                String author = rs.getString("author");
+                Integer page = rs.getInt("page");
+                boolean isAvailable = rs.getBoolean("isAvailable");
+                int stock = rs.getInt("stock");
+                book = new Book(id, title, author, page, isAvailable , stock);
+                listBook.add(book);
+            }
+            return listBook;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void updateStatus(String title, boolean isAvailable) {
         String sql = "UPDATE books SET isAvailable = ? WHERE title = ? ";

@@ -15,7 +15,7 @@ public class MemberRepo {
 
 
     public void insert(String name , int age , String phoneNumber, Member.Gender gender ,Integer borrowLimit ,Integer borrowedBooks){
-        String sql = "INSERT INTO members(name , age , phone_number , gender , borrow_limit ) VALUES (?, ?, ? , ? , ? , ?  )";
+        String sql = "INSERT INTO members(name , age , phone_number , gender , borrow_limit ) VALUES (?, ?, ? , ? , ?   )";
         try {
             Connection connection = db.connect();
             PreparedStatement ps = connection.prepareStatement(sql);
