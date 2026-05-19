@@ -46,7 +46,7 @@ public class LibraryService {
 
     public void returnBook (int member , int bookId) throws MemberNotFoundException {
 
-        ArrayList<Borrow> borrowlist = borrowRepo.selectMemberBook(member);
+        ArrayList<Borrow> borrowList = borrowRepo.selectMemberBook(member);
         Member name = memberService.readMemberById(member);
         Book book = bookService.findById(bookId);
 
@@ -57,26 +57,17 @@ public class LibraryService {
                 book.setAvailable(true);
             }
 
-                for (Borrow borrow : borrowlist){
+                for (Borrow borrow : borrowList){
                     if (borrow.getBook_id() == 0 || borrow.getMember_id() == 0 ){
                         System.out.println("you didn't borrow any books");
 
                     }
                 }
-
-
-
-
         memberRepo.updateLimit(member , name.getBorrowLimit());
 
         bookRepo.updateStock(bookId , book.getBookStock());
 
         borrowRepo.delete(member , bookId);
-
-
-
-
-
     }
 
 }
