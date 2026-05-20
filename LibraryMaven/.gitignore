@@ -1,0 +1,8 @@
+*.jar
+*.jar
+*.war
+*.ear
+*.class
+target/
+build/
+dependency-reduced-pom.xml
