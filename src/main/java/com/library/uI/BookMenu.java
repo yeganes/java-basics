@@ -4,7 +4,7 @@ package com.library.uI;
 
 
 import com.library.model.Book;
-import com.library.repository.BookRepo;
+import com.library.dao.BookDAO;
 import com.library.service.BookService;
 
 import java.text.MessageFormat;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BookMenu {
-    BookRepo bookRepo = new BookRepo();
+    BookDAO bookDAO = new BookDAO();
     BookService bookService = new BookService();
     static Scanner inputInfo = new Scanner(System.in);
 
@@ -91,7 +91,7 @@ public class BookMenu {
                     int number = Integer.parseInt(inputInfo.nextLine());
                     switch (number){
                         case 1:
-                            ArrayList<Book> allBooks = bookRepo.select();
+                            ArrayList<Book> allBooks = bookDAO.select();
                             while(true){
                                 try{
                                     System.out.println("enter the book you are searching for : ");
@@ -115,7 +115,7 @@ public class BookMenu {
                             }
                             break;
                         case 2:
-                            ArrayList<Book> allBooks1 = bookRepo.select();
+                            ArrayList<Book> allBooks1 = bookDAO.select();
                             while(true){
                                 try{
                                     System.out.println("search here:");

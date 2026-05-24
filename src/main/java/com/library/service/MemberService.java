@@ -3,7 +3,7 @@ package com.library.service;
 
 import com.library.exceptions.MemberNotFoundException;
 import com.library.model.Member;
-import com.library.repository.MemberRepo;
+import com.library.dao.MemberDAO;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 
 public class MemberService {
-    MemberRepo memberRepo = new MemberRepo();
+    MemberDAO memberDAO = new MemberDAO();
     Member person = null;
     public static ArrayList<Member> listPerson = new ArrayList<>();
     public static Integer borrowLimit = 2;
@@ -36,7 +36,7 @@ public class MemberService {
 
         listPerson.add(person);
 
-        memberRepo.insert(inputName, inputAge, inputPhoneNumber, gender,borrowLimit ,borrowedBooks);
+        memberDAO.insert(inputName, inputAge, inputPhoneNumber, gender,borrowLimit ,borrowedBooks);
 
         return  person;
     }
@@ -46,7 +46,7 @@ public class MemberService {
             throw new IllegalArgumentException("Search name cannot be null or empty");
         }
 
-        ArrayList<Member> a = memberRepo.select();
+        ArrayList<Member> a = memberDAO.select();
         Member result = null;
         for (Member m : a){
             if (member.equalsIgnoreCase(m.getName())){
@@ -61,7 +61,7 @@ public class MemberService {
             throw new IllegalArgumentException("Invalid member ID");
         }
 
-        ArrayList<Member> a = memberRepo.select();
+        ArrayList<Member> a = memberDAO.select();
         Member result = null;
         for (Member m : a) {
             if (id == m.getMemberId()) {
@@ -88,17 +88,17 @@ public class MemberService {
 
         if (name != null && !name.isEmpty()){
             m.setName(name);
-            memberRepo.updateName(id , name);
+            memberDAO.updateName(id , name);
         }
         if (phoneNumber != null && !phoneNumber.isEmpty()){
             m.setPhoneNumber(phoneNumber);
-            memberRepo.updatePhoneNumber(id , phoneNumber);
+            memberDAO.updatePhoneNumber(id , phoneNumber);
         }
 
         if (age != null  ){
 
             m.setAge(age);
-            memberRepo.updateAge(id , age);
+            memberDAO.updateAge(id , age);
         }
         return m;
     }
@@ -113,7 +113,7 @@ public class MemberService {
         }
         else {
             if (number == 1 ){
-                memberRepo.delete(enteredId);
+                memberDAO.delete(enteredId);
             } else if (number == 2 ) {
                 return m;
             }

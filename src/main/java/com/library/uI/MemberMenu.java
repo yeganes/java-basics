@@ -5,8 +5,8 @@ package com.library.uI;
 
 import com.library.exceptions.LimitBorrowedException;
 import com.library.exceptions.MemberNotFoundException;
-import com.library.repository.BorrowRepo;
-import com.library.repository.MemberRepo;
+import com.library.dao.BorrowDAO;
+import com.library.dao.MemberDAO;
 import com.library.service.BookService;
 import com.library.service.LibraryService;
 import com.library.service.MemberService;
@@ -21,11 +21,11 @@ import java.util.Scanner;
 
 public class MemberMenu {
     MemberService memberService = new MemberService();
-    MemberRepo memberRepo = new MemberRepo();
+    MemberDAO memberDAO = new MemberDAO();
     static Scanner input = new Scanner(System.in);
     LibraryService libraryService = new LibraryService();
     BookService bookService = new BookService();
-    BorrowRepo borrowRepo = new BorrowRepo();
+    BorrowDAO borrowDAO = new BorrowDAO();
     public MemberMenu() {
     }
     public void ask() throws LimitBorrowedException, MemberNotFoundException {
@@ -161,7 +161,7 @@ public class MemberMenu {
                             }
                             break;
                         case 3 :
-                            ArrayList<Member> a =  memberRepo.select();
+                            ArrayList<Member> a =  memberDAO.select();
                             for (Member m  : a){
                                 System.out.println(m);
                             }
@@ -244,7 +244,7 @@ public class MemberMenu {
                     try {
                         System.out.println("enter you member id to return a book");
                         int givenId1 = Integer.parseInt(input.nextLine());
-                        ArrayList<Borrow> borrowList = borrowRepo.selectMemberBook(givenId1);
+                        ArrayList<Borrow> borrowList = borrowDAO.selectMemberBook(givenId1);
                         for (Borrow borrow : borrowList){
                             Book book =  bookService.findById(borrow.getBook_id());
                             System.out.println(borrow.getBook_id() + " " + book.getTitle());

@@ -67,11 +67,11 @@ public class Book {
     public Book(){
 
     }
-    public Book(int id, String title, String author, int page, boolean available , int bookStock) {
+    public Book(int id, String title, String author, int totalPages, boolean available , int bookStock) {
         this.id = id;
         this.title = title;
         this.author = author;
-        this.totalPages = page;
+        this.totalPages = totalPages;
         this.available = available;
         this.bookStock = bookStock;
     }

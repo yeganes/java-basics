@@ -7,25 +7,25 @@ import com.library.exceptions.MemberNotFoundException;
 import com.library.model.Book;
 import com.library.model.Borrow;
 import com.library.model.Member;
-import com.library.repository.BookRepo;
-import com.library.repository.BorrowRepo;
-import com.library.repository.MemberRepo;
+import com.library.dao.BookDAO;
+import com.library.dao.BorrowDAO;
+import com.library.dao.MemberDAO;
 
 import java.util.ArrayList;
 
 public class LibraryService {
     MemberService memberService = new MemberService();
     BookService bookService = new BookService();
-    BookRepo bookRepo = new BookRepo();
-    BorrowRepo borrowRepo = new BorrowRepo();
-    MemberRepo memberRepo = new MemberRepo();
+    BookDAO bookDAO = new BookDAO();
+    BorrowDAO borrowDAO = new BorrowDAO();
+    MemberDAO memberDAO = new MemberDAO();
 
 
     public void borrow(int member, int bookId ) throws LimitBorrowedException, MemberNotFoundException {
 
         Member name = memberService.readMemberById(member);
         Book book = bookService.findById(bookId);
-        borrowRepo.selectAll();
+        borrowDAO.selectAll();
 
         if (book.isAvailable() && name.getBorrowLimit() > 0 && book.getBookStock() > 0) {
             name.setBorrowLimit(name.getBorrowLimit() - 1);
@@ -34,9 +34,9 @@ public class LibraryService {
                 book.setAvailable(false);
             }
 
-            borrowRepo.insert(member , bookId);
-            memberRepo.updateLimit(member , name.getBorrowLimit());
-            bookRepo.updateStock(bookId , book.getBookStock());
+            borrowDAO.insert(member , bookId);
+            memberDAO.updateLimit(member , name.getBorrowLimit());
+            bookDAO.updateStock(bookId , book.getBookStock());
 
 
 
@@ -48,7 +48,7 @@ public class LibraryService {
 
     public void returnBook (int member , int bookId) throws MemberNotFoundException {
 
-        ArrayList<Borrow> borrowList = borrowRepo.selectMemberBook(member);
+        ArrayList<Borrow> borrowList = borrowDAO.selectMemberBook(member);
         Member name = memberService.readMemberById(member);
         Book book = bookService.findById(bookId);
 
@@ -65,11 +65,11 @@ public class LibraryService {
 
             }
         }
-        memberRepo.updateLimit(member , name.getBorrowLimit());
+        memberDAO.updateLimit(member , name.getBorrowLimit());
 
-        bookRepo.updateStock(bookId , book.getBookStock());
+        bookDAO.updateStock(bookId , book.getBookStock());
 
-        borrowRepo.delete(member , bookId);
+        borrowDAO.delete(member , bookId);
     }
 
 }
