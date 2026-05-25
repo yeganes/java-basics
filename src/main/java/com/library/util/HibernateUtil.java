@@ -13,3 +13,4 @@ public class HibernateUtil {
 
     }
 }
+//making a connection once and reuse it .

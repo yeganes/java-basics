@@ -91,15 +91,14 @@ public class BookMenu {
                     int number = Integer.parseInt(inputInfo.nextLine());
                     switch (number){
                         case 1:
-                            ArrayList<Book> allBooks = bookDAO.select();
+                            List<Book> allBooks = bookDAO.readAllBooks();
                             while(true){
                                 try{
                                     System.out.println("enter the book you are searching for : ");
-                                    for (Book b :allBooks){
-                                        System.out.println(b);
-                                    }
+                                    List<Book> books = bookDAO.readAllBooks();
+                                    System.out.println(books);
                                     String givenTitle = inputInfo.nextLine();
-                                    ArrayList<Book> bookList = bookService.search(givenTitle);
+                                    List<Book> bookList = bookService.search(givenTitle);
                                     for ( Book book : bookList){
                                         String msg = MessageFormat.format("the {0} book is written by {1} and it has got {2} pages the availability status is {3}",
                                                 book.getTitle(),
@@ -115,7 +114,7 @@ public class BookMenu {
                             }
                             break;
                         case 2:
-                            ArrayList<Book> allBooks1 = bookDAO.select();
+                            List<Book> allBooks1 = bookDAO.readAllBooks();
                             while(true){
                                 try{
                                     System.out.println("search here:");
@@ -142,16 +141,15 @@ public class BookMenu {
                         ArrayList<Book> book = null;
 
                         try {
-                            System.out.println("enter the book you're going to update : ");
-                            String givenTitle1 = inputInfo.nextLine();
+                            System.out.println("enter the book's ID you're going to update : ");
+                            int id = Integer.parseInt(inputInfo.nextLine());
                             for(Book book1 : book){
-                                book = bookService.search(givenTitle1);
                                 String msg = MessageFormat.format("the {0} book availability is {1} if you  wanna change it press enter",
                                         book1.getTitle(),
                                         book1.isAvailable());
                                 System.out.println(msg);
                                 boolean chosen = inputInfo.nextLine().isEmpty();
-                                Book b = bookService.update(givenTitle1, chosen);
+                                Book b = bookService.update(id, chosen);
                                 System.out.println("the book availability is  " + b.isAvailable());
                             }
                             break;
@@ -165,12 +163,12 @@ public class BookMenu {
                 case 4:
                     System.out.println("you selected number 4, deleting a book!");
                     System.out.println("enter the book's title:");
-                    String givenTitle2 = inputInfo.nextLine();
+                    int givenID = Integer.parseInt(inputInfo.nextLine());
                     System.out.println("Do you want to delete this book? 1.yes 2.no");
                     try {
                         int choice = Integer.parseInt(inputInfo.nextLine());
                         if (choice == 1) {
-                            boolean deleted = bookService.delete(givenTitle2);
+                            boolean deleted = bookService.delete(givenID);
                             if (deleted) {
                                 System.out.println("Book successfully deleted.");
                             } else {

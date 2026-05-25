@@ -4,21 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8578d01-9a06-4477-b31a-997b77533176" name="Changes" comment="entity book">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+    <list default="true" id="d8578d01-9a06-4477-b31a-997b77533176" name="Changes" comment="adding hibernate phase 1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/dBConnection/DBConnection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/dao/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/dao/BookDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/dao/BorrowDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/dao/BorrowDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/dao/MemberDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/dao/MemberDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/library/model/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/model/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/model/Borrow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/model/Borrow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/model/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/model/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/repository/BookRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/dao/BookDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/repository/BorrowRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/dao/BorrowDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/repository/MemberRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/dao/MemberDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/library/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/service/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/service/LibraryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/service/LibraryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/library/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/service/MemberService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/library/uI/BookMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/uI/BookMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/uI/MemberMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/uI/MemberMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/util/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/util/HibernateUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,28 +39,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.App.executor": "Run",
-    "Application.Menu.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "hibernate",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/My/IdeaProjects/LibrararyMaven/src/main/resources",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Menu.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;hibernate&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/My/IdeaProjects/LibrararyMaven/src/main/resources&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\My\IdeaProjects\LibrararyMaven\src\main\resources" />
@@ -92,6 +88,7 @@
       <workItem from="1779273321635" duration="1485000" />
       <workItem from="1779516841901" duration="8789000" />
       <workItem from="1779602992832" duration="2235000" />
+      <workItem from="1779693694829" duration="8975000" />
     </task>
     <task id="LOCAL-00001" summary="entity book">
       <option name="closed" value="true" />
@@ -101,7 +98,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779611184962</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="adding hibernate phase 1">
+      <option name="closed" value="true" />
+      <created>1779624494160</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1779624494160</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,6 +114,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="entity book" />
-    <option name="LAST_COMMIT_MESSAGE" value="entity book" />
+    <MESSAGE value="adding hibernate phase 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding hibernate phase 1" />
   </component>
 </project>

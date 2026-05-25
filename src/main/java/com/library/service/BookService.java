@@ -5,6 +5,7 @@ import com.library.model.Book;
 import com.library.dao.BookDAO;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -44,14 +45,14 @@ public class BookService {
         int id = getMaxId() + 1 ;
         Book book = new Book(id, inputTitle, inputAuthor, inputPage,  isAvailable , bookStock);
         listBook.add(book);
-        bookDAO.insert(inputTitle, inputAuthor, inputPage,  isAvailable  , bookStock);
+        bookDAO.save(book);
         return book;
     }
     public ArrayList<Book> findExactMatch (String title){
         if (title == null || title.isEmpty()) {
             throw new IllegalArgumentException("Title cannot be null or empty");
         }
-        ArrayList<Book> allBooks = bookDAO.selectTitle(title);
+        List<Book> allBooks = bookDAO.readByPrefix(title);
         ArrayList<Book> result = new ArrayList<>();
 
         for (Book b : allBooks) {
@@ -65,30 +66,24 @@ public class BookService {
     }
 
     public Book findById( int id){
+        Book book = bookDAO.read(id);
         if (id <= 0) {
             throw new IllegalArgumentException("Invalid book ID");
-        }
-        ArrayList<Book> allBooks = bookDAO.selectId(id);
-        ArrayList<Book> result = new ArrayList<>();
-        Book book = null;
-        for (Book b : allBooks){
-            if (b.getId().equals(id)){
-                result.add(b);
-                book = b;
-            }
         }
         return book;
     }
 
 
     public List<Book> findPrefix(String preFix) {
+
         if (preFix == null || preFix.isEmpty()) {
             throw new IllegalArgumentException("Prefix cannot be empty");
         }
-        List<Book> allBooks = bookDAO.select();
+        List<Book> books =  bookDAO.readAllBooks();
+
         List<Book> result = new ArrayList<>(); // Separate list for results
 
-        for (Book b : allBooks) {
+        for (Book b : books) {
             String[] words = b.getTitle().split(" ");
             for (String w : words) {
                 if (w.toLowerCase().startsWith(preFix.toLowerCase())) {
@@ -104,7 +99,9 @@ public class BookService {
         if (givenTitle == null || givenTitle.isEmpty()) {
             throw new IllegalArgumentException("Title cannot be empty");
         }
-        bookDAO.selectTitle(givenTitle);
+
+
+        bookDAO.readByPrefix(givenTitle);
 
         ArrayList<Book> b = null;
 
@@ -117,22 +114,19 @@ public class BookService {
         return b;
     }
 
-    public Book update(String givenTitle, boolean chosen) {
-        if (givenTitle == null || givenTitle.isEmpty()) {
-            throw new IllegalArgumentException("Title cannot be empty");
-        }
+    public Book update(int id, boolean chosen) {
 
-        ArrayList<Book> book;
-        book = search(givenTitle);
+        List<Book> book;
+        book = Collections.singletonList(findById(id));
         for(Book b : book){
             if (chosen) {
                 if (b.isAvailable() == true) {
                     b.setAvailable(false);
-                    bookDAO.updateStatus(givenTitle , b.isAvailable());
+                    bookDAO.updateStatus(id , b.isAvailable());
                     b.isAvailable();
                 } else {
                     b.setAvailable(true);
-                    bookDAO.updateStatus(givenTitle ,  b.isAvailable());
+                    bookDAO.updateStatus(id,  b.isAvailable());
                     b.isAvailable();
                 }
             }
@@ -142,21 +136,15 @@ public class BookService {
         return null;
     }
 
-    public boolean delete(String givenTitle2)  {
+    public boolean delete(int id)  {
 
-        if (givenTitle2 == null || givenTitle2.isEmpty()) {
-            throw new IllegalArgumentException("Title cannot be empty");
-        }
+        List<Book> allBooks = bookDAO.readAllBooks();
 
-        ArrayList<Book> allBooks = bookDAO.selectTitle(givenTitle2);
+        Book book = findById(id);
 
-
-        ArrayList<Book> book = search(givenTitle2);
-        for (Book b :  book){
-            listBook.remove(b);
-            bookDAO.delete(b.getTitle());
-            allBooks.remove(b);
-        }
+            listBook.remove(book);
+            bookDAO.delete(book.getId());
+            allBooks.remove(book);
 
         return true;
     }
