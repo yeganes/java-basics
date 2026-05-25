@@ -43,7 +43,7 @@ public class BookService {
 
         }
         int id = getMaxId() + 1 ;
-        Book book = new Book(id, inputTitle, inputAuthor, inputPage,  isAvailable , bookStock);
+        Book book = new Book( inputTitle, inputAuthor, inputPage,  isAvailable , bookStock);
         listBook.add(book);
         bookDAO.save(book);
         return book;

@@ -72,8 +72,8 @@ public class Book {
     public Book(){
 
     }
-    public Book(int id, String title, String author, int totalPages, boolean available , int bookStock) {
-        this.id = id;
+    public Book( String title, String author, int totalPages, boolean available , int bookStock) {
+
         this.title = title;
         this.author = author;
         this.totalPages = totalPages;

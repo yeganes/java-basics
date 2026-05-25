@@ -82,12 +82,11 @@ public class Member {
     }
 
     // یک سازنده هم نام کلاسمان میسازیم
-    public Member(Integer memberId , String name , int age , String phoneNumber , Gender gender , Integer borrowLimit ) {
+    public Member(String name , int age , String phoneNumber , Gender gender , Integer borrowLimit ) {
         this.name = name;
         this.age = age;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
-        this.memberId = memberId;
         this.borrowLimit = borrowLimit;
 
     }
