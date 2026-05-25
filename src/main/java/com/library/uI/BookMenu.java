@@ -124,7 +124,7 @@ public class BookMenu {
                                     String prefix = inputInfo.nextLine();
                                     List<Book> book = bookService.findPrefix(prefix);
                                     for (Book b : book){
-                                        System.out.println(b);
+                                        System.out.println(b.getTitle() + " " + b.getAuthor());
                                     }
 
                                     break;
