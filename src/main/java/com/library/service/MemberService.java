@@ -7,6 +7,7 @@ import com.library.dao.MemberDAO;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * سرویس کراد ممبر ها
@@ -36,7 +37,7 @@ public class MemberService {
 
         listPerson.add(person);
 
-        memberDAO.insert(inputName, inputAge, inputPhoneNumber, gender,borrowLimit ,borrowedBooks);
+        memberDAO.save(person);
 
         return  person;
     }
@@ -45,8 +46,7 @@ public class MemberService {
         if (member == null || member.isEmpty()) {
             throw new IllegalArgumentException("Search name cannot be null or empty");
         }
-
-        ArrayList<Member> a = memberDAO.select();
+        List<Member> a = memberDAO.selectByName(member);
         Member result = null;
         for (Member m : a){
             if (member.equalsIgnoreCase(m.getName())){
@@ -60,17 +60,7 @@ public class MemberService {
         if (id == null || id <= 0) {
             throw new IllegalArgumentException("Invalid member ID");
         }
-
-        ArrayList<Member> a = memberDAO.select();
-        Member result = null;
-        for (Member m : a) {
-            if (id == m.getMemberId()) {
-                result = m;
-                break;
-            }
-        }
-        return result;
-
+        return memberDAO.select(id);
 
     }
 

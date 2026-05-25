@@ -1,7 +1,7 @@
 package com.library.model;
 
 import com.sun.istack.internal.NotNull;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "members")

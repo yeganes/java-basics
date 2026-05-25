@@ -1,7 +1,5 @@
 package com.library.service;
 
-
-
 import com.library.exceptions.LimitBorrowedException;
 import com.library.exceptions.MemberNotFoundException;
 import com.library.model.Book;
@@ -12,6 +10,7 @@ import com.library.dao.BorrowDAO;
 import com.library.dao.MemberDAO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LibraryService {
     MemberService memberService = new MemberService();
@@ -21,55 +20,57 @@ public class LibraryService {
     MemberDAO memberDAO = new MemberDAO();
 
 
-    public void borrow(int member, int bookId ) throws LimitBorrowedException, MemberNotFoundException {
+    public void borrow(int memberId, int bookId ) throws LimitBorrowedException, MemberNotFoundException {
 
-        Member name = memberService.readMemberById(member);
+
+        Member member = memberService.readMemberById(memberId);
         Book book = bookService.findById(bookId);
-        borrowDAO.selectAll();
+        List<Borrow> borrowList = borrowDAO.selectAll();
 
-        if (book.isAvailable() && name.getBorrowLimit() > 0 && book.getBookStock() > 0) {
-            name.setBorrowLimit(name.getBorrowLimit() - 1);
+
+        if (book.isAvailable() && member.getBorrowLimit() > 0 && book.getBookStock() > 0) {
+            member.setBorrowLimit(member.getBorrowLimit() - 1);
             book.setBookStock(book.getBookStock()-1);
             if (book.getBookStock() < 0){
                 book.setAvailable(false);
             }
-
-            borrowDAO.insert(member , bookId);
-            memberDAO.updateLimit(member , name.getBorrowLimit());
+            borrowDAO.insert(member , book);
+            memberDAO.updateLimit(memberId , member.getBorrowLimit());
             bookDAO.updateStock(bookId , book.getBookStock());
 
 
 
-        } else if (name.getBorrowLimit() == 0){
+        } else if (member.getBorrowLimit() == 0){
             throw new LimitBorrowedException("can't borrow more books");
 
         }
     }
 
-    public void returnBook (int member , int bookId) throws MemberNotFoundException {
+    public void returnBook (int memberId , int bookId) throws MemberNotFoundException {
 
-        ArrayList<Borrow> borrowList = borrowDAO.selectMemberBook(member);
-        Member name = memberService.readMemberById(member);
+        Member member = memberService.readMemberById(memberId);
         Book book = bookService.findById(bookId);
+        List<Borrow> borrowList = borrowDAO.selectMemberBook(member , book);
 
 
-        name.setBorrowLimit(name.getBorrowLimit() + 1 );
+
+        member.setBorrowLimit(member.getBorrowLimit() + 1 );
         book.setBookStock(book.getBookStock() + 1 );
         if (!book.isAvailable()){
             book.setAvailable(true);
         }
 
         for (Borrow borrow : borrowList){
-            if (borrow.getBook_id() == 0 || borrow.getMember_id() == 0 ){
+            if (borrow.getBook() == null || borrow.getMember() == null ){
                 System.out.println("you didn't borrow any books");
 
             }
         }
-        memberDAO.updateLimit(member , name.getBorrowLimit());
+        memberDAO.updateLimit(memberId , member.getBorrowLimit());
 
         bookDAO.updateStock(bookId , book.getBookStock());
 
-        borrowDAO.delete(member , bookId);
+        borrowDAO.delete(member , book);
     }
 
 }

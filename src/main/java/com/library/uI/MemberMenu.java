@@ -17,6 +17,7 @@ import com.library.model.Borrow;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MemberMenu {
@@ -161,7 +162,7 @@ public class MemberMenu {
                             }
                             break;
                         case 3 :
-                            ArrayList<Member> a =  memberDAO.select();
+                            List<Member> a =  memberDAO.selectAllMembers();
                             for (Member m  : a){
                                 System.out.println(m);
                             }
@@ -243,15 +244,18 @@ public class MemberMenu {
 
                     try {
                         System.out.println("enter you member id to return a book");
-                        int givenId1 = Integer.parseInt(input.nextLine());
-                        ArrayList<Borrow> borrowList = borrowDAO.selectMemberBook(givenId1);
-                        for (Borrow borrow : borrowList){
-                            Book book =  bookService.findById(borrow.getBook_id());
-                            System.out.println(borrow.getBook_id() + " " + book.getTitle());
-                        }
+                        int memberId = Integer.parseInt(input.nextLine());
+                        Member member = memberService.readMemberById(memberId);
+
                         System.out.println("which book do you wanna return , enter the id number ");
+
                         int bookId = Integer.parseInt(input.nextLine());
-                        libraryService.returnBook(givenId1 , bookId);
+                        Book book = bookService.findById(bookId);
+                        List<Borrow> borrowList = borrowDAO.selectMemberBook(member ,book );
+
+                        System.out.println(borrowList);
+
+                        libraryService.returnBook(memberId , bookId);
                     }catch (NullPointerException e){
                         System.out.println("you didn't borrow any");
                     }

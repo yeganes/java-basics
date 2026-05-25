@@ -1,11 +1,17 @@
 package com.library.model;
 
+import javax.persistence.*;
 
+@Entity
 public class Borrow {
+    @Id
+    @GeneratedValue
     private int borrowId;
-    private int member_id;
-    private int book_id;
+    @ManyToOne
+    @JoinColumn(name = "book_id")
     private Book book;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
     private Member member;
 
     public void setId(int borrowId) {
@@ -16,30 +22,6 @@ public class Borrow {
         return borrowId;
     }
 
-    public int getMember_id() {
-        return member_id;
-    }
-
-    public void setMember_id(int member_id) {
-        this.member_id = member_id;
-    }
-
-    public int getBook_id() {
-        return book_id;
-    }
-
-    public void setBook_id(int book_id) {
-        this.book_id = book_id;
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
     public Member getMember() {
         return member;
     }
@@ -48,13 +30,17 @@ public class Borrow {
         this.member = member;
     }
 
-    public Borrow (int borrowId , int member_id , int book_id ){
-        this.borrowId = borrowId;
-        this.member_id = member_id;
-        this.book_id = book_id;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
+    public Book getBook() {
+        return book;
+    }
 
+    public Borrow(){
+
+    }
 }
 
 

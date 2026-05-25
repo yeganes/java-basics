@@ -19,7 +19,7 @@
     </property>
 
     <property name="hibernate.dialect">
-      org.hibernate.dialect.MySQLDialect
+      org.hibernate.dialect.MySQL8Dialect
     </property>
 
     <property name="show_sql">true</property>
@@ -27,6 +27,8 @@
     <property name="hbm2ddl.auto">update</property>
 
     <mapping class="com.library.model.Book"/>
+    <mapping class="com.library.model.Member"/>
+    <mapping class="com.library.model.Borrow"/>
 
   </session-factory>
 
