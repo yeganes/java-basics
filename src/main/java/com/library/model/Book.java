@@ -80,5 +80,15 @@ public class Book {
         this.available = available;
         this.bookStock = bookStock;
     }
-
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", page=" + totalPages +
+                ", available=" + available +
+                ", bookStock=" + bookStock+
+                '}';
+    }
 }

@@ -27,7 +27,7 @@ public class BookDAO {
     }
 
 
-    public Book read(int id){
+    public Book readById(int id){
         Session session = sessionFactory.openSession();
 
         Book book = session.get(Book.class , id);
@@ -49,18 +49,24 @@ public class BookDAO {
 
     }
 
-    public List<Book> readByPrefix(String prefix){
+    public List<Book> readByTitleContains(String text) {
+
+        if (text == null || text.trim().isEmpty()) {
+            throw new IllegalArgumentException("Search text cannot be empty");
+        }
+
         Session session = sessionFactory.openSession();
 
-        Query<Book> query = session.createQuery("FROM Book WHERE title LIKE :title", Book.class);
+        try {
+            Query<Book> query = session.createQuery("FROM Book WHERE lower(title) LIKE :text", Book.class);
 
-        query.setParameter("title", "%" + prefix + "%");
-        List<Book> books = query.list();
+            query.setParameter("text", "%" + text.toLowerCase() + "%");
 
-        session.close();
+            return query.list();
 
-        return books;
-
+        } finally {
+            session.close();
+        }
     }
 
 

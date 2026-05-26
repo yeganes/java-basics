@@ -1,6 +1,7 @@
 package com.library.exceptions;
 
-public class LimitBorrowedException extends Exception{
-    public LimitBorrowedException(String s) {
+public class LimitBorrowedException extends RuntimeException {
+    public LimitBorrowedException(String message) {
+        super(message);
     }
 }

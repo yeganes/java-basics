@@ -48,11 +48,11 @@ public class BookService {
         bookDAO.save(book);
         return book;
     }
-    public ArrayList<Book> findExactMatch (String title){
+    public List<Book> findExactMatch (String title){
         if (title == null || title.isEmpty()) {
             throw new IllegalArgumentException("Title cannot be null or empty");
         }
-        List<Book> allBooks = bookDAO.readByPrefix(title);
+        List<Book> allBooks = bookDAO.readByTitleContains(title);
         ArrayList<Book> result = new ArrayList<>();
 
         for (Book b : allBooks) {
@@ -66,7 +66,7 @@ public class BookService {
     }
 
     public Book findById( int id){
-        Book book = bookDAO.read(id);
+        Book book = bookDAO.readById(id);
         if (id <= 0) {
             throw new IllegalArgumentException("Invalid book ID");
         }
@@ -95,15 +95,15 @@ public class BookService {
         return result;
     }
 
-    public ArrayList<Book> search(String givenTitle) {
+    public List<Book> search(String givenTitle) {
         if (givenTitle == null || givenTitle.isEmpty()) {
             throw new IllegalArgumentException("Title cannot be empty");
         }
 
 
-        bookDAO.readByPrefix(givenTitle);
+        bookDAO.readByTitleContains(givenTitle);
 
-        ArrayList<Book> b = null;
+        List<Book> b = null;
 
         b = findExactMatch(givenTitle);
 

@@ -8,7 +8,6 @@ import com.library.dao.BookDAO;
 import com.library.service.BookService;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -87,16 +86,17 @@ public class BookMenu {
 
                 case 2:
                     System.out.println("you selected number 2 , let's Search through the books");
-                    System.out.println(" 1.exact match \n 2.know the beginning");
+                    System.out.println(" 1.exact match \n 2.know the beginning \n 3.Exit");
                     int number = Integer.parseInt(inputInfo.nextLine());
                     switch (number){
                         case 1:
-                            List<Book> allBooks = bookDAO.readAllBooks();
                             while(true){
                                 try{
                                     System.out.println("enter the book you are searching for : ");
                                     List<Book> books = bookDAO.readAllBooks();
-                                    System.out.println(books);
+                                    for (Book b : books) {
+                                        System.out.println(b);
+                                    }
                                     String givenTitle = inputInfo.nextLine();
                                     List<Book> bookList = bookService.search(givenTitle);
                                     for ( Book book : bookList){
@@ -132,26 +132,33 @@ public class BookMenu {
                                     System.out.println("error!" + e.getMessage());
                                 }
                             }
+                        case 3 :
+                            break;
                     }
                     break;
+
 
                 case 3:
                     System.out.println("you selected number 3 , let's update the book's status");
                     while (true) {
-                        ArrayList<Book> book = null;
+                        List<Book> books = bookDAO.readAllBooks();
+                        for (Book b : books){
+                            System.out.println(b);
+                        }
 
                         try {
                             System.out.println("enter the book's ID you're going to update : ");
                             int id = Integer.parseInt(inputInfo.nextLine());
-                            for(Book book1 : book){
+                            Book book = bookDAO.readById(id);
+
                                 String msg = MessageFormat.format("the {0} book availability is {1} if you  wanna change it press enter",
-                                        book1.getTitle(),
-                                        book1.isAvailable());
+                                        book.getTitle(),
+                                        book.isAvailable());
                                 System.out.println(msg);
                                 boolean chosen = inputInfo.nextLine().isEmpty();
                                 Book b = bookService.update(id, chosen);
                                 System.out.println("the book availability is  " + b.isAvailable());
-                            }
+
                             break;
                         } catch (NullPointerException e) {
                             System.out.println("error!" + e.getMessage());
@@ -162,8 +169,13 @@ public class BookMenu {
                     break;
                 case 4:
                     System.out.println("you selected number 4, deleting a book!");
-                    System.out.println("enter the book's title:");
+                    List<Book> books = bookDAO.readAllBooks();
+                    for (Book b : books){
+                        System.out.println(b);
+                    }
+                    System.out.println("enter the book's id:");
                     int givenID = Integer.parseInt(inputInfo.nextLine());
+                    System.out.println(bookDAO.readById(givenID));
                     System.out.println("Do you want to delete this book? 1.yes 2.no");
                     try {
                         int choice = Integer.parseInt(inputInfo.nextLine());
@@ -187,6 +199,7 @@ public class BookMenu {
                     System.out.println("you selected number 5 , Bye");
                     break;
             }
+
 
 
 

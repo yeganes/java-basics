@@ -224,7 +224,7 @@ public class MemberMenu {
                     String givenBook = input.nextLine();
 
                     try{
-                        ArrayList<Book> book = bookService.findExactMatch(givenBook);
+                        List<Book> book = bookService.findExactMatch(givenBook);
                         for (Book b : book){
                             System.out.println(b.getId() + " " + b.getTitle() + " " + b.getAuthor() + " " + b.getTotalPages() + "\n");
                         }
