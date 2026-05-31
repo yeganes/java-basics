@@ -1,5 +1,7 @@
 package com.library.entity;
 
+import org.hibernate.annotations.Fetch;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,11 +15,6 @@ public class Borrow {
     public Borrow() {
     }
 
-    public Borrow(Book book, Member member) {
-        this.book = book;
-        this.member = member;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getBorrowId() {
@@ -28,7 +25,7 @@ public class Borrow {
         this.borrowId = borrowId;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id", nullable = false)
     public Book getBook() {
         return book;
@@ -38,12 +35,11 @@ public class Borrow {
         this.book = book;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     public Member getMember() {
         return member;
     }
-
     public void setMember(Member member) {
         this.member = member;
     }

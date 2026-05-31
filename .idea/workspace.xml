@@ -4,22 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8578d01-9a06-4477-b31a-997b77533176" name="Changes" comment="Book's menu fixed">
+    <list default="true" id="d8578d01-9a06-4477-b31a-997b77533176" name="Changes" comment="entity annotations , on the property access">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/library/dao/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/dao/BookDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/dao/BorrowDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/dao/BorrowDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/dao/MemberDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/dao/MemberDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/model/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/entity/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/model/Borrow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/entity/Borrow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/model/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/entity/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/service/BookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/entity/Borrow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/entity/Borrow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/library/service/LibraryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/service/LibraryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/library/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/service/MemberService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/uI/BookMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/ui/BookMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/uI/MemberMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/ui/MemberMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +124,7 @@
       <workItem from="1780120378489" duration="6660000" />
       <workItem from="1780135322214" duration="1959000" />
       <workItem from="1780146239726" duration="1229000" />
-      <workItem from="1780214517009" duration="1482000" />
+      <workItem from="1780214517009" duration="11532000" />
     </task>
     <task id="LOCAL-00001" summary="entity book">
       <option name="closed" value="true" />
@@ -192,7 +182,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779790224505</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="entity annotations , on the property access">
+      <option name="closed" value="true" />
+      <created>1780216100561</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1780216100561</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,6 +215,7 @@
     <MESSAGE value="adding hibernate error fixed" />
     <MESSAGE value="adding hibernate" />
     <MESSAGE value="Book's menu fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Book's menu fixed" />
+    <MESSAGE value="entity annotations , on the property access" />
+    <option name="LAST_COMMIT_MESSAGE" value="entity annotations , on the property access" />
   </component>
 </project>

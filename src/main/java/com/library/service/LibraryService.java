@@ -25,7 +25,6 @@ public class LibraryService {
 
         Member member = memberService.readMemberById(memberId);
         Book book = bookService.findById(bookId);
-        List<Borrow> borrowList = borrowDAO.selectAll();
 
 
         if (book.isAvailable() && member.getBorrowLimit() > 0 && book.getBookStock() > 0) {
