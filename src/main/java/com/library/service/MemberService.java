@@ -2,7 +2,7 @@ package com.library.service;
 
 
 import com.library.exceptions.MemberNotFoundException;
-import com.library.model.Member;
+import com.library.entity.Member;
 import com.library.dao.MemberDAO;
 
 import java.io.*;

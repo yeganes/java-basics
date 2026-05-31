@@ -2,9 +2,9 @@ package com.library.service;
 
 import com.library.exceptions.LimitBorrowedException;
 import com.library.exceptions.MemberNotFoundException;
-import com.library.model.Book;
-import com.library.model.Borrow;
-import com.library.model.Member;
+import com.library.entity.Book;
+import com.library.entity.Borrow;
+import com.library.entity.Member;
 import com.library.dao.BookDAO;
 import com.library.dao.BorrowDAO;
 import com.library.dao.MemberDAO;

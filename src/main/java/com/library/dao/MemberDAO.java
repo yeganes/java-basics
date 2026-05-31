@@ -2,18 +2,13 @@ package com.library.dao;
 
 
 
-import com.library.model.Book;
-import com.library.model.Member;
+import com.library.entity.Member;
 import com.library.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MemberDAO {

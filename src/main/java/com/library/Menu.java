@@ -2,8 +2,8 @@ package com.library;
 
 import com.library.exceptions.LimitBorrowedException;
 import com.library.exceptions.MemberNotFoundException;
-import com.library.uI.BookMenu;
-import com.library.uI.MemberMenu;
+import com.library.ui.BookMenu;
+import com.library.ui.MemberMenu;
 
 import java.io.IOException;
 import java.util.Scanner;

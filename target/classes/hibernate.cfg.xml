@@ -26,9 +26,9 @@
 
     <property name="hbm2ddl.auto">update</property>
 
-    <mapping class="com.library.model.Book"/>
-    <mapping class="com.library.model.Member"/>
-    <mapping class="com.library.model.Borrow"/>
+    <mapping class="com.library.entity.Book"/>
+    <mapping class="com.library.entity.Member"/>
+    <mapping class="com.library.entity.Borrow"/>
 
   </session-factory>
 

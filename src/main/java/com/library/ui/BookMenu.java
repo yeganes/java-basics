@@ -1,9 +1,9 @@
-package com.library.uI;
+package com.library.ui;
 
 
 
 
-import com.library.model.Book;
+import com.library.entity.Book;
 import com.library.dao.BookDAO;
 import com.library.service.BookService;
 
