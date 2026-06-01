@@ -29,7 +29,7 @@ public class LibraryService {
         Book book = bookService.findById(bookId);
 
 
-        if (book.isAvailable() && member.getBorrowLimit() > 0 && book.getBookStock() > 0) {
+        if (book.isAvailable() && member.getBorrowLimit() > 0 && book.getBookStock() > 0 && member.isActive()) {
             if (book.getBookStock() == 0){
                 book.setAvailable(false);
             }

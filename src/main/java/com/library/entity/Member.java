@@ -26,11 +26,23 @@ public class Member {
     private Gender gender;
     private LocalDateTime deletedAt;
     private List<Borrow> borrows;
+    private boolean active;
+
+
+    @Column(name = "active" , nullable = false )
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
 
     public Member() {
     }
 
-    public Member(String name, int age, String phoneNumber, Gender gender, Integer borrowLimit , Integer borrowedBooksNum) {
+    public Member(String name, int age, String phoneNumber, Gender gender, Integer borrowLimit , Integer borrowedBooksNum ,  boolean active) {
 
         this.name = name;
         this.age = age;
@@ -38,6 +50,7 @@ public class Member {
         this.gender = gender;
         this.borrowLimit = borrowLimit;
         this.borrowedBooksNum = borrowedBooksNum;
+        this.active = active;
     }
 
     @Id

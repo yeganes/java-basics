@@ -142,7 +142,7 @@ public class MemberDAO {
             Transaction tx = session.beginTransaction();
 
             Member member = session.get(Member.class, id);
-            session.remove(member);
+            member.setActive(false);
 
             tx.commit();
 

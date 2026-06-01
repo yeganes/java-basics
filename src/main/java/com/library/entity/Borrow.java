@@ -1,6 +1,5 @@
 package com.library.entity;
 
-import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 

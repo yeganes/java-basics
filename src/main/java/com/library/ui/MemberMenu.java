@@ -197,8 +197,8 @@ public class MemberMenu {
                         try {
                             System.out.println("enter the id number : ");
                             int enteredId1 = Integer.parseInt(input.nextLine());
-
                             Member n = memberService.readMemberById(enteredId1);
+
 
                             String msg = MessageFormat.format(" name : {0} \n age : {1} years old  \n phone number : {2} ",
                                     n.getName(),
