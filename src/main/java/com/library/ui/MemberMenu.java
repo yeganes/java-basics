@@ -3,6 +3,7 @@ package com.library.ui;
 
 
 
+import com.library.dao.BookDAO;
 import com.library.exceptions.LimitBorrowedException;
 import com.library.exceptions.MemberNotFoundException;
 import com.library.dao.BorrowDAO;
@@ -22,6 +23,7 @@ import java.util.Scanner;
 public class MemberMenu {
     MemberService memberService = new MemberService();
     MemberDAO memberDAO = new MemberDAO();
+    BookDAO bookDAO = new BookDAO();
     static Scanner input = new Scanner(System.in);
     LibraryService libraryService = new LibraryService();
     BookService bookService = new BookService();
@@ -219,18 +221,19 @@ public class MemberMenu {
                     System.out.println("you selected number 5 , let's borrow a book");
                     System.out.println("enter your id number to borrow a book");
                     int givenId = Integer.parseInt(input.nextLine());
-                    System.out.println("enter the book you wanna borrow");
-                    String givenBook = input.nextLine();
+                    List<Book> a =  bookDAO.readAllBooks();
+                    for (Book book  : a){
+                        System.out.println(book);
+                    }
+                    System.out.println("enter the book id you wanna borrow");
+                    int givenBook = Integer.parseInt(input.nextLine());
 
                     try{
-                        List<Book> book = bookService.findExactMatch(givenBook);
-                        for (Book b : book){
-                            System.out.println(b.getId() + " " + b.getTitle() + " " + b.getAuthor() + " " + b.getTotalPages() + "\n");
-                        }
-                        System.out.println("enter the book ID you wanna borrow :");
-                        int id = Integer.parseInt(input.nextLine());
-                        System.out.println();
-                        libraryService.borrow(givenId, id);
+                        Book book = bookService.findById(givenBook);
+                            System.out.println(book.getId() + " " + book.getTitle() + " " + book.getAuthor() + " " + book.getTotalPages() + "\n");
+
+                            System.out.println();
+                        libraryService.borrow(givenId, givenBook);
                         System.out.println("the book is borrowed");
 
                     }catch (LimitBorrowedException l){
@@ -242,17 +245,16 @@ public class MemberMenu {
                     System.out.println("you selected number 6 , let's return a book");
 
                     try {
-                        System.out.println("enter you member id to return a book");
+                        System.out.println("enter your member id to return a book");
                         int memberId = Integer.parseInt(input.nextLine());
                         Member member = memberService.readMemberById(memberId);
+                        List<Borrow> listBooks =  borrowDAO.findByMember(member);
+                        for (Borrow borrow  : listBooks){
+                            System.out.println( borrow.getBook().getId() +  borrow.getBook().getTitle());
+                        }
 
-                        System.out.println("which book do you wanna return , enter the id number ");
-
+                        System.out.println("enter the book id you wanna return");
                         int bookId = Integer.parseInt(input.nextLine());
-                        Book book = bookService.findById(bookId);
-                        List<Borrow> borrowList = borrowDAO.selectMemberBook(member ,book );
-
-                        System.out.println(borrowList);
 
                         libraryService.returnBook(memberId , bookId);
                     }catch (NullPointerException e){

@@ -1,6 +1,7 @@
 package com.library.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -12,6 +13,7 @@ public class Book {
     private int totalPages;
     private boolean available;
     private int bookStock;
+    private List<Borrow>  borrows;
 
     public Book() {
     }
@@ -52,6 +54,18 @@ public class Book {
     public String getAuthor() {
         return author;
     }
+
+    @OneToMany(mappedBy = "book",
+            fetch = FetchType.LAZY
+    )
+    public List<Borrow> getBorrows() {
+        return borrows;
+    }
+
+    public void setBorrows(List<Borrow> borrows) {
+        this.borrows = borrows;
+    }
+
 
     public void setAuthor(String author) {
         this.author = author;

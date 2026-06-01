@@ -19,55 +19,56 @@ public class MemberDAO {
 
         public void save(Member member){
 
-            Session session = sessionFactory.openSession();
+            Session session = sessionFactory.getCurrentSession();
             Transaction tx = session.beginTransaction();
 
             session.persist(member);
 
             tx.commit();
-            session.close();
         }
 
 
         public Member select(int id){
-            Session session = sessionFactory.openSession();
+            Session session = sessionFactory.getCurrentSession();
+            Transaction tx = session.beginTransaction();
 
             Member member = session.get(Member.class, id);
 
-            session.close();
+            tx.commit();
 
             return member;
         }
 
         public List<Member> selectAllMembers(){
-            Session session = sessionFactory.openSession();
+            Session session = sessionFactory.getCurrentSession();
+            Transaction tx = session.beginTransaction();
 
             Query<Member> bookQuery = session.createQuery("FROM Member ", Member.class);
             List<Member> members = bookQuery.list();
 
-            session.close();
+            tx.commit();
 
             return members;
 
         }
 
         public List<Member> selectByName(String name){
-            Session session = sessionFactory.openSession();
+            Session session = sessionFactory.getCurrentSession();
+            Transaction tx = session.beginTransaction();
 
             Query<Member> query = session.createQuery("FROM Member WHERE name LIKE :name", Member.class);
 
             query.setParameter("name", "%" + name + "%");
             List<Member> members = query.list();
 
-            session.close();
-
+            tx.commit();
             return members;
 
         }
 
         public void updateName(int id , String name){
 
-        Session session = sessionFactory.openSession();
+            Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
 
         Member member = session.get(Member.class , id);
@@ -75,14 +76,13 @@ public class MemberDAO {
         member.setName(name);
 
         tx.commit();
-        session.close();
 
 
         }
 
         public void updatePhoneNumber(int id , String phoneNumber){
 
-            Session session = sessionFactory.openSession();
+            Session session = sessionFactory.getCurrentSession();
             Transaction tx = session.beginTransaction();
 
             Member member = session.get(Member.class , id);
@@ -90,14 +90,13 @@ public class MemberDAO {
             member.setPhoneNumber(phoneNumber);
 
             tx.commit();
-            session.close();
 
 
         }
 
         public void updateAge(int id , int age){
 
-            Session session = sessionFactory.openSession();
+            Session session = sessionFactory.getCurrentSession();
             Transaction tx = session.beginTransaction();
 
             Member member = session.get(Member.class , id);
@@ -107,13 +106,12 @@ public class MemberDAO {
 
 
             tx.commit();
-            session.close();
 
 
         }
         public void updateLimit(int id , int borrowLimit){
 
-            Session session = sessionFactory.openSession();
+            Session session = sessionFactory.getCurrentSession();
             Transaction tx = session.beginTransaction();
 
             Member member = session.get(Member.class , id);
@@ -121,21 +119,32 @@ public class MemberDAO {
             member.setBorrowLimit(borrowLimit);
 
             tx.commit();
-            session.close();
+
+
+        }
+        public void updateBorrowedBooksNum(int id , int borrowedBooks){
+
+            Session session = sessionFactory.getCurrentSession();
+            Transaction tx = session.beginTransaction();
+
+            Member member = session.get(Member.class , id);
+
+            member.setBorrowedBooksNum(borrowedBooks);
+
+            tx.commit();
 
 
         }
 
         public void delete(int id){
 
-            Session session = sessionFactory.openSession();
+            Session session = sessionFactory.getCurrentSession();
             Transaction tx = session.beginTransaction();
 
             Member member = session.get(Member.class, id);
             session.remove(member);
 
             tx.commit();
-            session.close();
 
         }
 

@@ -34,7 +34,7 @@ public class MemberService {
         int id = 0 ;
         id ++;
 
-        person = new Member( inputName, inputAge, inputPhoneNumber, gender,borrowLimit );
+        person = new Member( inputName, inputAge, inputPhoneNumber, gender,borrowLimit , borrowedBooks);
 
         listPerson.add(person);
 

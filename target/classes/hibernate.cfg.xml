@@ -17,7 +17,9 @@
     <property name="hibernate.connection.password">
       Ysa291182
     </property>
-
+    <property name="hibernate.current_session_context_class">
+      thread
+    </property>
     <property name="hibernate.dialect">
       org.hibernate.dialect.MySQL8Dialect
     </property>

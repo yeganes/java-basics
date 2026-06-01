@@ -4,6 +4,8 @@ import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "borrows")
 public class Borrow {
@@ -11,6 +13,9 @@ public class Borrow {
     private Integer borrowId;
     private Book book;
     private Member member;
+    private LocalDateTime borrowDate;
+    private LocalDateTime returnDate;
+
 
     public Borrow() {
     }
@@ -43,6 +48,23 @@ public class Borrow {
     public void setMember(Member member) {
         this.member = member;
     }
+    @Column(nullable = false)
+    public LocalDateTime getBorrowDate() {
+        return borrowDate;
+    }
+
+    public void setBorrowDate(LocalDateTime borrowDate) {
+        this.borrowDate = borrowDate;
+    }
+
+    public LocalDateTime getReturnDate() {
+        return returnDate;
+    }
+    public void setReturnDate(LocalDateTime returnDate) {
+        this.returnDate = returnDate;
+    }
+
+
 
     @Override
     public String toString() {
@@ -50,6 +72,8 @@ public class Borrow {
                 "borrowId=" + borrowId +
                 ", book=" + book +
                 ", member=" + member +
+                ", borrowDate=" + borrowDate+
+                ",returnDate=" + returnDate+
                 '}';
     }
 }

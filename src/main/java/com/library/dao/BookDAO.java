@@ -15,36 +15,39 @@ public class BookDAO {
             HibernateUtil.getSessionFactory();
 
 
+
+
     public void save(Book book){
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
 
         session.persist(book);
 
         tx.commit();
-        session.close();
     }
 
 
     public Book readById(int id){
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
 
         Book book = session.get(Book.class , id);
 
-        session.close();
-
+        tx.commit();
         return book;
     }
 
     public List<Book> readAllBooks(){
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
 
         Query<Book> bookQuery = session.createQuery("FROM Book ", Book.class);
         List<Book> books = bookQuery.list();
 
-        session.close();
-
+        tx.commit();
         return books;
 
     }
@@ -55,24 +58,27 @@ public class BookDAO {
             throw new IllegalArgumentException("Search text cannot be empty");
         }
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
 
-        try {
-            Query<Book> query = session.createQuery("FROM Book WHERE lower(title) LIKE :text", Book.class);
+
+
+        Query<Book> query = session.createQuery("FROM Book WHERE lower(title) LIKE :text", Book.class);
 
             query.setParameter("text", "%" + text.toLowerCase() + "%");
+            List<Book> books = query.list();
 
-            return query.list();
+            tx.commit();
 
-        } finally {
-            session.close();
-        }
+            return books;
+
+
     }
 
 
      public void updateStatus(int id , boolean status){
 
-        Session session = sessionFactory.openSession();
+         Session session = sessionFactory.getCurrentSession();
          Transaction tx = session.beginTransaction();
 
         Book book = session.get(Book.class , id);
@@ -80,14 +86,13 @@ public class BookDAO {
         book.setAvailable(status);
 
         tx.commit();
-        session.close();
 
 
      }
 
     public void updateStock(int id , int stock){
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
 
         Book book = session.get(Book.class , id);
@@ -97,21 +102,19 @@ public class BookDAO {
 
 
         tx.commit();
-        session.close();
 
 
     }
 
      public void delete(int id){
 
-         Session session = sessionFactory.openSession();
+         Session session = sessionFactory.getCurrentSession();
          Transaction tx = session.beginTransaction();
 
          Book book = session.get(Book.class, id);
          session.remove(book);
 
          tx.commit();
-         session.close();
 
      }
 }

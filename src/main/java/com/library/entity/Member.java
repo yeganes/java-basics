@@ -5,6 +5,8 @@ package com.library.entity;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "members")
@@ -22,21 +24,20 @@ public class Member {
     private Integer borrowLimit;
     private Integer borrowedBooksNum;
     private Gender gender;
+    private LocalDateTime deletedAt;
+    private List<Borrow> borrows;
 
     public Member() {
     }
 
-    public Member(String name,
-                  int age,
-                  String phoneNumber,
-                  Gender gender,
-                  Integer borrowLimit) {
+    public Member(String name, int age, String phoneNumber, Gender gender, Integer borrowLimit , Integer borrowedBooksNum) {
 
         this.name = name;
         this.age = age;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
         this.borrowLimit = borrowLimit;
+        this.borrowedBooksNum = borrowedBooksNum;
     }
 
     @Id
@@ -104,6 +105,26 @@ public class Member {
         this.gender = gender;
     }
 
+    public void setBorrows(List<Borrow> borrows) {
+        this.borrows = borrows;
+    }
+
+    @OneToMany(mappedBy = "member",
+            fetch = FetchType.LAZY
+    )
+    public List<Borrow> getBorrows() {
+        return borrows;
+    }
+
+    @Column
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
     @Override
     public String toString() {
         return "Member{" +
@@ -114,6 +135,7 @@ public class Member {
                 ", borrowLimit=" + borrowLimit +
                 ", borrowedBooksNum=" + borrowedBooksNum +
                 ", gender=" + gender +
+                "'deletedAt=" + deletedAt +
                 '}';
     }
 }

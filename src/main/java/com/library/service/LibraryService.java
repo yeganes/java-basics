@@ -10,9 +10,11 @@ import com.library.dao.BorrowDAO;
 import com.library.dao.MemberDAO;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class LibraryService {
+    Borrow borrow = new Borrow();
     MemberService memberService = new MemberService();
     BookService bookService = new BookService();
     BookDAO bookDAO = new BookDAO();
@@ -28,15 +30,20 @@ public class LibraryService {
 
 
         if (book.isAvailable() && member.getBorrowLimit() > 0 && book.getBookStock() > 0) {
-            member.setBorrowLimit(member.getBorrowLimit() - 1);
-            book.setBookStock(book.getBookStock()-1);
-            if (book.getBookStock() < 0){
+            if (book.getBookStock() == 0){
                 book.setAvailable(false);
             }
+            member.setBorrowLimit(member.getBorrowLimit() - 1);
+
+            member.setBorrowedBooksNum(member.getBorrowedBooksNum() + 1 );
+
+            book.setBookStock(book.getBookStock()-1);
+
+
             borrowDAO.insert(member , book);
             memberDAO.updateLimit(memberId , member.getBorrowLimit());
+            memberDAO.updateBorrowedBooksNum(memberId , member.getBorrowedBooksNum());
             bookDAO.updateStock(bookId , book.getBookStock());
-
 
 
         } else if (member.getBorrowLimit() == 0){
@@ -53,23 +60,23 @@ public class LibraryService {
 
 
 
-        member.setBorrowLimit(member.getBorrowLimit() + 1 );
-        book.setBookStock(book.getBookStock() + 1 );
-        if (!book.isAvailable()){
-            book.setAvailable(true);
-        }
+            member.setBorrowLimit(member.getBorrowLimit() + 1);
 
-        for (Borrow borrow : borrowList){
-            if (borrow.getBook() == null || borrow.getMember() == null ){
-                System.out.println("you didn't borrow any books");
+            book.setBookStock(book.getBookStock() + 1);
 
+            member.setBorrowedBooksNum(member.getBorrowedBooksNum() - 1);
+
+            if (!book.isAvailable()) {
+                book.setAvailable(true);
             }
-        }
         memberDAO.updateLimit(memberId , member.getBorrowLimit());
 
-        bookDAO.updateStock(bookId , book.getBookStock());
+        memberDAO.updateBorrowedBooksNum(memberId , member.getBorrowedBooksNum());
 
-        borrowDAO.delete(member , book);
+        bookDAO.updateStock(bookId , book.getBookStock());
+        for(Borrow borrow : borrowList){
+        borrowDAO.returnBook(borrow.getBorrowId());
+        }
     }
 
 }
