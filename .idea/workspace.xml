@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8578d01-9a06-4477-b31a-997b77533176" name="Changes" comment="soft delete created">
+    <list default="true" id="d8578d01-9a06-4477-b31a-997b77533176" name="Changes" comment="fixing the delete date">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/dao/MemberDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/dao/MemberDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/entity/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/service/LibraryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/service/LibraryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/service/MemberService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/ui/MemberMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/ui/MemberMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/library/entity/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/library/entity/Book.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +125,7 @@
       <workItem from="1780146239726" duration="1229000" />
       <workItem from="1780214517009" duration="12690000" />
       <workItem from="1780293095148" duration="24800000" />
-      <workItem from="1780379832613" duration="3786000" />
+      <workItem from="1780379832613" duration="6298000" />
     </task>
     <task id="LOCAL-00001" summary="entity book">
       <option name="closed" value="true" />
@@ -219,7 +215,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780318994844</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="fixing the delete date">
+      <option name="closed" value="true" />
+      <created>1780383726178</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1780383726178</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,6 +252,7 @@
     <MESSAGE value="N+1 problems solved" />
     <MESSAGE value="history system created" />
     <MESSAGE value="soft delete created" />
-    <option name="LAST_COMMIT_MESSAGE" value="soft delete created" />
+    <MESSAGE value="fixing the delete date" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing the delete date" />
   </component>
 </project>

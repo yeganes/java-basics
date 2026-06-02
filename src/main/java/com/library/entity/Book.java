@@ -14,6 +14,9 @@ public class Book {
     private boolean available;
     private int bookStock;
     private List<Borrow>  borrows;
+    private Integer version;
+
+
 
     public Book() {
     }
@@ -60,6 +63,16 @@ public class Book {
     )
     public List<Borrow> getBorrows() {
         return borrows;
+    }
+
+
+    @Version
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     public void setBorrows(List<Borrow> borrows) {
