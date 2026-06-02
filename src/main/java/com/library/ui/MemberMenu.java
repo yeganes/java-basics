@@ -231,10 +231,7 @@ public class MemberMenu {
                     try{
                         Book book = bookService.findById(givenBook);
                             System.out.println(book.getId() + " " + book.getTitle() + " " + book.getAuthor() + " " + book.getTotalPages() + "\n");
-
-                            System.out.println();
                         libraryService.borrow(givenId, givenBook);
-                        System.out.println("the book is borrowed");
 
                     }catch (LimitBorrowedException l){
                         System.out.println("error" + l.getMessage());

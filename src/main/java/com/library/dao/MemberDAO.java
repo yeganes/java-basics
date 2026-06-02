@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class MemberDAO {
@@ -143,15 +144,11 @@ public class MemberDAO {
 
             Member member = session.get(Member.class, id);
             member.setActive(false);
+            member.setDeletedAt(LocalDateTime.now());
 
             tx.commit();
 
         }
-
-
-
-
-
     }
 
 

@@ -3,6 +3,7 @@ package com.library.entity;
 
 
 import com.sun.istack.NotNull;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -26,10 +27,11 @@ public class Member {
     private Gender gender;
     private LocalDateTime deletedAt;
     private List<Borrow> borrows;
-    private boolean active;
+    private boolean active = true;
 
 
     @Column(name = "active" , nullable = false )
+    @ColumnDefault("1")
     public boolean isActive() {
         return active;
     }

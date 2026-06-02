@@ -106,6 +106,7 @@ public class MemberService {
         else {
             if (number == 1 ){
                 memberDAO.delete(enteredId);
+
             } else if (number == 2 ) {
                 return m;
             }

@@ -8,13 +8,9 @@ import com.library.entity.Member;
 import com.library.dao.BookDAO;
 import com.library.dao.BorrowDAO;
 import com.library.dao.MemberDAO;
-
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class LibraryService {
-    Borrow borrow = new Borrow();
     MemberService memberService = new MemberService();
     BookService bookService = new BookService();
     BookDAO bookDAO = new BookDAO();
@@ -44,11 +40,15 @@ public class LibraryService {
             memberDAO.updateLimit(memberId , member.getBorrowLimit());
             memberDAO.updateBorrowedBooksNum(memberId , member.getBorrowedBooksNum());
             bookDAO.updateStock(bookId , book.getBookStock());
+            System.out.println("the book is borrowed");
+
 
 
         } else if (member.getBorrowLimit() == 0){
             throw new LimitBorrowedException("can't borrow more books");
 
+        } else if (book.getBookStock() == 0  || !book.isAvailable()) {
+            System.out.println("SORRY, this book is out of stock.");
         }
     }
 
